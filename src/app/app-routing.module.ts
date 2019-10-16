@@ -4,17 +4,17 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  }
+  {path:'dashboard',loadChildren: './views/dashboard/dashboard.module#DashboardPageModule'},
+  {path:'newusta',loadChildren: './views/dashboard/new-usta/new-usta.module#NewUstaPageModule'},
+  {path:'newcompany',loadChildren: './views/dashboard/new-company/new-company.module#NewCompanyageModule'},
+  {path:'newrestaurant',loadChildren: './views/dashboard/new-restaurant/new-restaurant.module#NewRestaurantPageModule'},
+  {path:'ustas/:id',loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
+  {path:'companies',loadChildren: './views/lists/companies/companies.module#CompaniesPageModule'},
+  {path:'restaurants',loadChildren: './views/lists/restaurants/restaurants.module#RestaurantsPageModule'},
+
 ];
 
 @NgModule({

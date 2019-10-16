@@ -1,0 +1,74 @@
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  <ion-title class="ion-text-center">USTA</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="openSearch()">
+      <ion-icon slot="icon-only" name="search" color="light"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list lines="full" mode="ios" class="roundedList">
+        <ion-item-group>
+            <ion-item-divider color="header">
+                <ion-title class="ion-text-center" color="medium"> ({{totalServices}}) الخدمات</ion-title>
+            </ion-item-divider> 
+            <ng-container *ngIf="!services || services.length == 0">
+                <div *ngFor="let n of [0,1,2]" class="ion-padding">
+                  <ion-skeleton-text></ion-skeleton-text>
+                  <p>
+                    <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+                  </p>
+                </div>
+              </ng-container>    
+              <ng-container *ngIf="services && services.length > 0">     
+            <ion-item *ngFor="let item of services" [routerLink]="['/ustas', item.id]" detail="false"  lines="full">
+              <ion-note color="medium"  slot="start">( {{item.ustacount}} )</ion-note>
+              <ion-label class="ion-text-center" color="dark" style="font-size: 5vw;white-space: normal;">
+                {{item.section}}
+              </ion-label>
+              <ion-buttons slot="end">
+              <ion-button slot="icon-only">
+                    <ion-icon   name="{{item.icon}}" color="header"></ion-icon><br>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ng-container>
+          </ion-item-group>        
+        </ion-list> 
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+            <ion-fab-button color="header">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="start">
+              <ion-fab-button color="header">
+                  <ion-icon name="person-add"></ion-icon>
+                              </ion-fab-button>
+              <ion-fab-button color="header">
+                  <ion-icon name="business"></ion-icon>
+                              </ion-fab-button>
+              <ion-fab-button color="header">
+                <ion-icon name="pizza"></ion-icon>
+              </ion-fab-button>
+            </ion-fab-list>
+            <ion-fab-list side="top">
+                <ion-fab-button color="header">
+                    <ion-icon name="person-add"></ion-icon>
+                                </ion-fab-button>
+                <ion-fab-button color="header">
+                    <ion-icon name="business"></ion-icon>
+                                </ion-fab-button>
+                <ion-fab-button color="header">
+                  <ion-icon name="pizza"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+          </ion-fab>       
+</ion-content>
+

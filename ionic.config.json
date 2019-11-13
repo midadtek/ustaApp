@@ -1,5 +1,8 @@
 {
   "name": "usta_app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,3 +1,14 @@
-.roundedList{
-    border-radius:  10px 10px; 
+
+ion-slides{
+    img{
+        width: 90%;
+        border-radius: 10px;
+    }
+}
+ion-card {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+.footer{
+    background: linear-gradient(to top, var(--ion-color-light-shade) 0%, #ffffff 100%) !important;
 }

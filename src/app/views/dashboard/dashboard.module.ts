@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DashboardPage } from './dashboard.page';
+import{CallNumber} from "@ionic-native/call-number/ngx"
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
+  providers:[CallNumber],
   declarations: [DashboardPage]
 })
 export class DashboardPageModule {}

@@ -1,110 +1,111 @@
 :root {
+
+
+  --ion-font-family: 'Cairo', sans-serif !important;
+
   --ion-color-primary: #c87e13;
-  --ion-color-primary-rgb: 200, 126, 19;
+  --ion-color-primary-rgb: 200,126,19;
   --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-contrast-rgb: 255,255,255;
   --ion-color-primary-shade: #b06f11;
   --ion-color-primary-tint: #ce8b2b;
 
-  --ion-color-secondary: #ecc512;
-  --ion-color-secondary-rgb: 236, 197, 18;
+  --ion-color-secondary: #efc11e;
+  --ion-color-secondary-rgb: 239,193,30;
   --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #d0ad10;
-  --ion-color-secondary-tint: #eecb2a;
+  --ion-color-secondary-contrast-rgb: 255,255,255;
+  --ion-color-secondary-shade: #d2aa1a;
+  --ion-color-secondary-tint: #f1c735;
 
-  --ion-color-tertiary: #027a93;
-  --ion-color-tertiary-rgb: 2, 122, 147;
+  --ion-color-tertiary: #417C5C;
+  --ion-color-tertiary-rgb: 65,124,92;
   --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #026b81;
-  --ion-color-tertiary-tint: #1b879e;
+  --ion-color-tertiary-contrast-rgb: 255,255,255;
+  --ion-color-tertiary-shade: #396d51;
+  --ion-color-tertiary-tint: #54896c;
 
-  --ion-color-success: #84bb05;
-  --ion-color-success-rgb: 132, 187, 5;
+  --ion-color-success: #008000;
+  --ion-color-success-rgb: 0,128,0;
   --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 0, 0, 0;
-  --ion-color-success-shade: #74a504;
-  --ion-color-success-tint: #90c21e;
+  --ion-color-success-contrast-rgb: 255,255,255;
+  --ion-color-success-shade: #007100;
+  --ion-color-success-tint: #1a8d1a;
 
   --ion-color-warning: #ff7b00;
-  --ion-color-warning-rgb: 255, 123, 0;
+  --ion-color-warning-rgb: 255,123,0;
   --ion-color-warning-contrast: #ffffff;
-  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-contrast-rgb: 255,255,255;
   --ion-color-warning-shade: #e06c00;
   --ion-color-warning-tint: #ff881a;
 
-  --ion-color-danger: #e00000;
-  --ion-color-danger-rgb: 224, 0, 0;
+
+  --ion-color-danger: #f11a0e;
+  --ion-color-danger-rgb: 241,26,14;
   --ion-color-danger-contrast: #ffffff;
-  --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #c50000;
-  --ion-color-danger-tint: #e31a1a;
+  --ion-color-danger-contrast-rgb: 255,255,255;
+  --ion-color-danger-shade: #d4170c;
+  --ion-color-danger-tint: #f23126;
 
-  --ion-color-dark: #5e5d5d;
-  --ion-color-dark-rgb: 94, 93, 93;
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34,34,34;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #535252;
-  --ion-color-dark-tint: #6e6d6d;
+  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
 
-  --ion-color-medium: #969696;
-  --ion-color-medium-rgb: 150, 150, 150;
-  --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0, 0, 0;
-  --ion-color-medium-shade: #848484;
-  --ion-color-medium-tint: #dfdfdf;
+  --ion-color-medium: #989aa2;
+  --ion-color-medium-rgb: 152,154,162;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255,255,255;
+  --ion-color-medium-shade: #86888f;
+  --ion-color-medium-tint: #a2a4ab;
 
-  --ion-color-light: #f3f3f3;
-  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244,244,244;
   --ion-color-light-contrast: #000000;
-  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-contrast-rgb: 0,0,0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-color-header: #e0d5a2;
-  --ion-color-header-rgb: 224, 213, 162;
-  --ion-color-header-contrast: #ffffff;
-  --ion-color-header-contrast-rgb: 0, 0, 0;
-  --ion-color-header-shade: #c5bb8f;
-  --ion-color-header-tint: #e3d9ab;
-  .ion-color-header {
-    --ion-color-base: var(--ion-color-header) !important;
-    --ion-color-base-rgb: var(--ion-color-header-rgb) !important;
-    --ion-color-contrast: var(--ion-color-header-contrast) !important;
-    --ion-color-contrast-rgb: var(--ion-color-header-contrast-rgb) !important;
-    --ion-color-shade: var(--ion-color-header-shade) !important;
-    --ion-color-tint: var(--ion-color-header-tint) !important;
-  }
+  // --ion-color-header: #e0d5a2;
+  // --ion-color-header-rgb: 224, 213, 162;
+  // --ion-color-header-contrast: #ffffff;
+  // --ion-color-header-contrast-rgb: 0, 0, 0;
+  // --ion-color-header-shade: #c5bb8f;
+  // --ion-color-header-tint: #e3d9ab;
+  // .ion-color-header {
+  //   --ion-color-base: var(--ion-color-header) !important;
+  //   --ion-color-base-rgb: var(--ion-color-header-rgb) !important;
+  //   --ion-color-contrast: var(--ion-color-header-contrast) !important;
+  //   --ion-color-contrast-rgb: var(--ion-color-header-contrast-rgb) !important;
+  //   --ion-color-shade: var(--ion-color-header-shade) !important;
+  //   --ion-color-tint: var(--ion-color-header-tint) !important;
+  // }
 
-  --ion-safe-area-top: 10px;
-  --ion-safe-area-bottom: 12px;
-
-  .fake-skeleton {
-    width: 60%;
-}
-
+  // --ion-safe-area-top: 10px;
+  // --ion-safe-area-bottom: 12px;
+  
   ion-content {
-    --background: linear-gradient(to right, var(--ion-color-medium-tint) 0%, var(--ion-color-light) 100%);
+    --background: linear-gradient(to top, var(--ion-color-light-shade) 0%, #ffffff 100%);
   }
   ion-toolbar {
-    --background: linear-gradient(to right, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+    --background: linear-gradient(to bottom, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
     --background-color: transparent;
     --color: var(--ion-color-dark-contrast);
   }
-  --ion-padding: 5px;
-  @font-face {
-    font-family: "MarkaziText";
-    font-style: normal;
-    font-weight: normal;
-    src: url("../assets/fonts/MarkaziText-Regular.ttf");
+  ion-alert{
+      --background: linear-gradient(to top, var(--ion-color-light-shade) 0%, #ffffff 100%) !important;
+      h2{
+        text-align: center;
+      }
   }
-  @font-face {
-    font-family: "MarkaziText";
-    font-style: normal;
-    font-weight: bold;
-    src: url("../assets/fonts/MarkaziText-Bold.ttf");
+  --ion-padding: 5px;
+  ion-input{
+    --background :linear-gradient(to top, var(---ion-color-light-shade) 0%, #ffffff 100%) !important;
+--color	:var(--ion-color-primary);
+  direction: rtl;
+    border:var(--ion-color-primary) solid 1px;
+    border-radius: 10px;
   }
   
-  --ion-font-family: "MarkaziText";
 }

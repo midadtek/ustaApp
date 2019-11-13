@@ -1,74 +1,141 @@
-<ion-header >
-  <ion-toolbar >
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-  <ion-title class="ion-text-center">USTA</ion-title>
-  <ion-buttons slot="end">
-    <ion-button (click)="openSearch()">
-      <ion-icon slot="icon-only" name="search" color="light"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+    <ion-title class="ion-text-center">USTA</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="openSearch()">
+        <ion-icon slot="icon-only" name="search" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <!-- <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let slide of banners">
+                <img src="assets/appImgs/banner.jpg" />
+        </ion-slide>
+      </ion-slides> -->
   </ion-toolbar>
- 
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="10" class="ion-no-padding ion-text-right">
+        <ion-input type="text" clearInput placeholder="ابحث هنا ..." color="primary"></ion-input>
+      </ion-col>
+      <ion-col size="2" class="ion-no-padding ion-align-self-center ion-text-center">
+        <ion-button (click)="search()">
+          <ion-icon slot="icon-only" name="search" color="light"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
-
 <ion-content class="ion-padding">
-
-  <ion-list lines="full" mode="ios" class="roundedList">
-        <ion-item-group>
-            <ion-item-divider color="header">
-                <ion-title class="ion-text-center" color="medium"> ({{totalServices}}) الخدمات</ion-title>
-            </ion-item-divider> 
-            <ng-container *ngIf="!services || services.length == 0">
-                <div *ngFor="let n of [0,1,2]" class="ion-padding">
-                  <ion-skeleton-text></ion-skeleton-text>
-                  <p>
-                    <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-                  </p>
-                </div>
-              </ng-container>    
-              <ng-container *ngIf="services && services.length > 0">     
-            <ion-item *ngFor="let item of services" [routerLink]="['/ustas', item.id]" detail="false"  lines="full">
-              <ion-note color="medium"  slot="start">( {{item.ustacount}} )</ion-note>
-              <ion-label class="ion-text-center" color="dark" style="font-size: 5vw;white-space: normal;">
-                {{item.section}}
-              </ion-label>
-              <ion-buttons slot="end">
-              <ion-button slot="icon-only">
-                    <ion-icon   name="{{item.icon}}" color="header"></ion-icon><br>
-                </ion-button>
-              </ion-buttons>
-            </ion-item>
-          </ng-container>
-          </ion-item-group>        
-        </ion-list> 
-        <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-            <ion-fab-button color="header">
-              <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-list side="start">
-              <ion-fab-button color="header">
-                  <ion-icon name="person-add"></ion-icon>
-                              </ion-fab-button>
-              <ion-fab-button color="header">
-                  <ion-icon name="business"></ion-icon>
-                              </ion-fab-button>
-              <ion-fab-button color="header">
-                <ion-icon name="pizza"></ion-icon>
-              </ion-fab-button>
-            </ion-fab-list>
-            <ion-fab-list side="top">
-                <ion-fab-button color="header">
-                    <ion-icon name="person-add"></ion-icon>
-                                </ion-fab-button>
-                <ion-fab-button color="header">
-                    <ion-icon name="business"></ion-icon>
-                                </ion-fab-button>
-                <ion-fab-button color="header">
-                  <ion-icon name="pizza"></ion-icon>
-                </ion-fab-button>
-              </ion-fab-list>
-          </ion-fab>       
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-title class="ion-text-center" color="warning">{{totalServices}} الخدمات</ion-title>
+    </ion-item-divider>
+    <ng-container *ngIf="!services || services.length == 0">
+      <ion-card mode="ios" *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+        <ion-item detail="false" lines="full">
+          <ion-label>
+            <p>
+              <ion-skeleton-text animated style="width: 80%;float: right;"></ion-skeleton-text>
+            </p>
+          </ion-label>
+          <ion-thumbnail slot="end">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+    <ng-container *ngIf="services && services.length > 0">
+      <ion-card mode="ios" *ngFor="let item of services">
+        <ion-item [routerLink]="['/ustas', item.id]" detail="false" lines="full">
+          <ion-note color="medium" slot="start">( {{item.ustacount}} )</ion-note>
+          <ion-label class="ion-text-center  ion-text-wrap" color="dark">
+            <h2>{{item.section}}</h2>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button slot="icon-only">
+              <ion-icon name="{{item.icon}}" color="primary"></ion-icon><br>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-title class="ion-text-center" color="tertiary"> {{totalBusiness}} الشركات و المطاعم </ion-title>
+    </ion-item-divider>
+    <ng-container *ngIf="business && business.length > 0">
+      <ion-card mode="ios" *ngFor="let item of business">
+        <ion-item [routerLink]="['/companies', item.id]" detail="false">
+          <ion-note color="medium" slot="start">( {{item.ustacount}} )</ion-note>
+          <ion-label class="ion-text-center ion-text-wrap" color="dark">
+            <h2>{{item.section}}</h2>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button slot="icon-only">
+              <ion-icon name="{{item.icon}}" color="tertiary"></ion-icon><br>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-title class="ion-text-center" color="secondary"> سوق اوسطى </ion-title>
+    </ion-item-divider>
+    <ng-container *ngIf="usedShops && usedShops.length > 0">
+      <ion-card mode="ios" *ngFor="let item of usedShops">
+        <ion-item [routerLink]="['/used-shop', item.id]" detail="false">
+          <ion-note color="medium" slot="start">( {{item.ustacount}} )</ion-note>
+          <ion-label class="ion-text-center ion-text-wrap" color="dark">
+            <h2>{{item.section}}</h2>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button slot="icon-only">
+              <ion-icon name="{{item.icon}}" color="secondary"></ion-icon><br>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+  </ion-item-group>
 </ion-content>
-
+<ion-footer>
+  <ion-grid fixed class="footer ion-padding">
+    <ion-row>
+      <ion-col size="12">
+        &nbsp;
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="danger" size="small" [routerLink]="['/contact-us']">
+      <ion-icon name="at"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="medium">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary" [routerLink]="['/newusta']">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="success" [routerLink]="['/newcompany']">
+        <ion-icon name="business"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="secondary" [routerLink]="['/newused']">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" size="small" (click)="callUs()">
+      <ion-icon name="call"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-footer>

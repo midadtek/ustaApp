@@ -3,7 +3,9 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
 import { Section, Banner, Country, City, Nationality, SectionLocation, Usta, Rate, Question } from './interfaces';
-
+import {formatDate } from '@angular/common';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,17 +14,20 @@ export class FstoreService {
   getSections() {
     return this.afs.collection<Section>('services', ref => ref.orderBy('order', "asc")).get();
   }
+
+  checkin(){
+    let current = formatDate(new Date(),'dd-MM-yyyy','en-US', '+03')    
+    this.afs.collection('reportings').doc(current)
+  .update({"counter" : firebase.firestore.FieldValue.increment(1)})
+  .catch((error) => {
+    // console.log('Error updating user', error); // (document does not exists)
+    this.afs.collection('reportings').doc(`${current}`)
+      .set({"counter" : 1});
+  });
+  }
   // banners
-  getBanners(): Observable<Banner[]> {
-    return this.afs.collection<Banner>('banners', ref => ref.where('active', '==', true)).snapshotChanges().pipe(
-      map(action => {
-        return action.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+  getBanners(){
+    return this.afs.collection<Banner>('banners', ref => ref.where('active', '==', true)).get();
   }
   getcountries(){
     return this.afs.collection<Country>('countries', ref => ref.where('active', '==', true)).get();
@@ -56,9 +61,51 @@ export class FstoreService {
     );
   }
   // ustas
-  getUstas(sectionId){
-    return this.afs.collection<Usta>("ustas", ref => ref.where('sectionIds', 'array-contains', sectionId).where('active', '==', true).orderBy("img_profile","desc")).get();
-  }
+  // getUstas(sectionId){
+  //   return this.afs.collection<Usta>("ustas", ref => ref.where('sectionIds', 'array-contains', sectionId).where('active', '==', true).orderBy("img_profile","desc")).get();
+  // }
+
+  // ustas
+  getUstas(sectionid,countryid,sub_section,lastusta:Usta){
+
+    return this.afs.collection<Usta>('ustas', ref => {   
+    if(lastusta){
+      if(countryid===undefined && sub_section === undefined){
+        return ref.where('sectionid', '==', sectionid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
+          }
+          else if(countryid !==undefined && sub_section===undefined){
+            return ref.where('sectionid','==',sectionid).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
+          }
+          else  if(sub_section!==undefined && countryid===undefined){          
+           return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
+          }
+          else if(sub_section!==undefined && countryid !==undefined ){        
+            return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
+          }
+    }else{
+      if(countryid===undefined && sub_section === undefined){
+    return ref.where('sectionid', '==', sectionid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
+      }
+      else if(countryid !==undefined && sub_section===undefined){
+      return ref.where('sectionid','==',sectionid).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
+      }
+      else  if(sub_section!==undefined && countryid===undefined){      
+       return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('active', '==', true).orderBy("img_profile","desc").limit(5);
+      }
+        else if(sub_section!==undefined && countryid !==undefined ){
+          return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
+        } 
+      }
+      }).snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+    }
   getUstaProfile(id) {
     return this.afs.collection<Usta>('ustas').doc<Usta>(id).valueChanges();
   }

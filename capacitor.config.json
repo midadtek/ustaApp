@@ -1,0 +1,7 @@
+{
+  "appId": "com.midadtek.usta",
+  "appName": "USTA",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

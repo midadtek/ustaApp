@@ -1,7 +1,8 @@
 
 export interface Usta {
-    id?: string,
-    name: string,
+    id?: string;
+    name: string;
+    hash_id?
     img_profile?: string;
     img_gallery?: Array<string>
     img_file: string
@@ -23,6 +24,24 @@ export interface Usta {
     locations: Array<string>
     ustatype: Array<string>
     country
+    latitude
+    longitude
+    typeOfconstruction
+    numberOfRooms
+    Typeofcar
+    fuel
+    year
+    modelOfCar
+    gear
+    plate
+    lift
+    deposit
+    Furnished
+    periodicExpenses
+    withinTheComplex
+    Delivery
+    typedescription
+    address;
   }
   export interface Section {
     id?: string,
@@ -57,6 +76,7 @@ export interface Usta {
     title: string
     active: boolean
     addedfrom: string
+    country
   }
   export interface City {
     id?: string

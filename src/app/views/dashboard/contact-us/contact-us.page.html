@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text='' color="light" defaultHref="/sections">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">تواصل معنا</ion-title>
+
+  <ion-buttons slot="end">
+    <ion-button>
+      <ion-icon slot="icon-only" name="mail" color="light"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-content class="ion-no-padding">
+
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm(contactForm.value)" >
+    <ion-item class="animated fadeInUp">
+      <ion-label class="ion-text-right" position="floating"> <ion-text color="danger">*</ion-text> الاسم</ion-label>
+      <ion-input type="text" formControlName="Name" class="ion-text-right"></ion-input>
+    </ion-item>
+    <ion-text color="warning" *ngIf="contactForm.get('Name').touched && contactForm.get('Name').hasError('required')">
+      <p class="ion-text-right">يرجى كتابة الاسم</p>
+    </ion-text>
+    <ion-item class="animated fadeInUp">
+      <ion-label class="ion-text-right" position="floating"><ion-text color="danger">*</ion-text> رقم الهاتف</ion-label>
+      <ion-input type="text" formControlName="Mobile" class="ion-text-right"></ion-input>
+    </ion-item>
+    <ion-text color="warning"
+      *ngIf="contactForm.get('Mobile').touched && contactForm.get('Mobile').hasError('required')">
+      <p class="ion-text-right">يرجى كتابة رقم الهاتف </p>
+    </ion-text>
+    <ion-text color="warning" *ngIf=" contactForm.get('Mobile').hasError('pattern') ">
+      <p class="ion-text-right"> (05XX XXX XX XX) يرجى كتابة الرقم على الشكل</p>
+    </ion-text>
+    <ion-item class="animated fadeInUp">
+      <ion-label class="ion-text-right" position="floating"><ion-text color="danger">*</ion-text> نص الرسالة</ion-label>
+      <ion-textarea type="text" formControlName="message" class="ion-text-right" rows="6" cols="20"></ion-textarea>
+      <ion-text color="warning"
+      *ngIf="contactForm.get('message').touched && contactForm.get('message').hasError('required')">
+      <p class="ion-text-right">يرجى كتابة نص الرسالة </p>
+    </ion-text>
+    </ion-item>
+    <ion-footer>
+        <ion-item lines="none">
+            <ion-label class="ion-text-center">
+              <ion-button expand="block" color="secondary" type="submit" [disabled]="!contactForm.valid">
+                ارسال
+              </ion-button>
+            </ion-label>
+          </ion-item>
+    </ion-footer>
+    
+  </form>
+</ion-card-content>
+</ion-card>
+</ion-content>

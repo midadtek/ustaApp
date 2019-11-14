@@ -70,29 +70,29 @@ export class FstoreService {
 
     return this.afs.collection<Usta>('ustas', ref => {   
     if(lastusta){
-      if(countryid===undefined && sub_section === undefined){
+      if(countryid == undefined && sub_section == undefined){
         return ref.where('sectionid', '==', sectionid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
           }
-          else if(countryid !==undefined && sub_section===undefined){
+          else if(countryid !=undefined && sub_section==undefined){
             return ref.where('sectionid','==',sectionid).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
           }
-          else  if(sub_section!==undefined && countryid===undefined){          
+          else  if(sub_section!=undefined && countryid==undefined){          
            return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
           }
-          else if(sub_section!==undefined && countryid !==undefined ){        
+          else if(sub_section!=undefined && countryid !=undefined ){        
             return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").startAfter(lastusta.img_profile).limit(5);
           }
     }else{
-      if(countryid===undefined && sub_section === undefined){
+      if(countryid==undefined && sub_section == undefined){
     return ref.where('sectionid', '==', sectionid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
       }
-      else if(countryid !==undefined && sub_section===undefined){
+      else if(countryid !=undefined && sub_section==undefined){
       return ref.where('sectionid','==',sectionid).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
       }
-      else  if(sub_section!==undefined && countryid===undefined){      
+      else  if(sub_section!=undefined && countryid==undefined){      
        return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('active', '==', true).orderBy("img_profile","desc").limit(5);
       }
-        else if(sub_section!==undefined && countryid !==undefined ){
+        else if(sub_section!=undefined && countryid !=undefined ){
           return ref.where('sectionid','==',sectionid).where('subservicesid','array-contains',sub_section).where('countryid','==',countryid).where('active', '==', true).orderBy("img_profile","desc").limit(5);
         } 
       }

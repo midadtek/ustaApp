@@ -1,0 +1,30 @@
+.nodata {
+    --background: none;
+    background-image: url('/assets/img/nodata.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size:contain
+}
+#map_canvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  div[scrollx=true] {
+  
+    display: -webkit-box;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+       display: -webkit-box;
+    }
+     .scroll-item {
+       flex: 0 0 auto;
+    }
+  }
+  ion-select {
+    text-align: center !important;
+    font-size: large;
+    font-weight: bold;
+    border: 2px solid #c87e13;
+}

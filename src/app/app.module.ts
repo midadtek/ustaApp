@@ -12,18 +12,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
-import { FilterUstasPageModule } from './views/lists/filter-ustas/filter-ustas.module';
-import { OrderUstasPageModule  } from './views/lists/order-ustas/order-ustas.module';
-
-
- 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),FilterUstasPageModule,OrderUstasPageModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule],

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Country, SubSection, City } from 'src/app/services/interfaces';
 import { ModalController, NavParams } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { FirebasedbService, Usta, City, Nationality, Country, SubSection } from '../../services/firebasedb.service';
-import { Observable } from 'rxjs';
+import { FstoreService } from 'src/app/services/fstore.service';
+
 @Component({
-  selector: 'app-filter-ustas',
-  templateUrl: './filter-ustas.page.html',
-  styleUrls: ['./filter-ustas.page.scss'],
+  selector: 'app-filter',
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.scss'],
 })
-export class FilterUstasPage implements OnInit {
+export class FilterComponent implements OnInit {
+
   sectionid
   customActionSheetOptions: any = {};
   cities:any[]
@@ -17,18 +18,22 @@ export class FilterUstasPage implements OnInit {
   filtered_city;
   filtered_country;
   filtered_subSection;
-  constructor(private storage: Storage, private modalCtr: ModalController,
-    private fbSrv: FirebasedbService, private navParams: NavParams) { }
-  ionViewWillEnter() {
-    let filter_affect = this.navParams.get('filter_affect');
-    this.sectionid = this.navParams.get('sectionid');
-    if (filter_affect) {
-      this.filtered_city = filter_affect.filtered_city
-      this.filtered_country = filter_affect.filtered_country
-      this.filtered_subSection = filter_affect.filtered_subSection
+  constructor(private modalCtr: ModalController,
+    private fbSrv: FstoreService, private navParams: NavParams) { }
+
+    ionViewWillEnter() {
+      let filter_affect = this.navParams.get('filter_affect');
+      this.sectionid = this.navParams.get('sectionid');
+      this.filtered_country = this.navParams.get('country');
+      this.filtered_subSection = this.navParams.get('subSection');
+      if (filter_affect) {
+        this.filtered_city = filter_affect.filtered_city
+        this.filtered_country = filter_affect.filtered_country
+        this.filtered_subSection = filter_affect.filtered_subSection
+      }
     }
-  }
   ngOnInit() {
+
     this.fbSrv.getSubSections(this.sectionid).subscribe((snapshot) => {
       this.subSections = snapshot.docs.map(doc => {
         return {
@@ -45,6 +50,9 @@ export class FilterUstasPage implements OnInit {
         } as Country;
       });
     })
+
+
+
   }
   onSelectChange(ev) {
     this.fbSrv.getcities(ev.detail.value).subscribe(res => {
@@ -54,7 +62,6 @@ export class FilterUstasPage implements OnInit {
           ...doc.data()
         } as City;
     }).sort((a: City, b: City) =>{ try{return a.title_ar < b.title_ar ? -1 : 1}catch{}})
-    // this.cities.push({id:'',title_ar:'تحديد الكل',title_tr:'',lat:'0',lon:'0'})
 
   });
   }
@@ -79,4 +86,5 @@ export class FilterUstasPage implements OnInit {
     result.filtered_subSection = null
     this.modalCtr.dismiss(result);
   }
+
 }

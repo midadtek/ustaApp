@@ -3,15 +3,14 @@ import { FstoreService } from 'src/app/services/fstore.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController, ModalController, PopoverController, IonInfiniteScroll } from '@ionic/angular';
 import { Country, SubSection, Usta } from 'src/app/services/interfaces';
-import { OrderUstasPage } from '../order-ustas/order-ustas.page';
-import { FilterUstasPage } from '../filter-ustas/filter-ustas.page';
+import { FilterComponent } from 'src/app/components/filter/filter.component';
 @Component({
   selector: 'app-ustas',
   templateUrl: './ustas.page.html',
   styleUrls: ['./ustas.page.scss'],
 })
 export class UstasPage implements OnInit {
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll, { static: false }) infiniteScroll: IonInfiniteScroll;
   countries: Country[];
   subSections;
   sectionid: string;
@@ -27,6 +26,7 @@ export class UstasPage implements OnInit {
   filter_affec;
   searchTerm
   showSearch
+
   constructor(private fbSrv: FstoreService, private route: ActivatedRoute,
     private loadingController: LoadingController, public navCtrl: NavController,
      private modalCtr: ModalController, private popoverCtr: PopoverController) { }
@@ -67,12 +67,12 @@ export class UstasPage implements OnInit {
       spinner: 'lines-small'
     });
     await loading.present();
-    this.fbSrv.getUstas(this.sectionid,this.filteredCountry,this.filterdSubSection,null).subscribe(snapshot =>{
+    this.fbSrv.getUstas(this.sectionid , this.filteredCountry , this.filterdSubSection , null).subscribe(snapshot => {
       this.orgUstas = this.pagedUstas = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
     });
-    this.closeFilter=true;
+    this.closeFilter = true;
    }
 
    async filterSubSection(){
@@ -80,28 +80,27 @@ export class UstasPage implements OnInit {
       spinner: 'lines-small'
     });
     await loading.present();
-  
-    this.fbSrv.getUstas(this.sectionid,this.filteredCountry,this.filterdSubSection,null).subscribe(snapshot =>{
-     
+    this.fbSrv.getUstas(this.sectionid , this.filteredCountry,this.filterdSubSection , null).subscribe(snapshot => {
       this.orgUstas = this.pagedUstas = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
     });
-    this.closeFilter=true
-  
+    this.closeFilter = true;
   }
 
    loadData(event){
-    this.fbSrv.getUstas(this.sectionid,this.filteredCountry,this.filterdSubSection,null).subscribe(res =>{
+    setTimeout(() => {
+    this.fbSrv.getUstas(this.sectionid , this.filteredCountry , this.filterdSubSection , this.lastUsta).subscribe(res => {
       if (res.length) {
         this.pagedUstas = this.pagedUstas.concat(res);
         this.lastUsta = res[res.length - 1];
         event.target.complete();
       }
-      else {
+      else{
         event.target.disabled = true;
       }
     });
+  }, 500);
    }
    toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
@@ -118,7 +117,7 @@ export class UstasPage implements OnInit {
       spinner: 'lines-small'
     });
     await loading.present();
-    this.fbSrv.getUstas(this.sectionid,this.filteredCountry,this.filterdSubSection,null).subscribe(snapshot =>{
+    this.fbSrv.getUstas(this.sectionid , this.filteredCountry , this.filterdSubSection , null).subscribe(snapshot =>{
       this.orgUstas = this.pagedUstas = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
@@ -127,42 +126,44 @@ export class UstasPage implements OnInit {
       this.sections = res.section
     })
   }
-  async order() {
-    const popover = await this.popoverCtr.create({
-      component: OrderUstasPage
-    });
-    popover.present();
-    popover.onWillDismiss().then(arrange => {
-      if(arrange.data){
-      if (arrange.data.order_affect) {
-        switch (arrange.data.order_affect) {
-          case 'low_rate':
-            this.orgUstas.sort((a: Usta, b: Usta) =>{ try{return a.ustarate < b.ustarate ? -1 : 1}catch{}})
-            break;
-          case 'low_experience':
-            this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.experienceyear < b.experienceyear ? -1 : 1}catch{}})
-            break;
-          case 'high_rate':
-            this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.ustarate > b.ustarate ? -1 : 1}catch{}})
-            break;
-          case 'high_experience':
-            this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.experienceyear > b.experienceyear ? -1 : 1}catch{}})
-            break;
-        }
-        this.pagedUstas = this.orgUstas
-        this.order_affect = arrange.data;
-      } else {
-        this.order_affect = null;
-      }
-    }
-    });
-  }
+  // async order() {
+  //   const popover = await this.popoverCtr.create({
+  //     component: OrderUstasPage
+  //   });
+  //   popover.present();
+  //   popover.onWillDismiss().then(arrange => {
+  //     if(arrange.data){
+  //     if (arrange.data.order_affect) {
+  //       switch (arrange.data.order_affect) {
+  //         case 'low_rate':
+  //           this.orgUstas.sort((a: Usta, b: Usta) =>{ try{return a.ustarate < b.ustarate ? -1 : 1}catch{}})
+  //           break;
+  //         case 'low_experience':
+  //           this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.experienceyear < b.experienceyear ? -1 : 1}catch{}})
+  //           break;
+  //         case 'high_rate':
+  //           this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.ustarate > b.ustarate ? -1 : 1}catch{}})
+  //           break;
+  //         case 'high_experience':
+  //           this.orgUstas.sort((a: Usta, b: Usta) => { try{return a.experienceyear > b.experienceyear ? -1 : 1}catch{}})
+  //           break;
+  //       }
+  //       this.pagedUstas = this.orgUstas
+  //       this.order_affect = arrange.data;
+  //     } else {
+  //       this.order_affect = null;
+  //     }
+  //   }
+  //   });
+  // }
   async openFilter() {
     const modal = await this.modalCtr.create({
-      component: FilterUstasPage,
+      component: FilterComponent,
       componentProps: {
         filter_affect: this.filter_affec,
-        sectionid:this.sectionid
+        sectionid:this.sectionid,
+        country:this.filteredCountry,
+        subSection:this.filterdSubSection
       }
     });
     modal.present();
@@ -196,16 +197,19 @@ export class UstasPage implements OnInit {
   filterustas() {
     console.log(this.searchTerm)
     if (this.searchTerm.length > 1) {
-        this.orgUstas = this.pagedUstas.filter(usta => 
-          { try{return ((usta.name.indexOf(this.searchTerm) > -1) ||
+        this.orgUstas = this.pagedUstas.filter(usta =>
+          {
+            try {
+              return ((usta.name.indexOf(this.searchTerm) > -1) ||
              (usta.mobile.indexOf(this.searchTerm) > -1) ||
-              (usta.description.indexOf(this.searchTerm) > -1||(usta.hash_id==this.searchTerm)))}
+              (usta.description.indexOf(this.searchTerm) > -1 || (usta.hash_id === this.searchTerm)))
+            }
               catch(err){}; 
           }
           )
     } else {
-      this.orgUstas = this.pagedUstas
+      this.orgUstas = this.pagedUstas;
     }
-    this.pagedUstas = this.orgUstas
+    this.pagedUstas = this.orgUstas;
   }
 }

@@ -89,7 +89,7 @@
     </ion-item-divider>
     <ng-container *ngIf="usedShops && usedShops.length > 0">
       <ion-card mode="ios" *ngFor="let item of usedShops">
-        <ion-item [routerLink]="['/used-shop', item.id]" detail="false">
+        <ion-item [routerLink]="['/used-shops', item.id]" detail="false">
           <ion-note color="medium" slot="start">( {{item.ustacount}} )</ion-note>
           <ion-label class="ion-text-center ion-text-wrap" color="dark">
             <h2>{{item.section}}</h2>

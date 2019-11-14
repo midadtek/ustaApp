@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore, QuerySnapshot } from '@angular/fire/firestore';
 import { map} from 'rxjs/operators';
-import { Section, Banner, Country, City, Nationality, SectionLocation, Usta, Rate, Question } from './interfaces';
+import { Section, Banner, Country, City, Nationality, SectionLocation, Usta, Rate, Question, Typeofconstruction, NumberOfRooms, years, Fuel, modelsOfCars, Gear, Plate } from './interfaces';
 import {formatDate } from '@angular/common';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -220,5 +220,26 @@ export class FstoreService {
         });
       })
     );
+  }
+  getTypeofContruction(){
+    return this.afs.collection<Typeofconstruction>('Typeofconstruction').get();
+  }
+  getNumberOfRoom(){
+    return this.afs.collection<NumberOfRooms>('NumberOfRooms',ref=>{return ref.orderBy("order","desc")}).get();
+  }
+  getfuel(){
+    return this.afs.collection<Fuel>('Fuel').get();
+  }
+  getdate(){
+    return this.afs.collection<years>('Dates', ref => ref.orderBy('year','desc')).get();
+  }
+  getModels(){
+    return this.afs.collection<modelsOfCars>('modelsOfCars').get();
+  }
+  getGear(){
+    return this.afs.collection<Gear>('Gear').get();
+  }
+  getPlate(){
+    return this.afs.collection<Plate>('Plate').get();
   }
 }

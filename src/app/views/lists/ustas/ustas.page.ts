@@ -26,6 +26,7 @@ export class UstasPage implements OnInit {
   filter_affec;
   searchTerm
   showSearch
+  usta:Usta[]
 
   constructor(private fbSrv: FstoreService, private route: ActivatedRoute,
     private loadingController: LoadingController, public navCtrl: NavController,
@@ -57,6 +58,9 @@ export class UstasPage implements OnInit {
   }
   Reset(){
     this.pagedUstas=null;
+    this.usta=null;
+    this.orgUstas=null;
+
      this.loadUstas();
      this.closeFilter=false
      this.filteredCountry=undefined;
@@ -68,7 +72,7 @@ export class UstasPage implements OnInit {
     });
     await loading.present();
     this.fbSrv.getUstas(this.sectionid , this.filteredCountry , this.filterdSubSection , null).subscribe(snapshot => {
-      this.orgUstas = this.pagedUstas = snapshot;
+      this.orgUstas = this.pagedUstas=this.usta = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
     });
@@ -81,7 +85,7 @@ export class UstasPage implements OnInit {
     });
     await loading.present();
     this.fbSrv.getUstas(this.sectionid , this.filteredCountry,this.filterdSubSection , null).subscribe(snapshot => {
-      this.orgUstas = this.pagedUstas = snapshot;
+      this.orgUstas = this.pagedUstas=this.usta = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
     });
@@ -118,7 +122,7 @@ export class UstasPage implements OnInit {
     });
     await loading.present();
     this.fbSrv.getUstas(this.sectionid , this.filteredCountry , this.filterdSubSection , null).subscribe(snapshot =>{
-      this.orgUstas = this.pagedUstas = snapshot;
+      this.orgUstas = this.pagedUstas=this.usta = snapshot;
       this.lastUsta = snapshot[snapshot.length - 1];
       loading.dismiss();
     });
@@ -163,36 +167,35 @@ export class UstasPage implements OnInit {
         filter_affect: this.filter_affec,
         sectionid:this.sectionid,
         country:this.filteredCountry,
-        subSection:this.filterdSubSection
       }
     });
     modal.present();
     modal.onWillDismiss().then(async filter => {
       if (filter.data) {
-        const loading = await this.loadingController.create({
-          spinner: 'lines-small'
-        });
-        await loading.present();
-        let tempUsta = this.pagedUstas
-        if (filter.data.filtered_city) {
-          tempUsta = tempUsta.filter(usta => { try{return usta.locationCode.indexOf(filter.data.filtered_city.id) > -1 }catch{}})
-        }
-        if (filter.data.filtered_country) {
-          tempUsta = tempUsta.filter(usta => { try{return usta.country.id == filter.data.filtered_country }catch{}})
-        }        
-        if (filter.data.filtered_subSection) {
-          tempUsta = tempUsta.filter(usta => { try{return usta.subservices.find(ob => ob.id === filter.data.filtered_subSection.id) != null }catch{}})
-        }
-        this.orgUstas = tempUsta
-        this.filter_affec = filter.data;
-        loading.dismiss();
-      }
-      else {
-        this.orgUstas = this.pagedUstas
+        this.filterData(filter.data);
+      } else {
         this.filter_affec = null;
+        this.loadUstas()
       }
-      this.pagedUstas = this.orgUstas
+ 
     });
+  }
+  async filterData(data){
+    const loading = await this.loadingController.create({
+      spinner: 'lines-small'
+    });
+    await loading.present();
+    let tempUsta = this.pagedUstas
+    if (data.filtered_city) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.locationCode.indexOf(data.filtered_city.id) > -1 }catch{}})
+    }
+    if (data.filtered_country) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.country.id ===data.filtered_country }catch{}})
+    }
+    this.pagedUstas = tempUsta;
+     this.filter_affec = data;
+     loading.dismiss();
+
   }
   filterustas() {
     console.log(this.searchTerm)
@@ -208,7 +211,7 @@ export class UstasPage implements OnInit {
           }
           )
     } else {
-      this.orgUstas = this.pagedUstas;
+      this.orgUstas = this.usta;
     }
     this.pagedUstas = this.orgUstas;
   }

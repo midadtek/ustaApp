@@ -71,6 +71,40 @@ export interface Usta {
     created_at: Date;
     active: boolean
   }
+  export interface years{
+    id:string;
+    year:number;
+  }
+  export interface Plate{
+    id:string;
+    title_ar:string;
+    title_en:string
+  }
+  
+  export interface Typeofconstruction{
+    id:string;
+    title_ar:string;
+    title_en:string
+  }
+  export interface NumberOfRooms{
+    id:string;
+    room:string;
+    order:number
+  }
+  export interface Fuel{
+    id:string;
+    title_ar:string;
+    title_en:string
+  }
+  export interface modelsOfCars{
+    id:string;
+    title:string;
+  }
+  export interface Gear{
+    id:string;
+    title_ar:string;
+    title_en:string
+  }
   export interface Country {
     id: string
     title: string

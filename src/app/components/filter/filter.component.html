@@ -17,7 +17,7 @@
               </ion-label>
       </ion-col>
       <ion-col size="12">
-          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_country" (ionChange)="onSelectChange($event)" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+          <ion-select mode="md" cancelText="إلغاء" [(ngModel)]="filtered_country" (ionChange)="onSelectChange($event)" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
               <ion-select-option  value="{{country.id}}"    *ngFor="let country of countries">{{country.country}}</ion-select-option>
               </ion-select>
       </ion-col>
@@ -32,7 +32,7 @@
             </ion-label>
       </ion-col>
       <ion-col size="12">
-          <ionic-selectable [disabled]="!filtered_country"  [(ngModel)]="filtered_city" [items]="cities" itemValueField="id"
+          <ionic-selectable mode="md" [disabled]="!filtered_country"  [(ngModel)]="filtered_city" [items]="cities" itemValueField="id"
           itemTextField="title_ar" [canSearch]="true" headerColor="primary">
           <ng-template ionicSelectableCloseButtonTemplate>
               <ion-icon name="arrow-back" color='light'></ion-icon>            
@@ -45,21 +45,218 @@
     </ion-row>
   </ion-grid>
   <br/>
-  <ion-grid fixed>
+  <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
       <ion-row>
         <ion-col size="12">
-                <ion-label text-center color="primary">
-                  <h2>التخصص</h2>
-                </ion-label>
+            <ion-label text-center color="primary">
+                <h4>  حسب  نوع العقار  </h4>
+              </ion-label>
         </ion-col>
         <ion-col size="12">
-            <ion-select  mode="md" cancelText="إلغاء" [(ngModel)]="filtered_subSection" >
-                <ion-select-option  value="{{sub.id}}"    *ngFor="let sub of subSections">{{sub.title}}</ion-select-option>
-                </ion-select>
-        </ion-col>
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_typeOfconstruction" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="{{t.title_ar}}"    *ngFor="let t of typeOfconstruction">{{t.title_ar}}</ion-select-option>
+              </ion-select>
+      </ion-col>
       </ion-row>
     </ion-grid>
+    <br/>
+    
+    <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  حسب   عدد الغرف  </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_numberOfRooms" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="{{n.room}}"    *ngFor="let n of numberOfRooms">{{n.room}}</ion-select-option>
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    
+    <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  يوجد تأمين </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_deposit" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="نعم" >نعم</ion-select-option>
+              <ion-select-option  value="لا" >لا</ion-select-option>
+    
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    <ion-grid  *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  مفروشة  </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_furnished" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="نعم" >نعم</ion-select-option>
+              <ion-select-option  value="لا" >لا</ion-select-option>
+    
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  مصعد  </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_lift" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="نعم" >نعم</ion-select-option>
+              <ion-select-option  value="لا" >لا</ion-select-option>
+    
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  عائدات  </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_periodicExpenses" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="نعم" >نعم</ion-select-option>
+              <ion-select-option  value="لا" >لا</ion-select-option>
+    
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    <ion-grid *ngIf="sectionid=='yCncXQlblutGpU8YlbjW'" fixed>
+      <ion-row>
+        <ion-col size="12">
+            <ion-label text-center color="primary">
+                <h4>  داخل مجمع  </h4>
+              </ion-label>
+        </ion-col>
+        <ion-col size="12">
+          <ion-select cancelText="إلغاء" [(ngModel)]="filtered_withinTheComplex" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+              <ion-select-option  value="نعم" >نعم</ion-select-option>
+              <ion-select-option  value="لا" >لا</ion-select-option>
+    
+              </ion-select>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br/>
+    <ion-grid *ngIf="sectionid=='X8YhOaNVHSBsje3DjM3w'" fixed>
+        <ion-row>
+          <ion-col size="12">
+              <ion-label text-center color="primary">
+                  <h4>  حسب نوع الوقود</h4>
+                </ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select cancelText="إلغاء" [(ngModel)]="filtered_fuel"  [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+                <ion-select-option  value="{{f.title_ar}}"    *ngFor="let f of fuel">{{f.title_ar}}</ion-select-option>
+                </ion-select>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/>
+      
+      <ion-grid *ngIf="sectionid=='X8YhOaNVHSBsje3DjM3w'" fixed>
+        <ion-row>
+          <ion-col size="12">
+              <ion-label text-center color="primary">
+                  <h4>  حسب سنة الصنع </h4>
+                </ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select cancelText="إلغاء" [(ngModel)]="filtered_date"  [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+                <ion-select-option  value="{{d.year}}"    *ngFor="let d of date">{{d.year}}</ion-select-option>
+                </ion-select>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/>
+      
+      <ion-grid *ngIf="sectionid=='X8YhOaNVHSBsje3DjM3w'" fixed>
+        <ion-row>
+          <ion-col size="12">
+              <ion-label text-center color="primary">
+                  <h4>  حسب  موديل السيارة </h4>
+                </ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select cancelText="إلغاء" [(ngModel)]="filtered_modelsOfCars" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+                <ion-select-option  value="{{m.title}}"    *ngFor="let m of modelsofcars">{{m.title}}</ion-select-option>
+                </ion-select>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/>
+      
+      <ion-grid *ngIf="sectionid=='X8YhOaNVHSBsje3DjM3w'" fixed>
+        <ion-row>
+          <ion-col size="12">
+              <ion-label text-center color="primary">
+                  <h4>  حسب  ناقل الحركة </h4>
+                </ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select cancelText="إلغاء" [(ngModel)]="filtered_gear" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+                <ion-select-option  value="{{g.title_ar}}"    *ngFor="let g of gear">{{g.title_ar}}</ion-select-option>
+                </ion-select>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/>
+      
+      <ion-grid *ngIf="sectionid=='X8YhOaNVHSBsje3DjM3w'" fixed>
+        <ion-row>
+          <ion-col size="12">
+              <ion-label text-center color="primary">
+                  <h4>  حسب   لوحة السيارة  </h4>
+                </ion-label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-select cancelText="إلغاء" [(ngModel)]="filtered_plate" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+                <ion-select-option  value="{{p.title_ar}}"    *ngFor="let p of plate">{{p.title_ar}}</ion-select-option>
+                </ion-select>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/>
+<ion-grid *ngIf="sectionid=='XF0nvOlqe0kiGR3badlt'" fixed>
+  <ion-row>
+    <ion-col size="12">
+        <ion-label text-center color="primary">
+            <h4>  إمكانية التوصيل  </h4>
+          </ion-label>
+    </ion-col>
+    <ion-col size="12">
+      <ion-select cancelText="إلغاء" [(ngModel)]="filtered_delivery" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" >
+          <ion-select-option  value="نعم" >نعم</ion-select-option>
+          <ion-select-option  value="لا" >لا</ion-select-option>
 
+          </ion-select>
+  </ion-col>
+  </ion-row>
+</ion-grid>
   </ion-content>
   <ion-footer>
         <ion-grid>

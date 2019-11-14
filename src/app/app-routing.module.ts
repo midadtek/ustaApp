@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'ustas/:sectionid', loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
   {path: 'companies', loadChildren: './views/lists/companies/companies.module#CompaniesPageModule'},
   {path: 'restaurants', loadChildren: './views/lists/restaurants/restaurants.module#RestaurantsPageModule'},
-  { path: 'used-shops/:id', loadChildren: './views/lists/used-shops/used-shops.module#UsedShopsPageModule' },
+  { path: 'used-shops/:sectionid', loadChildren: './views/lists/used-shops/used-shops.module#UsedShopsPageModule' },
   { path: 'contact-us', loadChildren: './views/dashboard/contact-us/contact-us.module#ContactUsPageModule' },
 
 ];

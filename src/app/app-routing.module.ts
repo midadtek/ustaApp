@@ -13,10 +13,14 @@ const routes: Routes = [
   {path: 'newused', loadChildren: './views/dashboard/new-used/new-used.module#NewUsedPageModule'},
   {path: 'ustas/:sectionid', loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
   {path: 'companies', loadChildren: './views/lists/companies/companies.module#CompaniesPageModule'},
-  {path: 'restaurants', loadChildren: './views/lists/restaurants/restaurants.module#RestaurantsPageModule'},
+  {path: 'restaurants-companies/:sectionid',
+   loadChildren: './views/lists/restaurants-companies/restaurants-companies.module#RestaurantsCompaniesPageModule'},
   { path: 'used-shops/:sectionid', loadChildren: './views/lists/used-shops/used-shops.module#UsedShopsPageModule' },
   { path: 'contact-us', loadChildren: './views/dashboard/contact-us/contact-us.module#ContactUsPageModule' },
+  { path: 'profile-banner', loadChildren: './views/profiles/profile-banner/profile-banner.module#ProfileBannerPageModule'},
+  { path: 'profile', loadChildren: './views/profiles/profile/profile.module#ProfilePageModule' },
 
+  { path: 'ustaprofile/:id', loadChildren: './views/profiles/ustaprofile/ustaprofile.module#UstaprofilePageModule'},
 ];
 
 @NgModule({

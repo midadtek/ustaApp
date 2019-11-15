@@ -191,16 +191,62 @@ export class UsedShopsPage implements OnInit {
     });
     await loading.present();
     let tempUsta = this.pagedUstas
+    if(data){
     if (data.filtered_city) {
       tempUsta = tempUsta.filter(usta => { try{return usta.locationCode.indexOf(data.filtered_city.id) > -1 }catch{}})
     }
     if (data.filtered_country) {
       tempUsta = tempUsta.filter(usta => { try{return usta.country.id ===data.filtered_country }catch{}})
+    } 
+    if (data.filtered_numberOfRooms) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.numberOfRooms.room === data.filtered_numberOfRooms }catch{}})
+
+    }
+    if (data.filtered_typeOfconstruction) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.typeOfconstruction.title_ar === data.filtered_typeOfconstruction }catch{}})
+
+    }
+    if (data.filtered_deposit) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.deposit === data.filtered_deposit }catch{}})
+
+    }
+    if (data.filtered_furnished) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.Furnished === data.filtered_furnished }catch{}})
+
+    }
+    if (data.filtered_lift) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.lift === data.filtered_lift }catch{}})
+
+    }
+    if (data.filtered_periodicExpenses) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.periodicExpenses === data.filtered_periodicExpenses }catch{}})
+
+    }
+    if (data.filtered_withinTheComplex) {
+      tempUsta = tempUsta.filter(usta => { try{return usta.withinTheComplex === data.filtered_withinTheComplex }catch{}})
+    }
+
+    if (data.filtered_fuel){
+      tempUsta = tempUsta.filter(usta => {try {return usta.fuel.title_ar ===data.filtered_fuel; }catch {}});
+    }
+    if (data.filtered_date){
+      tempUsta = tempUsta.filter(usta => {try {return usta.year.year ===data.filtered_date; }catch {}});
+    }
+    if (data.filtered_modelsOfCars){
+      tempUsta = tempUsta.filter(usta => {try {return usta.modelOfCar.title ===data.filtered_modelsOfCars; }catch {}});
+    }
+    if (data.filtered_gear){
+      tempUsta = tempUsta.filter(usta => {try {return usta.gear.title_ar ===data.filtered_gear; }catch {}});
+    }
+    if (data.filtered_plate){
+      tempUsta = tempUsta.filter(usta => {try {return usta.plate.title_ar ===data.filtered_plate; }catch {}});
     }
     this.pagedUstas = tempUsta;
      this.filter_affec = data;
      loading.dismiss();
-
+    }else{
+      this.loadUstas()
+    }
   }
   filterustas() {
     console.log(this.searchTerm)

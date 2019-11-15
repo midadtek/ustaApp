@@ -69,7 +69,7 @@
     </ion-item-divider>
     <ng-container *ngIf="business && business.length > 0">
       <ion-card mode="ios" *ngFor="let item of business">
-        <ion-item [routerLink]="['/companies', item.id]" detail="false">
+        <ion-item [routerLink]="['/restaurants-companies', item.id]" detail="false">
           <ion-note color="medium" slot="start">( {{item.ustacount}} )</ion-note>
           <ion-label class="ion-text-center ion-text-wrap" color="dark">
             <h2>{{item.section}}</h2>
@@ -95,7 +95,7 @@
             <h2>{{item.section}}</h2>
           </ion-label>
           <ion-buttons slot="end">
-            <ion-button slot="icon-only">
+            <ion-button slot="icon-only"> 
               <ion-icon name="{{item.icon}}" color="secondary"></ion-icon><br>
             </ion-button>
           </ion-buttons>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button color="light" (click)="close()"><ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    <ion-title text-center> تقييم {{ustaname}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-item lines="none">
+    <ion-label text-center>
+      <ion-text color="primary" text-right>
+        <h4>التقييم من 5</h4>
+      </ion-text>
+       <rating [(ngModel)]="rate" readonly="false" size="5">
+      </rating></ion-label>
+    
+  </ion-item>
+  <form [formGroup]="rateForm" (ngSubmit)="submitForm(rateForm.value)">
+    <ion-item lines="none">
+      <ion-input type="text" formControlName="username" placeholder="اسمك" text-right></ion-input>
+    </ion-item>
+    <ion-text  color="warning"
+      *ngIf="rateForm.get('username').touched && rateForm.get('username').hasError('required')">
+      <p text-right>هذا الحقل مطلوب</p>
+    </ion-text>
+    <ion-item lines="none">
+      <ion-textarea  text-right formControlName="opinion" rows="6" cols="20" placeholder="تحدث عن تجربتك "></ion-textarea>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label text-center>
+          <ion-button expand="block" color="secondary" type="submit" [disabled]="!rateForm.valid || !rate">
+              تقييم
+            </ion-button>
+      </ion-label>
+      
+    </ion-item>
+  </form>
+</ion-content>

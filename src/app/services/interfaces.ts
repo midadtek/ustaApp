@@ -1,7 +1,7 @@
 
 export interface Usta {
-    id?: string;
-    name: string;
+    id?: string,
+    name: string,
     hash_id?
     img_profile?: string;
     img_gallery?: Array<string>
@@ -19,9 +19,16 @@ export interface Usta {
     whatsappmobile: string
     guarantee: string
     sex: string
+    social
+    email
+    pricein
+    workday
+    location
+    producercompany
+    created_at
     language: Array<string>
     nationality: Array<string>
-    locations: Array<string>
+    locations: Array<any>
     ustatype: Array<string>
     country
     latitude
@@ -41,7 +48,8 @@ export interface Usta {
     withinTheComplex
     Delivery
     typedescription
-    address;
+    address
+  
   }
   export interface Section {
     id?: string,

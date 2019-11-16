@@ -4,14 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import {ComponentsModule} from '../../../components/components.module';
 import { IonicModule } from '@ionic/angular';
+import { IonicHeaderParallaxModule } from 'ionic-header-parallax';
 
-import { UstaprofilePage } from './ustaprofile.page';
+import { restaurantcompanyprofilePage } from './restaurant-company-profile.page';
 import { IonicRatingModule } from 'ionic4-rating';
+
+
+
+
 
 const routes: Routes = [
   {
     path: '',
-    component: UstaprofilePage
+    component: restaurantcompanyprofilePage
   }
 ];
 
@@ -19,11 +24,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ComponentsModule,
-    IonicModule,
+    IonicModule,IonicHeaderParallaxModule,
     IonicRatingModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [UstaprofilePage]
+  declarations: [restaurantcompanyprofilePage]
 })
-export class UstaprofilePageModule {}
+export class restaurantcompanyprofilePageModule {}

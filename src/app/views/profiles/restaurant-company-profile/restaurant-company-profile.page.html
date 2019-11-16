@@ -1,0 +1,431 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text='' color="light" defaultHref="/restaurant-company">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>{{usta?.name}}</ion-title>
+
+    <ion-buttons slot="end">
+        
+    <ion-button fill="outline" size="small" color="light" (click)="addTofavorite()" *ngIf="!ustafavorite">
+      <ion-icon name="heart-empty"></ion-icon>
+    </ion-button>
+    <ion-button size="small" fill="outline" color="danger" (click)="removeFromfav()" *ngIf="ustafavorite">
+      <ion-icon name="heart" color="danger"></ion-icon>
+    </ion-button>
+   
+  </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+      <ng-container *ngIf="!usta">
+    <div *ngFor="let n of [0,1,2]" padding>
+      <ion-skeleton-text></ion-skeleton-text>
+      <p>
+        <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+      </p>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="usta">
+    <div class="card">
+        <img src="{{usta.img_profile}}" *ngIf="usta.img_profile" (click)="openProfile()">
+        <img src="assets/img/{{usta.sex}}.png" *ngIf="!usta.img_profile && usta.sex">
+        <img src="assets/img/male.png" *ngIf="!usta.img_profile && !usta.sex ">
+        <h1>{{usta?.name}}</h1>
+        <ion-label text-center>
+          <rating [rate]="usta.ustarate" readonly="true" size="small"></rating>
+        </ion-label>
+        <ion-badge color="danger" slot="end">{{usta.ustarate}} / 5 </ion-badge>
+        <ion-item *ngIf="usta.hash_id" lines="full">
+            <ion-label text-right>
+              <h2>رقم الإعلان : <ion-text color="danger">{{usta.hash_id}}</ion-text>  </h2>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.address" lines="full">
+              <ion-label text-right text-warp>
+                <h2>العنوان</h2>
+                <p style="white-space: normal;">{{usta.address}}</p>
+              </ion-label>
+            </ion-item>
+          <ion-item *ngIf="usta.typecompany" lines="full">
+            <ion-label text-right>
+              <h2>نوع الشركة</h2>
+              <p>{{usta.typecompany}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.branchescompany" lines="full">
+            <ion-label text-right>
+              <h2>فروع الشركة</h2>
+              <p>{{usta.branchescompany}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.producercompany" lines="full">
+            <ion-label text-right>
+              <h2>منتجات الشركة</h2>
+              <p>{{usta.producercompany}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.description" lines="full">
+            <ion-label text-right>
+              <h2>التخصص</h2>
+              <p style="white-space: normal;">{{usta.description}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.work_experience" lines="full">
+            <ion-label text-right>
+              <h2>خبرة في المجالات</h2>
+              <p style="white-space: normal;"> {{usta.work_experience}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.locations?.length" lines="full">
+            <ion-label text-right>
+              <h2>مناطق تقديم الخدمات</h2>
+              <span *ngFor="let location of usta.locations"> {{location.title_ar}} &nbsp;</span>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.workday?.length" lines="full">
+            <ion-label text-right>
+              <h2> أيام العمل </h2>
+              <p style="white-space: normal;"> {{usta.workday}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.nationality" lines="full">
+            <ion-label text-right>
+              <h2>الجنسية</h2>
+              <p>{{nationality[usta.nationality]}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.language?.length" lines="full">
+            <ion-label text-right>
+              <h2>اللغات</h2>
+              <span *ngFor="let i of usta.language">
+                {{language[i]}} &nbsp;
+              </span>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.price" lines="full">
+            <ion-label text-right>
+              <h2> التكلفة </h2>
+              <p> {{usta.pricein}} / {{usta.price}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.guarantee" lines="full">
+            <ion-label text-right>
+              <h2> كفالة الخدمة</h2>
+              <p> {{usta.guarantee}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.ustatype?.length" lines="full">
+            <ion-label text-right>
+              <h2> طبيعة العمل</h2>
+              <p> {{usta.ustatype}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.experienceyear" lines="full">
+            <ion-label text-right>
+              <h2> سنوات الخبرة</h2>
+              <p> {{usta.experienceyear}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.hourswork" lines="full">
+              <ion-label text-right>
+                <h2>  ساعات العمل</h2>
+                <p> {{usta.hourswork}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="usta.targetmarkets" lines="full">
+              <ion-label text-right>
+                <h2>   الاسواق المستهدفة </h2>
+                <p style="word-break: break-all;
+                white-space: normal;"> {{usta.targetmarkets}}</p>
+              </ion-label>
+            </ion-item>
+          <ion-item *ngIf="usta.paymentby" lines="full">
+              <ion-label text-right>
+                <h2> طرق الدفع </h2>
+                <p> {{usta.paymentby}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="usta.transporation" lines="full">
+                <ion-label text-right>
+                  <h2> المواصلات  </h2>
+                  <p> {{usta.transporation}}</p>
+                </ion-label>
+              </ion-item>
+              <ion-item *ngIf="usta.aboutstaffresturant" lines="full">
+                  <ion-label text-right>
+                    <h2> حول كادر المطعم  </h2>
+                    <p> {{usta.aboutstaffresturant}}</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item *ngIf="usta.typedescription" lines="full">
+                  <ion-label text-right>
+                    <h2>تصنيف نشاط الشركة</h2>
+                    <p style="white-space: normal;">{{usta.typedescription}}</p>
+                  </ion-label>
+                </ion-item>
+                <h5 *ngIf="usta.companyfeatures">   مميزات الشركة</h5>
+
+                <ion-item style="display: inline-block"  *ngFor="let item of usta.companyfeatures">
+      
+                    <ion-badge  style="border-radius: 1px;" color="medium">{{item}}</ion-badge>
+                  </ion-item>
+                  <ion-item *ngIf="usta.addresssubcompany1" lines="full">
+                    <ion-label text-right>
+                      <h2>   عنوان فرع شركة شعبة 1</h2>
+                      <p style="white-space: normal;">{{usta.addresssubcompany1}}</p>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="usta.servicesubcompany1" lines="full">
+                    <ion-label text-right>
+                      <h2>   خدمات ومنتجات  فرع شركة شعبة 1</h2>
+                      <p style="white-space: normal;">{{usta.servicesubcompany1}}</p>
+                    </ion-label>
+                  </ion-item>
+    
+                  <ion-item *ngIf="usta.addresssubcompany2" lines="full">
+                    <ion-label text-right>
+                      <h2>   عنوان فرع شركة شعبة 2</h2>
+                      <p style="white-space: normal;">{{usta.addresssubcompany2}}</p>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="usta.servicesubcompany2" lines="full">
+                    <ion-label text-right>
+                      <h2>   خدمات ومنتجات  فرع شركة شعبة 2</h2>
+                      <p style="white-space: normal;">{{usta.servicesubcompany2}}</p>
+                    </ion-label>
+                  </ion-item>
+    
+                  <ion-item *ngIf="usta.addresssubcompany3" lines="full">
+                    <ion-label text-right>
+                      <h2>   عنوان فرع شركة شعبة 3</h2>
+                      <p style="white-space: normal;">{{usta.addresssubcompany3}}</p>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="usta.servicesubcompany3" lines="full">
+                    <ion-label text-right>
+                      <h2>   خدمات ومنتجات  فرع شركة شعبة 3</h2>
+                      <p style="white-space: normal;">{{usta.servicesubcompany3}}</p>
+                    </ion-label>
+                  </ion-item>
+                      
+          <h5 *ngIf="usta.resturantmenu">  قائمة الطعام</h5>
+
+          <ion-item style="display: inline-block"  *ngFor="let item of usta.resturantmenu">
+
+              <ion-badge fill="inline" style="border-radius: 1px;"  color="medium">{{item}}</ion-badge>
+            </ion-item>
+            <h5 *ngIf="usta.resturantfeatures">   مميزات المطعم</h5>
+
+            <ion-item style="display: inline-block"  *ngFor="let item of usta.resturantfeatures">
+  
+                <ion-badge  style="border-radius: 1px;"  color="medium">{{item}}</ion-badge>
+              </ion-item>
+          <ion-item *ngIf="usta.mobile" lines="full">
+              <ion-badge color="medium" slot="start" (click)="copyNumber(usta.mobile)">نسخ الرقم<ion-icon name="copy">
+                </ion-icon>
+              </ion-badge>
+              <ion-label text-right color="danger">
+                <h2>رقم الجوال </h2>
+              </ion-label>
+              <ion-icon name="call" text-right></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="usta.phoneLine" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copyNumber(usta.phoneLine)">نسخ الرقم<ion-icon name="copy">
+                  </ion-icon>
+                </ion-badge>
+                <ion-label text-right color="danger">
+                  <h2>رقم الهاتف الثابت  </h2>
+                </ion-label>
+                <ion-icon name="call" text-right></ion-icon>
+              </ion-item>
+
+            <ion-item *ngIf="usta.othernumbers" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copyNumber(usta.othernumbers)">نسخ الرقم<ion-icon name="copy">
+                  </ion-icon>
+                </ion-badge>
+                <ion-label text-right color="danger">
+                  <h2>ارقام اخرى  </h2>
+                </ion-label>
+                <ion-icon name="call" text-right></ion-icon>
+              </ion-item>
+
+            <ion-item *ngIf="usta.whatsappmobile" lines="full">
+              <ion-badge color="medium" slot="start" (click)="copyNumber(usta.whatsappmobile)">نسخ الرقم<ion-icon
+                  name="copy"></ion-icon>
+              </ion-badge>
+              <ion-label text-right color="danger">
+                <h2>رقم الواتس اب </h2>
+              </ion-label>
+              <ion-icon name="logo-whatsapp" text-right></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="usta.webaddress" lines="full">
+                <ion-badge color="medium"  slot="start" (click)="copyEmail(usta.webaddress)">نسخ الموقع
+                    <ion-icon name="mail"> </ion-icon>
+                  </ion-badge>
+              <ion-label text-right >
+                  <h2>  الموقع الالكتروني </h2>
+
+                <p style="white-space: normal;" >{{usta.webaddress}}</p>
+              </ion-label>
+              
+            </ion-item>
+            
+            <ion-item *ngIf="usta.email" lines="full">
+                <ion-badge color="medium"  slot="start" (click)="copyEmail(usta.email)">نسخ البريد
+                    <ion-icon name="mail"> </ion-icon>
+                  </ion-badge>
+              <ion-label text-right >
+                  <h2>  البريد الالكتروني </h2>
+
+                <p >{{usta.email}}</p>
+              </ion-label>
+              
+            </ion-item>
+            <ion-item *ngIf="usta.social" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copySocial(usta.social)">نسخ
+                    <ion-icon name="share"></ion-icon>
+                  </ion-badge>
+              <ion-label text-right>
+                  <h2> التواصل الاجتماعي   </h2>
+
+                <p style="white-space: normal;">{{usta.social}} </p>
+              </ion-label>
+             
+            </ion-item>
+
+            <ion-item *ngIf="usta.facebook" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copySocial(usta.facebook)">نسخ
+                    <ion-icon name="share"></ion-icon>
+                  </ion-badge> 
+              <ion-label text-right>
+                    <h2>الفيس بوك   </h2>
+
+                  <p style="white-space: normal;">{{usta.facebook}} </p>
+                </ion-label>
+               
+              </ion-item>
+
+              <ion-item *ngIf="usta.twitter" lines="full">
+                  <ion-badge color="medium" slot="start" (click)="copySocial(usta.twitter)">نسخ
+                      <ion-icon name="share"></ion-icon>
+                    </ion-badge> 
+                <ion-label text-right>
+                      <h2>  التويتر </h2>
+
+                    <p style="white-space: normal;">{{usta.twitter}} </p>
+                  </ion-label>
+                  
+                </ion-item>
+
+                <ion-item *ngIf="usta.instegram" lines="full">
+                    <ion-badge color="medium" slot="start" (click)="copySocial(usta.instegram)">نسخ
+                        <ion-icon name="share"></ion-icon>
+                      </ion-badge>
+                    <ion-label text-right>
+                        <h2> الانستغرام </h2>
+
+                      <p style="white-space: normal;">{{usta.instegram}} </p>
+                    </ion-label>
+                   
+                  </ion-item>
+                  <div class="container">
+                    <div class="scroll" scrollX="true">
+                        <ion-item (click)="openBanner(i)" *ngFor="let banner of usta.img_gallery;let i=index">
+                          <ion-thumbnail slot="end" bannerImg>
+                              <img [src]="banner" >
+                          </ion-thumbnail>
+                      </ion-item>
+                    </div>
+    </div>
+
+
+            <!-- <ion-slides [options]="slideOpts" *ngIf="!usta?.img_gallery">
+                <ion-slide>
+                  <img src='assets/img/no.jpg' />
+                </ion-slide>
+              </ion-slides>
+              <ion-slides [options]="slideOpts" *ngIf="usta?.img_gallery">
+                <ion-slide *ngIf="!usta.img_gallery.length">
+                  <ion-img src='assets/img/no.jpg'></ion-img>
+                </ion-slide>
+                <ion-slide (click)="openBanner(i)" *ngFor="let banner of usta.img_gallery;let i=index">
+                  <ion-img tappable src='assets/img/loading.gif' [style.display]="loaded ? 'none' : 'unset'"></ion-img>
+                  <ion-img tappable [src]="banner" (ionImgDidLoad)="loaded = true" (ionImgWillLoad)="loaded = false"></ion-img>
+                </ion-slide>
+              </ion-slides> -->
+        <ion-item>
+            <div style="margin-top: 13px;margin-bottom: 13px" id="map_canvas"></div>
+          </ion-item>
+            <ion-item *ngIf="canRate" lines="full">
+                <ion-button slot="start" expand="block" fill="outline" color="danger" (click)="ustarate()">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <ion-icon name="thumbs-down"></ion-icon>
+                </ion-button>
+                <ion-label text-right>
+                  <h2>أضف تقييمك</h2>
+                </ion-label>
+              </ion-item>
+              <ion-item *ngIf="!canRate" lines="full">
+                <ion-button slot="start" expand="block" fill="outline" color="medium" >
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <ion-icon name="thumbs-down"></ion-icon>
+                </ion-button>
+                <ion-label text-center>
+                  <h2>قمت بتقييم هذا الحساب</h2>
+                </ion-label>
+              </ion-item>
+                <ion-card *ngFor="let item of ratelist" mode="ios">
+                  <ion-card-content>
+                    <ion-card-title text-right>
+                      {{item.client}}
+                    </ion-card-title>
+                    <p text-right>
+                      {{item.message}}
+                    </p>
+                  </ion-card-content>
+       
+                  <ion-row no-padding>
+                    <ion-col>
+                        <ion-chip color="light" mode="ios" outline="true">
+                      <img src="assets/img/{{item.rate_value}}.png" style="width: 100%">
+                    </ion-chip>
+                    </ion-col>
+                    <ion-col text-right>
+                        <ion-chip color="secondary" mode="ios">
+                            <ion-icon name="calendar"></ion-icon>
+                            <ion-label>{{item.created_at.seconds * 1000 | date:'dd-MM-yyyy'}}</ion-label>
+                          </ion-chip>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+       
+      </div>
+  
+  </ng-container>
+
+
+ 
+    
+</ion-content>
+<ion-footer>
+  <ion-grid no-padding>
+    <ion-row align-items-center>
+      <ion-col align-self-center>
+        <ion-button expand="block" size="large" fill="outline" color="secondary" (click)="call(usta?.mobile)">
+          <ion-icon name="call" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+          <ion-button fill="outline" size="small" color="success" (click)="shareWhatsApp()">
+              <ion-icon name="share"></ion-icon>
+              مشاركة
+            </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

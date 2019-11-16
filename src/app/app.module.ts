@@ -26,11 +26,10 @@ import { ProfileBannerPageModule} from '../app/views/profiles/profile-banner/pro
   entryComponents: [],
   imports: [
     BrowserModule,
-    
     IonicStorageModule.forRoot(),
     ProfilePageModule,
     ProfileBannerPageModule,
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule],

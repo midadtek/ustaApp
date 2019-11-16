@@ -21,6 +21,10 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './views/profiles/profile/profile.module#ProfilePageModule' },
 
   { path: 'ustaprofile/:id', loadChildren: './views/profiles/ustaprofile/ustaprofile.module#UstaprofilePageModule'},
+
+  { path: 'restaurant-company-profile/:id',
+   loadChildren: './views/profiles/restaurant-company-profile/restaurant-company-profile.module#restaurantcompanyprofilePageModule'},
+
 ];
 
 @NgModule({

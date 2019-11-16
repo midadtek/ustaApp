@@ -60,7 +60,7 @@
       </ng-container>
       <ng-container *ngIf="pagedUstas && pagedUstas.length > 0">
           <ion-list>
-              <ion-card mode="ios" *ngFor="let item of pagedUstas" [routerLink]="['/resturantprofile', item.id]" detail="false"
+              <ion-card mode="ios" *ngFor="let item of pagedUstas" [routerLink]="['/restaurant-company-profile', item.id]" detail="false"
                 routerDirection="forward">
                 <ion-item lines="none" color="light">
                     <ion-title ><ion-label class="ion-text-wrap ion-text-right" > {{item.name}} </ion-label></ion-title>
@@ -69,8 +69,10 @@
                   <ion-row class="ion-no-padding">
                     <ion-col size="12" class="ion-no-padding">
                       <div class="container">
-                        <img [src]="item.img_gallery[0]" onError="this.src='assets/img/loading.jpg';" />
-                       
+                     
+                          <img  src="{{item.img_profile}}" *ngIf="item.img_profile" style="width: 190px;" >
+                          <img src="assets/img/{{item.sex}}.png" *ngIf="!item.img_profile && item.sex ">
+                          <img src="assets/img/male.png" *ngIf="!item.img_profile && !item.sex ">
                       </div>
                     </ion-col>
                   </ion-row>

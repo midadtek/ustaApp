@@ -36,6 +36,7 @@
     "cordova-sqlite-storage": "3.4.0",
     "core-js": "^2.5.4",
     "firebase": "^7.1.0",
+    "ionic-header-parallax": "^2.2.2",
     "ionic-selectable": "^4.5.0",
     "ionic4-rating": "^1.0.9",
     "rxjs": "~6.5.1",

@@ -49,6 +49,29 @@ export interface Usta {
     Delivery
     typedescription
     address
+    typecompany
+    branchescompany
+    hourswork
+    targetmarkets
+    paymentby
+    transporation
+    aboutstaffresturant
+    companyfeatures
+    addresssubcompany1
+    servicesubcompany1
+    addresssubcompany2
+    servicesubcompany2
+    addresssubcompany3
+    servicesubcompany3
+    resturantmenu
+    resturantfeatures
+    phoneLine
+    othernumbers
+    webaddress
+    facebook
+    twitter
+    instegram
+    
   
   }
   export interface Section {

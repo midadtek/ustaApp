@@ -1,9 +1,260 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>newCompany</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text='' color="light" defaultHref="/dashboard">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>استمارة تسجيل</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-segment [(ngModel)]="request_segment" titleContent>
+      <ion-segment-button color="medium" value="company" >
+          شركة
+        </ion-segment-button>
+    <ion-segment-button color="medium" value="resturant" checked>
+      مطعم
+    </ion-segment-button>
+
+</ion-segment>
+
+<div [ngSwitch]="request_segment">
+  <ion-list *ngSwitchCase="'company'" padding>
+    <form [formGroup]="companyReqForm" (ngSubmit)="submitcompanyReqForm(companyReqForm.value)">
+      <ion-item class="animated fadeInUp">
+        <ion-label text-right position="floating">اسم الشركة</ion-label>
+        <ion-input type="text" formControlName="fullname" text-right></ion-input>
+      </ion-item>
+      <ion-text color="warning"
+        *ngIf="companyReqForm.get('fullname').touched && companyReqForm.get('fullname').hasError('required')">
+        <p text-right>هذا الحقل مطلوب</p>
+      </ion-text>
+
+      <ion-item class="animated fadeInUp">
+        <ion-label text-right position="floating">رقم التواصل</ion-label>
+        <ion-input type="text" formControlName="mobile" text-right></ion-input>
+      </ion-item>
+      <ion-text color="warning"
+        *ngIf="companyReqForm.get('mobile').touched && companyReqForm.get('mobile').hasError('required')">
+        <p text-right>هذا الحقل مطلوب </p>
+      </ion-text>
+      <ion-text color="warning" *ngIf=" companyReqForm.get('mobile').hasError('pattern') ">
+        <p text-right> (05XX XXX XX XX) يرجى كتابة الرقم على الشكل</p>
+      </ion-text>
+      <ion-item class="animated fadeInUp">
+          <ion-label text-right position="floating">نوع الشركة</ion-label>
+          <ion-select formControlName="typecompany" [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+            <ion-select-option value="شخصية">شخصية</ion-select-option>
+            <ion-select-option value="محدودة"> محدودة</ion-select-option>
+            <ion-select-option value="تعاونية"> تعاونية</ion-select-option>
+          </ion-select>
+        </ion-item>
+      <ion-item style=" direction:rtl">
+        <ion-label>مجال التخصص</ion-label>
+        <ionic-selectable multiple item-content formControlName="sections" [items]="companyservice" itemValueField="id"
+          itemTextField="section" [canSearch]="false">
+        </ionic-selectable>
+      </ion-item>
+      <ion-text color="warning"    *ngIf="companyReqForm.get('sections').touched && companyReqForm.get('sections').hasError('required') && contactForm.get('sections').dirty">
+        <p text-right> هذا الحقل مطلوب </p>
+      </ion-text>
+
+      <ion-item style=" direction:rtl">
+          <ion-label text-right>المحافظة</ion-label>
+          <ion-select formControlName="country" (ionChange)="onSelectChange($event)"
+            [interfaceOptions]="customActionSheetOptions" interface="action-sheet">                
+            <ion-select-option *ngFor="let country of countries" [value]="country">{{country.country}}
+            </ion-select-option>
+          </ion-select>
+
+        </ion-item>
+        <ion-text color="warning"  
+          *ngIf="companyReqForm.get('country').touched && companyReqForm.get('country').hasError('required')">
+          <p text-right> هذا الحقل مطلوب </p>
+        </ion-text>
+
+
+        <ion-item style=" direction:rtl" *ngIf="showLocation">
+            <ion-label text-right>البلدية </ion-label>
+            <ionic-selectable  item-content  formControlName="locations" [isMultiple]="true"
+              [items]="cities" itemValueField="title_ar" itemTextField="title_ar" [canSearch]="false">
+              <ng-template ionicSelectableCloseButtonTemplate>
+                <ion-icon name="arrow-back" color='light'></ion-icon>
+              </ng-template>
+              <ng-template ionicSelectableTitleTemplate>
+                <ion-title text-center>البلديات</ion-title>
+              </ng-template>
+            </ionic-selectable>
+          </ion-item>
+          <ion-text color="warning" 
+            *ngIf="companyReqForm.get('locations').touched && companyReqForm.get('locations').hasError('required')">
+            <p text-right> هذا الحقل مطلوب </p>
+          </ion-text>
+      <ion-item class="animated fadeInUp">
+        <ion-label text-right position="floating">عنوان الشركة</ion-label>
+        <ion-input type="text" formControlName="address" text-right></ion-input>
+      </ion-item>
+      <ion-item class="animated fadeInUp">
+        <ion-label text-right position="floating">ايام العمل</ion-label>
+        <ion-select formControlName="workday" multiple="true" cancelText="إالغاء" okText="تحديد">
+          <ion-select-option value="الاحد">الاحد</ion-select-option>
+          <ion-select-option value="الاثنين">الاثنين</ion-select-option>
+          <ion-select-option value="الثلاثاء">الثلاثاء</ion-select-option>
+          <ion-select-option value="الاربعاء">الاربعاء</ion-select-option>
+          <ion-select-option value="الخميس">الخميس</ion-select-option>
+          <ion-select-option value="الجمعة">الجمعة</ion-select-option>
+          <ion-select-option value="السبت">السبت</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="animated fadeInUp">
+        <ion-label text-right position="floating">المنتجات و الخدمات</ion-label>
+        <ion-textarea type="text" formControlName="description" text-right rows="6" cols="20"></ion-textarea>
+      </ion-item>
+<ion-item>
+  <ion-chip outline="true" color="danger">
+      <ion-label text-center style="white-space: normal;">عند ارسال الاستمارة سيتم التواصل معكم ليتم استكمال البيانات</ion-label>
+      <ion-icon name="information-circle-outline"></ion-icon>      </ion-chip>
+</ion-item>
+      
+
+      <ion-item lines="none">
+        <ion-label text-center>
+          <ion-button  expand="block" color="secondary" type="submit"
+            [disabled]="!companyReqForm.valid">
+            ارسال
+          </ion-button>
+        </ion-label>
+
+      </ion-item>
+    </form>
+  </ion-list>
+  <ion-list *ngSwitchCase="'resturant'" padding>
+      <form [formGroup]="resturantReqForm" (ngSubmit)="submitresturantReqForm(resturantReqForm.value)">
+        <ion-item class="animated fadeInUp">
+          <ion-label text-right position="floating">اسم المطعم</ion-label>
+          <ion-input type="text" formControlName="fullname" text-right></ion-input>
+        </ion-item>
+        <ion-text color="warning"
+          *ngIf="resturantReqForm.get('fullname').touched && resturantReqForm.get('fullname').hasError('required')">
+          <p text-right>هذا الحقل مطلوب</p>
+        </ion-text>
+
+        <ion-item class="animated fadeInUp">
+          <ion-label text-right position="floating">رقم التواصل</ion-label>
+          <ion-input type="text" formControlName="mobile" text-right></ion-input>
+        </ion-item>
+        <ion-text color="warning"
+          *ngIf="resturantReqForm.get('mobile').touched && resturantReqForm.get('mobile').hasError('required')">
+          <p text-right>هذا الحقل مطلوب </p>
+        </ion-text>
+        <ion-text color="warning" *ngIf=" resturantReqForm.get('mobile').hasError('pattern') ">
+          <p text-right> (05XX XXX XX XX) يرجى كتابة الرقم على الشكل</p>
+        </ion-text>
+      
+       
+
+        <ion-item style=" direction:rtl">
+            <ion-label text-right>المحافظة</ion-label>
+            <ion-select formControlName="country" (ionChange)="onSelectChange($event)"
+              [interfaceOptions]="customActionSheetOptions" interface="action-sheet">                
+              <ion-select-option *ngFor="let country of countries" [value]="country">{{country.country}}
+              </ion-select-option>
+            </ion-select>
+  
+          </ion-item>
+          <ion-text color="warning"  
+            *ngIf="resturantReqForm.get('country').touched && resturantReqForm.get('country').hasError('required')">
+            <p text-right> هذا الحقل مطلوب </p>
+          </ion-text>
+
+
+          <ion-item style=" direction:rtl" *ngIf="showLocation">
+              <ion-label text-right>البلدية </ion-label>
+              <ionic-selectable  item-content  formControlName="locations" [isMultiple]="true"
+                [items]="cities" itemValueField="title_ar" itemTextField="title_ar" [canSearch]="false">
+                <ng-template ionicSelectableCloseButtonTemplate>
+                  <ion-icon name="arrow-back" color='light'></ion-icon>
+                </ng-template>
+                <ng-template ionicSelectableTitleTemplate>
+                  <ion-title text-center>البلديات</ion-title>
+                </ng-template>
+              </ionic-selectable>
+            </ion-item>
+            <ion-text color="warning" 
+              *ngIf="resturantReqForm.get('locations').touched && resturantReqForm.get('locations').hasError('required')">
+              <p text-right> هذا الحقل مطلوب </p>
+            </ion-text>
+        <ion-item class="animated fadeInUp">
+          <ion-label text-right position="floating">عنوان المطعم</ion-label>
+          <ion-input type="text" formControlName="address" text-right></ion-input>
+        </ion-item>
+        <ion-item class="animated fadeInUp">
+          <ion-label text-right position="floating">قائمة المطعم </ion-label>
+          <ion-select formControlName="resturantmenu" multiple="true" cancelText="إالغاء" okText="تحديد">
+            <ion-select-option value="وجبات طبخ">وجبات طبخ</ion-select-option>
+            <ion-select-option value="وجبات غربية">وجبات غربية</ion-select-option>
+            <ion-select-option value="سندويش">سندويش</ion-select-option>
+            <ion-select-option value="حلويات">حلويات</ion-select-option>
+            <ion-select-option value="مشروبات باردة">مشروبات باردة</ion-select-option>
+            <ion-select-option value="مشروبات ساخنة">مشروبات ساخنة</ion-select-option>
+            <ion-select-option value="مقبلات">مقبلات</ion-select-option>
+            <ion-select-option value="معجنات">معجنات</ion-select-option>
+
+            <ion-select-option value="أراكيل وشيشة">أراكيل وشيشة</ion-select-option>
+            <ion-select-option value="وجبات مجمدة جاهزة">وجبات مجمدة جاهزة</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+        <ion-item class="animated fadeInUp">
+            <ion-label text-right position="floating">مميزات المطعم </ion-label>
+            <ion-select formControlName="resturantfeatures" multiple="true" cancelText="إالغاء" okText="تحديد">
+              <ion-select-option value="خدمة التوصيل">خدمة التوصيل</ion-select-option>
+              <ion-select-option value="خدمة الطلبات الخارجية">خدمة الطلبات الخارجية</ion-select-option>
+              <ion-select-option value="خدمة الطلبات المخصصة للحفلات والمناسبات">خدمة الطلبات المخصصة للحفلات والمناسبات</ion-select-option>
+              <ion-select-option value="خدمة الافطار">خدمة الافطار</ion-select-option>
+              <ion-select-option value="موقف للسيارات">موقف للسيارات</ion-select-option>
+              <ion-select-option value="خدمة صف السيارات">خدمة صف السيارات</ion-select-option>
+              <ion-select-option value="خدمة الانترنت">خدمة الانترنت</ion-select-option>
+              <ion-select-option value="منطقة للتدخين">منطقة للتدخين</ion-select-option>
+
+              <ion-select-option value="تراسات">تراسات</ion-select-option>
+              <ion-select-option value="التواجد على تطبيقات الموبايل">التواجد على تطبيقات الموبايل</ion-select-option>
+              <ion-select-option value="مصلى">مصلى</ion-select-option>
+
+
+            </ion-select>
+          </ion-item>
+          <ion-item class="animated fadeInUp">
+              <ion-label text-right position="floating">طرق الدفع </ion-label>
+              <ion-select formControlName="paymentby" multiple="true" cancelText="إالغاء" okText="تحديد">
+                <ion-select-option value="الدفع نقدي">الدفع نقدي</ion-select-option>
+                <ion-select-option value="الدفع عن طريق البطاقة">الدفع عن طريق البطاقة</ion-select-option>
+         
+
+              </ion-select>
+            </ion-item>
+       
+<ion-item>
+    <ion-chip outline="true" color="danger">
+        <ion-label text-center style="white-space: normal;">عند ارسال الاستمارة سيتم التواصل معكم ليتم استكمال البيانات</ion-label>
+        <ion-icon name="information-circle-outline"></ion-icon>      </ion-chip>
+</ion-item>
+        
+
+        <ion-item lines="none">
+          <ion-label text-center>
+            <ion-button  expand="block" color="secondary" type="submit"
+              [disabled]="!resturantReqForm.valid">
+              ارسال
+            </ion-button>
+          </ion-label>
+
+        </ion-item>
+      </form>
+    </ion-list>
+
+
+</div>
 
 </ion-content>

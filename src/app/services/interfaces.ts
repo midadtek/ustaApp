@@ -34,7 +34,17 @@ export interface Usta {
     latitude
     longitude
     typeOfconstruction
+    ageOfconstruction
+    floorNumber
     numberOfRooms
+    numberOfBalconies
+    numberOfBathrooms
+    space
+    theNumberOfFloors
+    Enginetype
+    color
+    Counternumber
+    enginePower
     Typeofcar
     fuel
     year

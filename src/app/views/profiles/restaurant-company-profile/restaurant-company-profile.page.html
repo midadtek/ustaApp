@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text='' color="light" defaultHref="/restaurant-company">
+      <ion-back-button text='' color="light" defaultHref="/dashboard">
       </ion-back-button>
     </ion-buttons>
     <ion-title text-center>{{usta?.name}}</ion-title>
@@ -335,31 +335,14 @@
                   <div class="container">
                     <div class="scroll" scrollX="true">
                         <ion-item (click)="openBanner(i)" *ngFor="let banner of usta.img_gallery;let i=index">
-                          <ion-thumbnail slot="end" bannerImg>
+                          <ion-thumbnail slot="end">
                               <img [src]="banner" >
                           </ion-thumbnail>
                       </ion-item>
                     </div>
     </div>
 
-
-            <!-- <ion-slides [options]="slideOpts" *ngIf="!usta?.img_gallery">
-                <ion-slide>
-                  <img src='assets/img/no.jpg' />
-                </ion-slide>
-              </ion-slides>
-              <ion-slides [options]="slideOpts" *ngIf="usta?.img_gallery">
-                <ion-slide *ngIf="!usta.img_gallery.length">
-                  <ion-img src='assets/img/no.jpg'></ion-img>
-                </ion-slide>
-                <ion-slide (click)="openBanner(i)" *ngFor="let banner of usta.img_gallery;let i=index">
-                  <ion-img tappable src='assets/img/loading.gif' [style.display]="loaded ? 'none' : 'unset'"></ion-img>
-                  <ion-img tappable [src]="banner" (ionImgDidLoad)="loaded = true" (ionImgWillLoad)="loaded = false"></ion-img>
-                </ion-slide>
-              </ion-slides> -->
-        <ion-item>
-            <div style="margin-top: 13px;margin-bottom: 13px" id="map_canvas"></div>
-          </ion-item>
+     
             <ion-item *ngIf="canRate" lines="full">
                 <ion-button slot="start" expand="block" fill="outline" color="danger" (click)="ustarate()">
                   <ion-icon name="thumbs-up"></ion-icon>

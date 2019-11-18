@@ -1,0 +1,82 @@
+.map{
+  height: 40%;
+}
+#map_canvas {
+  height: 250px;
+  width: 500px;
+  pointer-events: none;
+  
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: auto;
+  margin: auto;
+  text-align: center;
+}
+.fake-skeleton {
+  width: 60%;
+}
+.fone{
+  text-align: end;
+} 
+
+.segment-button-checked{
+
+background-color: var(--ion-color-secondary);
+background: var(--ion-color-secondary);
+--color-checked: var(--ion-color-light);
+--indicator-color-checked: var(--ion-color-medium-tint);
+border-top:0.1rem solid var(--ion-color-warning);   
+
+}
+
+
+
+.category{
+  border-top:var(--ion-color-secondary) solid 1px;
+}
+
+.header-banner{
+     
+  height:150px;
+  min-height:150px;
+  background:rgb(238, 235, 235);
+}
+
+.slide-zoom {
+  // height:200px;
+  height: 100%;
+  // overflow:hidden;
+}
+
+ ion-slides {
+    height: 250px;
+ }
+ ion-slides{
+  
+   background: #e6e6e6;
+   img{
+     padding-top: 5px;
+     padding-bottom: 5px;
+   }
+ }
+
+ div[scrollx=true] {
+  
+  display: -webkit-box;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+     display: -webkit-box;
+  }
+   .scroll-item {
+     flex: 0 0 auto;
+  }
+}
+
+
+[bannerImg]{
+  width: 60px;
+  height: 60px;
+  // border: #057996 2px solid;
+}

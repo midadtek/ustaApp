@@ -207,6 +207,21 @@ export class FstoreService {
     request.active=false
     return this.afs.collection<Request>("companyRequest").add(request);
   }
+  resturantRequest(request) {
+    let locationid = []
+    if(request.locations){
+      request.locations.forEach(element => {
+        locationid.push(element.id)
+      });
+    }
+    request.locationCode = locationid;  
+    request.name = request.fullname;
+    request.ustadate = new Date();
+    request.readed = false;
+    request.sex="resturant"
+    request.active=false
+    return this.afs.collection<Request>("resturantRequest").add(request);
+  }
   contaUs(message){
     return this.afs.collection("contactUs").add(message);
   }

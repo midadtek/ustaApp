@@ -17,7 +17,7 @@
     <ion-row *ngIf="finishLoading" no-padding>
       <ion-col size="6">
         <ion-label text-center color="primary">
-            <ion-select  color="primary" cancelText="إلغاء" [(ngModel)]="filterdSubSection" (ionChange)="filterSubSection($event)" interface="action-sheet" placeholder=" تصنيف الأكل" text-right> 
+            <ion-select  color="primary" cancelText="إلغاء" [(ngModel)]="filterdSubSection" (ionChange)="filterSubSection($event)" interface="action-sheet" placeholder="حسب التصنيف" text-right> 
                 <ion-select-option color="primary" value="{{sub.id}}"    *ngFor="let sub of subSections">{{sub.title}}</ion-select-option>
                 </ion-select>
         </ion-label>
@@ -60,7 +60,7 @@
       </ng-container>
       <ng-container *ngIf="pagedUstas && pagedUstas.length > 0">
           <ion-list>
-              <ion-card mode="ios" *ngFor="let item of pagedUstas" [routerLink]="['/resturantprofile', item.id]" detail="false"
+              <ion-card mode="ios" *ngFor="let item of pagedUstas" [routerLink]="['/house-car-stuff-profile', item.id]" detail="false"
                 routerDirection="forward">
                 <ion-item lines="none" color="light">
                     <ion-title ><ion-label class="ion-text-wrap ion-text-right" > {{item.name}} </ion-label></ion-title>

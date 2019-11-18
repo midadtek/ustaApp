@@ -8,8 +8,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {path: 'dashboard', loadChildren: './views/dashboard/dashboard.module#DashboardPageModule'},
-  {path: 'newusta', loadChildren: './views/dashboard/new-usta/new-usta.module#NewUstaPageModule'},
-  {path: 'newcompany', loadChildren: './views/dashboard/new-company/new-company.module#NewCompanyPageModule'},
+  {path: 'new-usta', loadChildren: './views/dashboard/new-usta/new-usta.module#NewUstaPageModule'},
+  {path: 'new-company', loadChildren: './views/dashboard/new-company/new-company.module#NewCompanyPageModule'},
   {path: 'newused', loadChildren: './views/dashboard/new-used/new-used.module#NewUsedPageModule'},
   {path: 'ustas/:sectionid', loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
   {path: 'companies', loadChildren: './views/lists/companies/companies.module#CompaniesPageModule'},
@@ -24,6 +24,8 @@ const routes: Routes = [
 
   { path: 'restaurant-company-profile/:id',
    loadChildren: './views/profiles/restaurant-company-profile/restaurant-company-profile.module#restaurantcompanyprofilePageModule'},
+   { path: 'house-car-stuff-profile/:id',
+   loadChildren: './views/profiles/house-car-stuff-profile/house-car-stuff-profile.module#housescarstuffprofilePageModule'},
 
 ];
 

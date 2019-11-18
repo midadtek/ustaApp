@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
-import { FstoreService } from '../../../services/fstore.service';
+import { FstoreService} from '../../../services/fstore.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, ToastController, LoadingController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
-
 import { Storage } from '@ionic/storage';
 import { ProfileBannerPage } from '../profile-banner/profile-banner.page';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ProfilePage } from '../profile/profile.page';
-
-import { Rate, Usta } from 'src/app/services/interfaces';
+import { ElementRef, NgZone, ViewChild} from '@angular/core';
+import { Usta, Rate } from 'src/app/services/interfaces';
 import { RateComponent } from 'src/app/components/Rate/rate.component';
 
 @Component({
-  selector: 'app-restaurant-company-profile',
-  templateUrl: './restaurant-company-profile.page.html',
-  styleUrls: ['./restaurant-company-profile.page.scss'],
+  selector: 'app-housecarstuffprofile',
+  templateUrl: './house-car-stuff-profile.page.html',
+  styleUrls: ['./house-car-stuff-profile.page.scss'],
 })
-export class restaurantcompanyprofilePage implements OnInit {
+export class housescarstuffprofilePage implements OnInit {
   ustaid
   ratelist: Rate[]
   usta: Usta
@@ -30,7 +29,7 @@ export class restaurantcompanyprofilePage implements OnInit {
   max:number=50
   canRate: boolean
   usta_segment: string
- 
+  locationCoords: any;
   timetest: any;
 
   language = { en: ".الانكليزية", tr: ".التركية", ar: ".العربية" }
@@ -44,14 +43,15 @@ export class restaurantcompanyprofilePage implements OnInit {
     spaceBetween:20
   };
  
-  constructor(private db:FstoreService , private route: ActivatedRoute,
+  constructor(private db: FstoreService, private route: ActivatedRoute,
     private loadingController: LoadingController, public navCtrl: NavController, public platform: Platform,
     private callNumber: CallNumber, private storage: Storage, private rateModel: ModalController
-    , private popoverCtr: PopoverController, private clipboard: Clipboard, public toastController: ToastController, private modalCtr: ModalController, private socialSharing: SocialSharing){
+    , private popoverCtr: PopoverController, private clipboard: Clipboard,
+     public toastController: ToastController, private modalCtr: ModalController,
+      private socialSharing: SocialSharing){
       this.usta_segment = "details";
 
       this.timetest = Date.now();
-      
     }
 
 
@@ -88,10 +88,6 @@ export class restaurantcompanyprofilePage implements OnInit {
 
 
   }
-
-
-
- 
   async loadUstaProfile() {
     const loading = await this.loadingController.create({
       spinner: 'lines-small'
@@ -248,7 +244,6 @@ export class restaurantcompanyprofilePage implements OnInit {
     });
     modal.present();
   }
-
   async openProfile() {
     const popover = await this.popoverCtr.create(
       {
@@ -264,6 +259,4 @@ export class restaurantcompanyprofilePage implements OnInit {
     }).catch((e) => {
     });
   }
- 
-
 }

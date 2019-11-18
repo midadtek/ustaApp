@@ -1,0 +1,375 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text='' color="light" defaultHref="/dashboard">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>{{usta?.name}}</ion-title>
+
+    <ion-buttons slot="end">
+        
+    <ion-button fill="outline" size="small" color="light" (click)="addTofavorite()" *ngIf="!ustafavorite">
+      <ion-icon name="heart-empty"></ion-icon>
+    </ion-button>
+    <ion-button size="small" fill="outline" color="danger" (click)="removeFromfav()" *ngIf="ustafavorite">
+      <ion-icon name="heart" color="danger"></ion-icon>
+    </ion-button>
+   
+  </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+
+<ion-content>
+    
+  <ng-container *ngIf="!usta">
+    <div *ngFor="let n of [0,1,2]" padding>
+      <ion-skeleton-text></ion-skeleton-text>
+      <p>
+        <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+      </p>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="usta">
+    
+    <div class="card">
+              <ion-img [src]="usta.img_gallery[0]" (ionImgDidLoad)="loaded = true" (ionImgWillLoad)="loaded = false"></ion-img>
+        <h1>{{usta?.name}}</h1>
+        <ion-item *ngIf="usta.hash_id" lines="full">
+            <ion-label text-right>
+              <h2>رقم الإعلان : <ion-text color="danger">{{usta.hash_id}}</ion-text>  </h2>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.subservices" lines="full">
+            <ion-label text-right text-warp>
+              <h2>نوع الإعلان</h2>
+              <span *ngFor="let i of usta.subservices">
+                <p style="white-space: normal;">{{i.title}}</p>
+              </span>
+              
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.typeOfconstruction" lines="full">
+            <ion-label text-right text-warp>
+              <h2>نوع العقار</h2>
+              <p style="white-space: normal;">{{usta.typeOfconstruction.title_ar}}</p>
+            </ion-label>
+          </ion-item>
+
+
+       
+         
+            
+         
+      
+          <ion-item *ngIf="usta.locations?.length" lines="full">
+            <ion-label text-right>
+              <h2>المنطقة المتوفر فيها </h2>
+              <span *ngFor="let location of usta.locations"> {{location.title_ar}} &nbsp;</span>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item *ngIf="usta.ageOfconstruction" lines="full">
+            <ion-label text-right>
+              <h2>  عمر العقار </h2>
+              <p> {{usta.ageOfconstruction}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.floorNumber" lines="full">
+            <ion-label text-right>
+              <h2>   رقم الطابق </h2>
+              <p> {{usta.floorNumber}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.numberOfBalconies" lines="full">
+            <ion-label text-right>
+              <h2>    عدد التراسات </h2>
+              <p> {{usta.numberOfBalconies}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.numberOfBathrooms" lines="full">
+            <ion-label text-right>
+              <h2>    عدد الحمامات </h2>
+              <p> {{usta.numberOfBathrooms}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.Furnished" lines="full">
+            <ion-label text-right>
+              <h2>   مفروشة </h2>
+              <p> {{usta.Furnished}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.periodicExpenses" lines="full">
+            <ion-label text-right>
+              <h2>   يوجد عائدات</h2>
+              <p> {{usta.periodicExpenses}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.space" lines="fu\ll">
+            <ion-label text-right>
+              <h2>  المساحة</h2>
+              <p> {{usta.space}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.theNumberOfFloors" lines="full">
+            <ion-label text-right>
+              <h2>  عدد الطوابق</h2>
+              <p> {{usta.theNumberOfFloors}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.withinTheComplex" lines="full">
+            <ion-label text-right>
+              <h2>   داخل المجمع</h2>
+              <p> {{usta.withinTheComplex}}</p>
+            </ion-label>
+          </ion-item>
+     
+          <ion-item *ngIf="usta.address" lines="full">
+            <ion-label text-right text-warp>
+              <h2>العنوان</h2>
+              <p style="white-space: normal;">{{usta.address}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.Typeofcar" lines="full">
+            <ion-label text-right text-warp>
+              <h2>نوع السيارة </h2>
+              
+                <p style="white-space: normal;">{{usta.Typeofcar}}</p>
+          
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.year" lines="full">
+            <ion-label text-right>
+              <h2>  سنة الصنع  </h2>
+              <p> {{usta.year.year}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.Enginetype" lines="full">
+            <ion-label text-right>
+              <h2>   نوع المحرك </h2>
+              <p> {{usta.Enginetype}}</p>
+            </ion-label>
+          </ion-item>
+
+
+          
+          <ion-item *ngIf="usta.color" lines="full">
+            <ion-label text-right>
+              <h2>    اللون  </h2>
+              <p> {{usta.color}}</p>
+            </ion-label>
+          </ion-item>
+
+
+          <ion-item *ngIf="usta.Counternumber" lines="full">
+            <ion-label text-right>
+              <h2>     رقم العداد </h2>
+              <p> {{usta.Counternumber}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.fuel" lines="full">
+            <ion-label text-right>
+              <h2>   نوع الوقود </h2>
+              <p> {{usta.fuel.title_ar}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.enginePower" lines="full">
+            <ion-label text-right>
+              <h2>   قوة المحرك</h2>
+              <p> {{usta.enginePower}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.plate" lines="full">
+            <ion-label text-right>
+              <h2>   نوع اللوحة</h2>
+              <p> {{usta.plate.title_ar}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.gear" lines="full">
+            <ion-label text-right>
+              <h2>    ناقل الحركة</h2>
+              <p> {{usta.gear.title_ar}}</p>
+            </ion-label>
+          </ion-item>
+
+
+          <ion-item *ngIf="usta.Delivery" lines="full">
+            <ion-label text-right>
+              <h2> إمكانية التوصيل </h2>
+              <p> {{usta.Delivery}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="usta.description" lines="full">
+            <ion-label text-right>
+              <h2>التفاصيل </h2>
+              <p style="white-space: normal;">{{usta.description}}</p>
+            </ion-label>
+          </ion-item>
+        
+          <ion-item *ngIf="usta.price" lines="full">
+            <ion-label text-right>
+              <h2> السعر </h2>
+              <p> {{usta.price}}</p>
+            </ion-label>
+          </ion-item>
+
+
+         
+        
+         
+
+          <ion-item *ngIf="usta.mobile" lines="full">
+              <ion-badge color="medium" slot="start" (click)="copyNumber(usta.mobile)">نسخ الرقم<ion-icon name="copy">
+                </ion-icon>
+              </ion-badge>
+              <ion-label text-right color="danger">
+                <h2>رقم الجوال </h2>
+              </ion-label>
+              <ion-icon name="call" text-right></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="usta.phoneLine" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copyNumber(usta.phoneLine)">نسخ الرقم<ion-icon name="copy">
+                  </ion-icon>
+                </ion-badge>
+                <ion-label text-right color="danger">
+                  <h2>رقم الهاتف الثابت  </h2>
+                </ion-label>
+                <ion-icon name="call" text-right></ion-icon>
+              </ion-item>
+
+              <ion-item *ngIf="usta.phoneLine" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copyNumber(usta.phoneLine)">نسخ الرقم<ion-icon name="copy">
+                  </ion-icon>
+                </ion-badge>
+                <ion-label text-right color="danger">
+                  <h2>رقم الهاتف الثابت  </h2>
+                </ion-label>
+                <ion-icon name="call" text-right></ion-icon>
+              </ion-item>
+
+            <ion-item *ngIf="usta.whatsappmobile" lines="full">
+              <ion-badge color="medium" slot="start" (click)="copyNumber(usta.whatsappmobile)">نسخ الرقم<ion-icon
+                  name="copy"></ion-icon>
+              </ion-badge>
+              <ion-label text-right color="danger">
+                <h2>رقم الواتس اب </h2>
+              </ion-label>
+              <ion-icon name="logo-whatsapp" text-right></ion-icon>
+            </ion-item>
+         
+            
+     
+            <ion-item *ngIf="usta.social" lines="full">
+                <ion-badge color="medium" slot="start" (click)="copySocial(usta.social)">نسخ
+                    <ion-icon name="share"></ion-icon>
+                  </ion-badge>
+              <ion-label text-right>
+                  <h2> ايميل التواصل الاجتماعي   </h2>
+
+                <p style="white-space: normal;">{{usta.social}} </p>
+              </ion-label>
+             
+            </ion-item>
+
+
+
+
+             
+                  <div class="container">
+                    <div class="scroll" scrollX="true">
+                        <ion-item (click)="openBanner(i)" *ngFor="let banner of usta.img_gallery;let i=index">
+                          <ion-thumbnail slot="end" bannerImg>
+                              <img [src]="banner" >
+                          </ion-thumbnail>
+                      </ion-item>
+                    </div>
+    </div>
+
+
+           
+        <ion-item>
+            
+          </ion-item>
+            <ion-item *ngIf="canRate" lines="full">
+                <ion-button slot="start" expand="block" fill="outline" color="danger" (click)="ustarate()">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <ion-icon name="thumbs-down"></ion-icon>
+                </ion-button>
+                <ion-label text-right>
+                  <h2>أضف تقييمك</h2>
+                </ion-label>
+              </ion-item>
+              <ion-item *ngIf="!canRate" lines="full">
+                <ion-button slot="start" expand="block" fill="outline" color="medium" >
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <ion-icon name="thumbs-down"></ion-icon>
+                </ion-button>
+                <ion-label text-center>
+                  <h2>قمت بتقييم هذا الحساب</h2>
+                </ion-label>
+              </ion-item>
+                <ion-card *ngFor="let item of ratelist" mode="ios">
+                  <ion-card-content>
+                    <ion-card-title text-right>
+                      {{item.client}}
+                    </ion-card-title>
+                    <p text-right>
+                      {{item.message}}
+                    </p>
+                  </ion-card-content>
+       
+                  <ion-row no-padding>
+                    <ion-col>
+                        <ion-chip color="light" mode="ios" outline="true">
+                      <img src="assets/img/{{item.rate_value}}.png" style="width: 100%">
+                    </ion-chip>
+                    </ion-col>
+                    <ion-col text-right>
+                        <ion-chip color="secondary" mode="ios">
+                            <ion-icon name="calendar"></ion-icon>
+                            <ion-label>{{item.created_at.seconds * 1000 | date:'dd-MM-yyyy'}}</ion-label>
+                          </ion-chip>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+       
+      </div>
+  
+  </ng-container>
+
+
+ 
+    
+</ion-content>
+<ion-footer>
+  <ion-grid no-padding>
+    <ion-row align-items-center>
+      <ion-col align-self-center>
+        <ion-button expand="block" size="small" fill="outline" color="secondary" (click)="call(usta?.mobile)">
+          <ion-icon name="call" ></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+          <ion-button expand="block" fill="outline" size="small" color="success" (click)="shareWhatsApp()">
+              <ion-icon name="share"></ion-icon>
+              مشاركة
+            </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

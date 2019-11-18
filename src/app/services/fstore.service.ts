@@ -222,6 +222,29 @@ export class FstoreService {
     request.active=false
     return this.afs.collection<Request>("resturantRequest").add(request);
   }
+  housesRequest(request) {
+    
+    let locationid = []
+    if(request.locations){
+      request.locations.forEach(element => {
+        locationid.push(element.id)
+      });
+    }
+    request.locationCode = locationid;
+    let sectionIds=["yCncXQlblutGpU8YlbjW"]
+    request.sectionIds = sectionIds
+    request.name = request.fullname;
+    request.ustadate = new Date();
+    request.readed = false;
+    request.sex="houses"
+    request.active=false
+    request.img_profile=""
+    console.log(request)
+    return this.afs.collection<Request>("housesRequests").add(request);
+  }
+  getsubservices(cid:string){
+    return this.afs.collection('services').doc(cid).collection('sub_services').get();
+  }
   contaUs(message){
     return this.afs.collection("contactUs").add(message);
   }

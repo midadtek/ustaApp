@@ -18,6 +18,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import {ProfilePageModule} from '../app/views/profiles/profile/profile.module';
 import { ProfileBannerPageModule} from '../app/views/profiles/profile-banner/profile-banner.module';
+import {Camera} from '@ionic-native/camera/ngx';
 
 
 
@@ -38,7 +39,7 @@ import { ProfileBannerPageModule} from '../app/views/profiles/profile-banner/pro
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FirestoreSettingsToken, useValue: {} },
-    SocialSharing,Clipboard,CallNumber
+    SocialSharing,Clipboard,CallNumber,Camera
   ],
   bootstrap: [AppComponent]
 })

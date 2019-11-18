@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'dashboard', loadChildren: './views/dashboard/dashboard.module#DashboardPageModule'},
   {path: 'new-usta', loadChildren: './views/dashboard/new-usta/new-usta.module#NewUstaPageModule'},
   {path: 'new-company', loadChildren: './views/dashboard/new-company/new-company.module#NewCompanyPageModule'},
-  {path: 'newused', loadChildren: './views/dashboard/new-used/new-used.module#NewUsedPageModule'},
+  {path: 'new-used', loadChildren: './views/dashboard/new-used/new-used.module#NewUsedPageModule'},
   {path: 'ustas/:sectionid', loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
   {path: 'companies', loadChildren: './views/lists/companies/companies.module#CompaniesPageModule'},
   {path: 'restaurants-companies/:sectionid',

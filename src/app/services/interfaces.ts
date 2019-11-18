@@ -84,6 +84,10 @@ export interface Usta {
     
   
   }
+  export interface subservices{
+    id
+    title:string;
+  }
   export interface Section {
     id?: string,
     section: string

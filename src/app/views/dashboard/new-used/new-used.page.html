@@ -8,9 +8,453 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content padding>
+    <ion-segment [(ngModel)]="request_segment" titleContent>
+        <ion-segment-button color="medium" value="houses" checked >
+            العقارات
+          </ion-segment-button>
+      <ion-segment-button color="medium" value="cars" >
+        السيارات
+      </ion-segment-button>
+      <ion-segment-button color="medium" value="stuffs">
+          المتقرقات
+        </ion-segment-button>
 
-  
+</ion-segment>
 
+<div [ngSwitch]="request_segment">
+    <ion-list *ngSwitchCase="'houses'" padding>
+        <form [formGroup]="housesRequests" (ngSubmit)="submithousesReqForm(housesRequests.value)">
+          <ion-slides  #slides>
+            <ion-slide>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating">الاسم</ion-label>
+                      <ion-input type="text" formControlName="fullname" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('fullname').touched && housesRequests.get('fullname').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب</p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating">رقم التواصل</ion-label>
+                      <ion-input type="text" formControlName="mobile" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('mobile').touched && housesRequests.get('mobile').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                    <ion-text color="warning" *ngIf=" housesRequests.get('mobile').hasError('pattern') ">
+                      <p text-right> (05XX XXX XX XX) يرجى كتابة الرقم على الشكل</p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating">رقم الواتس اب</ion-label>
+                      <ion-input type="text" formControlName="whatsappmobile" text-right></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item style=" direction:rtl">
+                      <ion-label text-right>المحافظة</ion-label>
+                      <ion-select formControlName="country" (ionChange)="onSelectChange($event)"
+                        [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+                        <ion-select-option *ngFor="let country of countries" [value]="country">{{country.country}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('country').touched && housesRequests.get('country').hasError('required')">
+                      <p text-right> هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item style=" direction:rtl" *ngIf="showLocation">
+                      <ion-label text-right>البلدية </ion-label>
+                      <ionic-selectable item-content formControlName="locations" [isMultiple]="true" [items]="cities"
+                        itemValueField="title_ar" itemTextField="title_ar" [canSearch]="false">
+                        <ng-template ionicSelectableCloseButtonTemplate>
+                          <ion-icon name="arrow-back" color='light'></ion-icon>
+                        </ng-template>
+                        <ng-template ionicSelectableTitleTemplate>
+                          <ion-title text-center>البلديات</ion-title>
+                        </ng-template>
+                      </ionic-selectable>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('locations').touched && housesRequests.get('locations').hasError('required')">
+                      <p text-right> هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating">السعر </ion-label>
+                      <ion-input type="number" formControlName="price" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('price').touched && housesRequests.get('price').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item style=" direction:rtl">
+                      <ion-label text-right> نوع الطلب</ion-label>
+                      <ion-select formControlName="subservices" multiple="true"
+                        [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+                        <ion-select-option *ngFor="let s of subservice" [value]="s">
+                          {{s.title}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('subservices').touched && housesRequests.get('subservices').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item style=" direction:rtl">
+                      <ion-label text-right> نوع العقار</ion-label>
+                      <ion-select formControlName="typeOfconstruction" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option *ngFor="let  t of typeOfconstruction" [value]="t">{{t.title_ar}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('typeOfconstruction').touched && housesRequests.get('typeOfconstruction').hasError('required')">
+                      <p text-right> هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+    
+                 
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" offset="3">
+                    <ion-button  expand="block" color="secondary" (click)="next()">
+                        التالي
+                      </ion-button>
+                    </ion-col>
+                </ion-row>
+             
+                
+              </ion-grid>
+             
+            </ion-slide>
+            <ion-slide>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> المساحة </ion-label>
+                      <ion-input type="number" formControlName="space" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('space').touched && housesRequests.get('space').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> عمر البناء </ion-label>
+                      <ion-input type="text" formControlName="ageOfconstruction" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('ageOfconstruction').touched && housesRequests.get('ageOfconstruction').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item style=" direction:rtl">
+                      <ion-label text-right> عدد الغرف</ion-label>
+                      <ion-select formControlName="numberOfRooms" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option *ngFor="let  n of numberOfRooms" [value]="n">{{n.room}}
+                        </ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('numberOfRooms').touched && housesRequests.get('numberOfRooms').hasError('required')">
+                      <p text-right> هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> عدد الحمامات </ion-label>
+                      <ion-input type="number" formControlName="numberOfBathrooms" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('numberOfBathrooms').touched && housesRequests.get('numberOfBathrooms').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> عدد الطوابق </ion-label>
+                      <ion-input type="number" formControlName="theNumberOfFloors" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('theNumberOfFloors').touched && housesRequests.get('theNumberOfFloors').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> رقم الطابق </ion-label>
+                      <ion-input type="number" formControlName="floorNumber" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('floorNumber').touched && housesRequests.get('floorNumber').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> عدد البلكونات </ion-label>
+                      <ion-input type="number" formControlName="numberOfBalconies" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('numberOfBalconies').touched && housesRequests.get('numberOfBalconies').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> عائدات</ion-label>
+                      <ion-select formControlName="periodicExpenses" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('periodicExpenses').touched && housesRequests.get('periodicExpenses').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                      <ion-button  expand="block" color="secondary" (click)="prev()">
+                          السابق
+                        </ion-button>
+                   
+                  </ion-col>
+                    <ion-col>
+                        <ion-button  expand="block" color="secondary" (click)="next()">
+                            التالي
+                          </ion-button>
+                    </ion-col>
+                    </ion-row>
+              </ion-grid>
+            </ion-slide>
+            <ion-slide>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> يوجد مصعد</ion-label>
+                      <ion-select formControlName="lift" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('lift').touched && housesRequests.get('lift').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> يوجد تأمين</ion-label>
+                      <ion-select formControlName="deposit" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('deposit').touched && housesRequests.get('deposit').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> ضمن مجمع</ion-label>
+                      <ion-select formControlName="withinTheComplex" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('withinTheComplex').touched && housesRequests.get('withinTheComplex').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> مفروشة</ion-label>
+                      <ion-select formControlName="Furnished" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('Furnished').touched && housesRequests.get('Furnished').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> العنوان بالتفصيل </ion-label>
+                      <ion-input type="text" formControlName="address" text-right></ion-input>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="housesRequests.get('address').touched && housesRequests.get('address').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> تفاصيل العقار</ion-label>
+                      <ion-textarea type="text" formControlName="description" text-right rows="6" cols="20"></ion-textarea>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating"> الايميل </ion-label>
+                      <ion-input type="text" formControlName="social" text-right></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-label text-right position="floating"> الصور </ion-label>
+                <ion-row>
+                  <ion-col>
+                    <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
+                    <img *ngIf="!photos[0]" src='assets/img/no.jpg' 
+                      style="height: 100px;width:100px">
+                  </ion-col>
+                  <ion-col>
+                    <ion-button *ngIf="!photos[0]" (click)="openGallery()" style="margin-top: 10px;" color="secondary">
+                      إضافة الصورة
+                    </ion-button>
+                    <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="margin-top: 10px;" color="secondary">
+                        حذف الصورة
+                      </ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                      <img *ngIf="photos[1]" [src]="photos[1]" style="height: 50px;width:100px">
+                      <img *ngIf="!photos[1]" src='assets/img/no.jpg' 
+                        style="height: 100px;width:100px">
+                    </ion-col>
+                    <ion-col>
+                      <ion-button *ngIf="!photos[1]" (click)="openGallery()" style="margin-top: 10px;" color="secondary">
+                        إضافة الصورة
+                      </ion-button>
+                      <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="margin-top: 10px;" color="secondary">
+                          حذف الصورة
+                        </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                        <img *ngIf="photos[2]" [src]="photos[2]" style="height: 50px;width:100px">
+                        <img *ngIf="!photos[2]" src='assets/img/no.jpg' 
+                          style="height: 100px;width:100px">
+                      </ion-col>
+                      <ion-col>
+                        <ion-button *ngIf="!photos[2]" (click)="openGallery()" style="margin-top: 10px;" color="secondary">
+                          إضافة الصورة
+                        </ion-button>
+                        <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="margin-top: 10px;" color="secondary">
+                            حذف الصورة
+                          </ion-button>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                          <img *ngIf="photos[3]" [src]="photos[3]" style="height: 50px;width:100px">
+                          <img *ngIf="!photos[3]" src='assets/img/no.jpg' (click)="openGallery()"
+                            style="height: 100px;width:100px">
+                        </ion-col>
+                        <ion-col>
+                          <ion-button *ngIf="!photos[3]" (click)="openGallery()" style="margin-top: 10px;" color="secondary">
+                            إضافة الصورة
+                          </ion-button>
+                          <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="margin-top: 10px;" color="secondary">
+                              حذف الصورة
+                            </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    
+                <ion-row>
+                  <ion-col>
+                    <ion-item lines="none">
+                      <ion-label text-center>
+                        <ion-button expand="block" color="secondary" type="submit" [disabled]="!housesRequests.valid">
+                          ارسال
+                        </ion-button>
+                        <ion-button  expand="block" color="secondary" (click)="prev()">
+                            السابق
+                          </ion-button>
+                      </ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+             
+              </ion-grid>
+            </ion-slide>
+          </ion-slides>
+        </form>
+      </ion-list>
+</div>
 
 </ion-content>

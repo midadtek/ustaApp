@@ -8,6 +8,9 @@ import { FilterComponent } from './filter/filter.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { RateComponent } from './Rate/rate.component';
 import {IonicRatingModule} from 'ionic4-rating';
+import { OrderComponent} from './order/order.component';
+import {SearchComponent} from '../views/dashboard/search/search.component'
+
 
 
 
@@ -16,12 +19,12 @@ import {IonicRatingModule} from 'ionic4-rating';
 @NgModule({
   declarations: [
     FilterComponent,
-    RateComponent
+    RateComponent,OrderComponent,SearchComponent
   ],
   imports: [CommonModule, IonicModule,IonicSelectableModule, FormsModule,RouterModule,IonicRatingModule,ReactiveFormsModule],
-  exports: [  FilterComponent,
-    RateComponent],
+  exports: [  FilterComponent,SearchComponent,
+    RateComponent,OrderComponent],
   entryComponents: [  FilterComponent,
-    RateComponent]
+    RateComponent,OrderComponent,SearchComponent]
 })
 export class ComponentsModule {}

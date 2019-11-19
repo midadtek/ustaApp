@@ -242,6 +242,44 @@ export class FstoreService {
     console.log(request)
     return this.afs.collection<Request>("housesRequests").add(request);
   }
+  carsRequest(request) {
+    let locationid = []
+    if(request.locations){
+      request.locations.forEach(element => {
+        locationid.push(element.id)
+      });
+    }
+    request.locationCode = locationid;
+    let sectionIds=["X8YhOaNVHSBsje3DjM3w"]
+    request.sectionIds = sectionIds
+    request.name = request.fullname;
+    request.ustadate = new Date();
+    request.readed = false;
+    request.sex="cars"
+    request.active=false
+    request.img_profile=""
+    console.log(request)
+    return this.afs.collection<Request>("carsRequests").add(request);
+  }
+  stuffsRequest(request) {
+    let locationid = []
+    if(request.locations){
+      request.locations.forEach(element => {
+        locationid.push(element.id)
+      });
+    }
+    request.locationCode = locationid;
+    let sectionIds=["XF0nvOlqe0kiGR3badlt"]
+    request.sectionIds = sectionIds
+    request.name = request.fullname;
+    request.ustadate = new Date();
+    request.readed = false;
+    request.sex="stuffs"
+    request.active=false
+    request.img_profile=""
+    console.log(request)
+    return this.afs.collection<Request>("stuffsRequests").add(request);
+  }
   getsubservices(cid:string){
     return this.afs.collection('services').doc(cid).collection('sub_services').get();
   }

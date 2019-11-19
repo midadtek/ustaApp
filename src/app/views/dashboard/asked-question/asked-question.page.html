@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text='' color="light" defaultHref="/dashboard">
+        </ion-back-button>
+      </ion-buttons>
+    <ion-title text-right>الأسئلة الشائعة</ion-title>
+  </ion-toolbar>    
+</ion-header>
+<ion-content>
+    <ion-list  *ngFor="let item of question" >
+        <ion-item   (click)="toggleAccordion(item)">
+        <p slot="end">
+            {{item.title}}
+        </p>
+        <ion-icon  *ngIf="item.isMenuOpen" name="arrow-dropdown-circle" size="large" color="primary"></ion-icon>
+        <ion-icon  *ngIf="!item.isMenuOpen" name="arrow-dropright-circle" size="large" color="primary"></ion-icon>
+      </ion-item>
+        <div 
+           [ngClass]="item.active ? 'active' : 'inactive'" style="background-color: #fff5ca">
+           <p text-right [ngClass]="item.active ? 'fade-in' : 'fade-out'" style="color: black">{{item.description}}</p>
+        </div>
+    </ion-list>
+</ion-content>

@@ -19,6 +19,12 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import {ProfilePageModule} from '../app/views/profiles/profile/profile.module';
 import { ProfileBannerPageModule} from '../app/views/profiles/profile-banner/profile-banner.module';
 import {Camera} from '@ionic-native/camera/ngx';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { File } from '@ionic-native/file/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 
 
@@ -28,7 +34,7 @@ import {Camera} from '@ionic-native/camera/ngx';
   imports: [
     BrowserModule,
     IonicStorageModule.forRoot(),
-    ProfilePageModule,
+    ProfilePageModule,AngularFireStorageModule,
     ProfileBannerPageModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -39,7 +45,7 @@ import {Camera} from '@ionic-native/camera/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: FirestoreSettingsToken, useValue: {} },
-    SocialSharing,Clipboard,CallNumber,Camera
+    SocialSharing,Clipboard,CallNumber,Camera,File,Network,AppVersion,Deeplinks,FCM
   ],
   bootstrap: [AppComponent]
 })

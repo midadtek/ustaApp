@@ -98,9 +98,6 @@
        <ion-button expand="block" fill="outline" [color]="(filter_affec)?'danger':'light'" (click)="openFilter()"> 
         <ion-icon slot="start" name="funnel"></ion-icon>
       </ion-button> 
-      <ion-button color="light" (click)="showSearch = !showSearch" fill="outline" color="light">
-        <ion-icon name=search></ion-icon>
-      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-grid fixed>
@@ -120,13 +117,7 @@
         </ion-label>
       </ion-col>
     </ion-row>
-    <ion-row no-padding *ngIf="showSearch">
-      <ion-col size="12">
-        <ion-searchbar [@fadeInOnEnter] [@fadeOutOnLeave] text-right animated cancelButtonText="إلغاء" color="light"
-          placeholder="....البحث" [(ngModel)]="searchTerm" (ionChange)="filterustas()" clear-icon autocomplete>
-        </ion-searchbar>
-      </ion-col>
-    </ion-row>
+   
   </ion-grid>
   <ion-grid *ngIf="closeFilter" style="background-color: beige;">
     <ion-row >

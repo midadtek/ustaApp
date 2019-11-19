@@ -1,0 +1,35 @@
+<ion-header>
+        <ion-toolbar >
+            <ion-buttons slot="start"  >
+              <ion-back-button text='' color="light" defaultHref="/dashboard" text='' color="light"></ion-back-button>
+            </ion-buttons>
+            <ion-title text-center>المفضلة</ion-title>
+          </ion-toolbar>
+      
+  </ion-header>
+  <ion-content>
+      <ion-list>
+          <ion-card *ngFor="let item of ustas" [routerLink]="['/ustaprofile', item.id]" detail="false">
+            <ion-item lines="none">
+              <ion-avatar item-end>
+                <ion-img src="{{item.img_profile}}" *ngIf="item.img_profile" ></ion-img>
+                <ion-img src="assets/img/{{item.sex}}.png" *ngIf="!item.img_profile && item.sex "></ion-img>
+                <ion-img src="assets/img/male.png" *ngIf="!item.img_profile && !item.sex "></ion-img>
+              </ion-avatar>
+              <ion-label text-right>
+                <ion-text color="primary">
+                  <h2>{{item.name}}</h2>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label text-wrap text-right>{{item.description}}</ion-label>
+            </ion-item>
+            <ion-item detail="false" lines="none">
+                <ion-chip outline="true" color="primary">{{item.ustarate}} / 5 </ion-chip>
+              <ion-label text-wrap  text-right color="danger">{{ item.address }}</ion-label>
+              <ion-icon name="pin" slot="end" color="danger"></ion-icon>
+            </ion-item>
+          </ion-card>
+      </ion-list>
+  </ion-content>

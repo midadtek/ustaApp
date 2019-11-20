@@ -5,6 +5,12 @@ import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FstoreService } from 'src/app/services/fstore.service';
 import { Storage } from '@ionic/storage';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {File} from '@ionic-native/file/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+
+
 
 @Component({
   selector: 'app-new-company',
@@ -33,9 +39,13 @@ export class NewCompanyPage implements OnInit {
   countries:any[]
   companyIds=['4TRI4w7NCIcuMtxySXix', 'QgfSghbyU5QdJFvDFMuo'];
   request_segment: string = 'resturant';
+  gallery:any[]=[];
+  profile:any[]=[];
 
-  constructor(private formBuilder: FormBuilder,
+
+  constructor(private formBuilder: FormBuilder, private afStorage:AngularFireStorage,
     private storage: Storage, public toastController: ToastController, private router: Router,
+    private camera:Camera,public file:File,
     private db:FstoreService, private loadingController: LoadingController) { }
 
   ngOnInit() {
@@ -147,6 +157,18 @@ export class NewCompanyPage implements OnInit {
     }
   }
   async submitcompanyReqForm(value) {
+    value.img_gallery=[]
+        this.gallery.forEach(element => {
+         value.img_gallery.push(element)
+       });
+
+       if(this.profile=[]){
+         value.img_profile=""
+       }else{
+       this.profile.forEach(element => {
+        value.img_profile=element
+      });
+    }
     const loading = await this.loadingController.create({
       spinner: 'lines-small'
     });
@@ -195,9 +217,23 @@ export class NewCompanyPage implements OnInit {
         }, 1000);
         }
       }
+
     })
+    this.gallery=[]
+    this.profile=[]
   }
   async submitresturantReqForm(value) {
+    value.img_gallery=[]
+    this.gallery.forEach(element => {
+     value.img_gallery.push(element)
+   });
+   if(this.profile=[]){
+    value.img_profile=""
+  }else{
+  this.profile.forEach(element => {
+   value.img_profile=element
+ });
+}
     const loading = await this.loadingController.create({
       spinner: 'lines-small'
     });
@@ -248,6 +284,172 @@ export class NewCompanyPage implements OnInit {
       }
     }
     )
+    this.gallery=[]
+    this.profile=[]
   }
-
+  async openProfileResturantRequests(){
+      
+    let options:CameraOptions={
+      quality:100,
+      destinationType:this.camera.DestinationType.FILE_URI,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation:true
+    };
+  
+  
+    try{
+  
+      const fileUri:string=await this.camera.getPicture(options);
+  
+      let file:string
+  
+      file=fileUri.substring(fileUri.lastIndexOf('/')+1,fileUri.indexOf('?'))
+  
+      const path:string=fileUri.substring(0,fileUri.lastIndexOf('/'));
+  
+  
+      const buffer:ArrayBuffer=await this.file.readAsArrayBuffer(path,file)
+      const blob:Blob= new Blob([buffer],{type:"image/jpeg"});
+  
+      this.uploadprofilepicture(blob,'resturantsRequests/');
+    }catch{
+      alert("error")
+    }
+  }
+  async openGalleryResturantRequests(){
+      
+    let options:CameraOptions={
+      quality:100,
+      destinationType:this.camera.DestinationType.FILE_URI,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation:true
+    };
+  
+  
+    try{
+  
+      const fileUri:string=await this.camera.getPicture(options);
+  
+      let file:string
+  
+      file=fileUri.substring(fileUri.lastIndexOf('/')+1,fileUri.indexOf('?'))
+  
+      const path:string=fileUri.substring(0,fileUri.lastIndexOf('/'));
+  
+  
+      const buffer:ArrayBuffer=await this.file.readAsArrayBuffer(path,file)
+      const blob:Blob= new Blob([buffer],{type:"image/jpeg"});
+  
+      this.uploadgallerypicture(blob,'resturantsRequests/');
+    }catch{
+      alert("error")
+    }
+  }
+  async openProfileCompanyRequests(){
+      
+    let options:CameraOptions={
+      quality:100,
+      destinationType:this.camera.DestinationType.FILE_URI,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation:true
+    };
+  
+  
+    try{
+  
+      const fileUri:string=await this.camera.getPicture(options);
+  
+      let file:string
+  
+      file=fileUri.substring(fileUri.lastIndexOf('/')+1,fileUri.indexOf('?'))
+  
+      const path:string=fileUri.substring(0,fileUri.lastIndexOf('/'));
+  
+  
+      const buffer:ArrayBuffer=await this.file.readAsArrayBuffer(path,file)
+      const blob:Blob= new Blob([buffer],{type:"image/jpeg"});
+  
+      this.uploadprofilepicture(blob,'companiesRequests/');
+    }catch{
+      alert("error")
+    }
+  }
+  async openGalleryCompanyRequests(){
+      
+    let options:CameraOptions={
+      quality:100,
+      destinationType:this.camera.DestinationType.FILE_URI,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      correctOrientation:true
+    };
+  
+  
+    try{
+  
+      const fileUri:string=await this.camera.getPicture(options);
+  
+      let file:string
+  
+      file=fileUri.substring(fileUri.lastIndexOf('/')+1,fileUri.indexOf('?'))
+  
+      const path:string=fileUri.substring(0,fileUri.lastIndexOf('/'));
+  
+  
+      const buffer:ArrayBuffer=await this.file.readAsArrayBuffer(path,file)
+      const blob:Blob= new Blob([buffer],{type:"image/jpeg"});
+  
+      this.uploadgallerypicture(blob,'companiesRequests/');
+    }catch{
+      alert("error")
+    }
+  }
+  uploadgallerypicture(blob:Blob,type){
+    
+    const randomId = Math.random().toString(36).substring(2);
+    
+    const ref=this.afStorage.ref(`${type}/${randomId}`)
+    const task=ref.put(blob).then(uploadSnapshot=>{
+      
+      uploadSnapshot.ref.getDownloadURL().then((downloadur)=>{
+        this.gallery.push(downloadur)
+      })
+      
+    })
+   
+  }
+  uploadprofilepicture(blob:Blob,type){
+  
+    const randomId = Math.random().toString(36).substring(2);
+    
+    const ref=this.afStorage.ref(`${type}/${randomId}`)
+    const task=ref.put(blob).then(uploadSnapshot=>{
+      
+      uploadSnapshot.ref.getDownloadURL().then((downloadur)=>{
+        this.profile.push(downloadur)
+      })
+      
+    })
+  
+  
+  
+  
+   
+  }
+  deletegalleryimg(item){
+    
+ 
+    var arr=this.gallery.indexOf(item);
+    this.gallery.splice(arr,1)
+       
+       }
+  deleteprofileimg(item){
+    
+ 
+        var arr=this.profile.indexOf(item);
+        this.profile.splice(arr,1)
+           
+   }
 }
+
+  
+

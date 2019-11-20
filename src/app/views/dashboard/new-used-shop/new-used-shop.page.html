@@ -150,7 +150,13 @@
               </ion-row>
               <ion-row>
                   <ion-col size="6" offset="3">
-                  <ion-button  expand="block" color="secondary" (click)="next()">
+                  <ion-button  expand="block" color="secondary" (click)="next()" [disabled]=" housesRequests.get('fullname').hasError('required')||
+                  housesRequests.get('mobile').hasError('required') ||
+                  housesRequests.get('country').hasError('required') ||
+                  housesRequests.get('locations').hasError('required') ||
+                  housesRequests.get('price').hasError('required') ||
+                  housesRequests.get('subservices').hasError('required') ||
+                  housesRequests.get('typeOfconstruction').hasError('required')">
                       التالي
                     </ion-button>
                   </ion-col>
@@ -274,7 +280,15 @@
                  
                 </ion-col>
                   <ion-col>
-                      <ion-button  expand="block" color="secondary" (click)="next()">
+                      <ion-button  expand="block" color="secondary" (click)="next()" [disabled]=" housesRequests.get('space').hasError('required')||
+                      housesRequests.get('ageOfconstruction').hasError('required') ||
+                      housesRequests.get('numberOfRooms').hasError('required') ||
+                      housesRequests.get('numberOfBathrooms').hasError('required') ||
+                      housesRequests.get('theNumberOfFloors').hasError('required') ||
+                      housesRequests.get('floorNumber').hasError('required') ||
+                      housesRequests.get('typeOfconstruction').hasError('required') ||
+                      housesRequests.get('numberOfBalconies').hasError('required')
+                      ||housesRequests.get('periodicExpenses').hasError('required')">
                           التالي
                         </ion-button>
                   </ion-col>
@@ -376,6 +390,7 @@
                 </ion-col>
               </ion-row>
               <ion-label text-right position="floating"> الصور </ion-label>
+              <ion-label text-right position="floating"> الصور </ion-label>
               <ion-row>
                 <ion-col>
                   <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
@@ -383,10 +398,10 @@
                     style="height: 100px;width:100px">
                 </ion-col>
                 <ion-col>
-                  <ion-button *ngIf="!photos[0]" (click)="openGalleryhousesRequests()" style="margin-top: 10px;" color="secondary">
+                  <ion-button *ngIf="!photos[0]" (click)="openGalleryhousesRequests()" style="width: 40;" color="secondary">
                     إضافة الصورة
                   </ion-button>
-                  <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="margin-top: 10px;" color="secondary">
+                  <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="width: 40;" color="secondary">
                       حذف الصورة
                     </ion-button>
                 </ion-col>
@@ -398,10 +413,10 @@
                       style="height: 100px;width:100px">
                   </ion-col>
                   <ion-col>
-                    <ion-button *ngIf="!photos[1]" (click)="openGalleryhousesRequests()" style="margin-top: 10px;" color="secondary">
+                    <ion-button *ngIf="!photos[1]" (click)="openGalleryhousesRequests()" style="width: 40;" color="secondary">
                       إضافة الصورة
                     </ion-button>
-                    <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="margin-top: 10px;" color="secondary">
+                    <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="width: 40;" color="secondary">
                         حذف الصورة
                       </ion-button>
                   </ion-col>
@@ -413,10 +428,10 @@
                         style="height: 100px;width:100px">
                     </ion-col>
                     <ion-col>
-                      <ion-button *ngIf="!photos[2]" (click)="openGalleryhousesRequests()" style="margin-top: 10px;" color="secondary">
+                      <ion-button *ngIf="!photos[2]" (click)="openGalleryhousesRequests()" style="width: 40;" color="secondary">
                         إضافة الصورة
                       </ion-button>
-                      <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="margin-top: 10px;" color="secondary">
+                      <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="width: 40;" color="secondary">
                           حذف الصورة
                         </ion-button>
                     </ion-col>
@@ -428,14 +443,17 @@
                           style="height: 100px;width:100px">
                       </ion-col>
                       <ion-col>
-                        <ion-button *ngIf="!photos[3]" (click)="openGalleryhousesRequests()" style="margin-top: 10px;" color="secondary">
+                        <ion-button *ngIf="!photos[3]" (click)="openGalleryhousesRequests()" style="width: 40;" color="secondary">
                           إضافة الصورة
                         </ion-button>
-                        <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="margin-top: 10px;" color="secondary">
+                        <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="width: 40;" color="secondary">
                             حذف الصورة
                           </ion-button>
                       </ion-col>
                     </ion-row>
+      
+              
+                 
                   
               <ion-row>
                 <ion-col>
@@ -620,7 +638,15 @@
                 </ion-row>
                 <ion-row>
                     <ion-col size="6" offset="3">
-                    <ion-button  expand="block" color="secondary" (click)="next()">
+                    <ion-button  expand="block" color="secondary" [disabled]=" carsRequests.get('fullname').hasError('required')||
+                    carsRequests.get('mobile').hasError('required') ||
+                    carsRequests.get('country').hasError('required') ||
+                    carsRequests.get('locations').hasError('required') ||
+                    carsRequests.get('modelOfCar').hasError('required') ||
+                    carsRequests.get('year').hasError('required')
+                    ||carsRequests.get('Enginetype').hasError('required')||
+                    carsRequests.get('color').hasError('required')||
+                    carsRequests.get('Counternumber').hasError('required')" (click)="next()">
                         التالي
                       </ion-button>
                     </ion-col>
@@ -772,67 +798,68 @@
              
                 
                       
-            <ion-label text-right position="floating"> الصور </ion-label>
-        <ion-row>
-          <ion-col>
-            <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
-            <img *ngIf="!photos[0]" src='assets/img/no.jpg' 
-              style="height: 100px;width:100px">
-          </ion-col>
-          <ion-col>
-            <ion-button *ngIf="!photos[0]" (click)="openGallerycarsRequests()" style="margin-top: 10px;" color="secondary">
-              إضافة الصورة
-            </ion-button>
-            <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="margin-top: 10px;" color="secondary">
-                حذف الصورة
-              </ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-              <img *ngIf="photos[1]" [src]="photos[1]" style="height: 50px;width:100px">
-              <img *ngIf="!photos[1]" src='assets/img/no.jpg' 
-                style="height: 100px;width:100px">
-            </ion-col>
-            <ion-col>
-              <ion-button *ngIf="!photos[1]" (click)="openGallerycarsRequests()" style="margin-top: 10px;" color="secondary">
-                إضافة الصورة
-              </ion-button>
-              <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="margin-top: 10px;" color="secondary">
-                  حذف الصورة
-                </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-              <ion-col>
-                <img *ngIf="photos[2]" [src]="photos[2]" style="height: 50px;width:100px">
-                <img *ngIf="!photos[2]" src='assets/img/no.jpg' 
-                  style="height: 100px;width:100px">
-              </ion-col>
-              <ion-col>
-                <ion-button *ngIf="!photos[2]" (click)="openGallerycarsRequests()" style="margin-top: 10px;" color="secondary">
-                  إضافة الصورة
-                </ion-button>
-                <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="margin-top: 10px;" color="secondary">
-                    حذف الصورة
-                  </ion-button>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                  <img *ngIf="photos[3]" [src]="photos[3]" style="height: 50px;width:100px">
-                  <img *ngIf="!photos[3]" src='assets/img/no.jpg' (click)="openGallerycarsRequests()"
-                    style="height: 100px;width:100px">
-                </ion-col>
-                <ion-col>
-                  <ion-button *ngIf="!photos[3]" (click)="openGallerycarsRequests()" style="margin-top: 10px;" color="secondary">
-                    إضافة الصورة
-                  </ion-button>
-                  <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="margin-top: 10px;" color="secondary">
-                      حذف الصورة
-                    </ion-button>
-                </ion-col>
-              </ion-row>
+                      <ion-label text-right position="floating"> الصور </ion-label>
+                      <ion-row>
+                        <ion-col>
+                          <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
+                          <img *ngIf="!photos[0]" src='assets/img/no.jpg' 
+                            style="height: 100px;width:100px">
+                        </ion-col>
+                        <ion-col>
+                          <ion-button *ngIf="!photos[0]" (click)="openGallerycarsRequests()" style="width: 40;" color="secondary">
+                            إضافة الصورة
+                          </ion-button>
+                          <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="width: 40;" color="secondary">
+                              حذف الصورة
+                            </ion-button>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col>
+                            <img *ngIf="photos[1]" [src]="photos[1]" style="height: 50px;width:100px">
+                            <img *ngIf="!photos[1]" src='assets/img/no.jpg' 
+                              style="height: 100px;width:100px">
+                          </ion-col>
+                          <ion-col>
+                            <ion-button *ngIf="!photos[1]" (click)="openGallerycarsRequests()" style="width: 40;" color="secondary">
+                              إضافة الصورة
+                            </ion-button>
+                            <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="width: 40;" color="secondary">
+                                حذف الصورة
+                              </ion-button>
+                          </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                              <img *ngIf="photos[2]" [src]="photos[2]" style="height: 50px;width:100px">
+                              <img *ngIf="!photos[2]" src='assets/img/no.jpg' 
+                                style="height: 100px;width:100px">
+                            </ion-col>
+                            <ion-col>
+                              <ion-button *ngIf="!photos[2]" (click)="openGallerycarsRequests()" style="width: 40;" color="secondary">
+                                إضافة الصورة
+                              </ion-button>
+                              <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="width: 40;" color="secondary">
+                                  حذف الصورة
+                                </ion-button>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                              <ion-col>
+                                <img *ngIf="photos[3]" [src]="photos[3]" style="height: 50px;width:100px">
+                                <img *ngIf="!photos[3]" src='assets/img/no.jpg' (click)="openGallerycarsRequests()"
+                                  style="height: 100px;width:100px">
+                              </ion-col>
+                              <ion-col>
+                                <ion-button *ngIf="!photos[3]" (click)="openGallerycarsRequests()" style="width: 40;" color="secondary">
+                                  إضافة الصورة
+                                </ion-button>
+                                <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="width: 40;" color="secondary">
+                                    حذف الصورة
+                                  </ion-button>
+                              </ion-col>
+                            </ion-row>
+              
 
               <ion-row>
                   <ion-col>
@@ -996,70 +1023,66 @@
 
 
 
-            <ion-item>
-               <ion-grid>
-                  <ion-row>
-                    <ion-col>
-                      <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
-                      <img *ngIf="!photos[0]" src='assets/img/no.jpg' 
-                        style="height: 100px;width:100px">
-                    </ion-col>
-                    <ion-col>
-                      <ion-button *ngIf="!photos[0]" (click)="openGallerystuffsRequests()" style="margin-top: 10px;" color="secondary">
-                        إضافة الصورة
-                      </ion-button>
-                      <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="margin-top: 10px;" color="secondary">
-                          حذف الصورة
-                        </ion-button>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
+                    <ion-row>
                       <ion-col>
-                        <img *ngIf="photos[1]" [src]="photos[1]" style="height: 50px;width:100px">
-                        <img *ngIf="!photos[1]" src='assets/img/no.jpg' 
+                        <img *ngIf="photos[0]" [src]="photos[0]" style="height: 50px;width:100px">
+                        <img *ngIf="!photos[0]" src='assets/img/no.jpg' 
                           style="height: 100px;width:100px">
                       </ion-col>
                       <ion-col>
-                        <ion-button *ngIf="!photos[1]" (click)="openGallerystuffsRequests()" style="margin-top: 10px;" color="secondary">
+                        <ion-button *ngIf="!photos[0]" (click)="openGallerystuffsRequests()" style="width: 40;" color="secondary">
                           إضافة الصورة
                         </ion-button>
-                        <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="margin-top: 10px;" color="secondary">
+                        <ion-button *ngIf="photos[0]" (click)="deleteimg(photos[0])" style="width: 40;" color="secondary">
                             حذف الصورة
                           </ion-button>
                       </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                          <img *ngIf="photos[2]" [src]="photos[2]" style="height: 50px;width:100px">
-                          <img *ngIf="!photos[2]" src='assets/img/no.jpg' 
+                          <img *ngIf="photos[1]" [src]="photos[1]" style="height: 50px;width:100px">
+                          <img *ngIf="!photos[1]" src='assets/img/no.jpg' 
                             style="height: 100px;width:100px">
                         </ion-col>
                         <ion-col>
-                          <ion-button *ngIf="!photos[2]" (click)="openGallerystuffsRequests()" style="margin-top: 10px;" color="secondary">
+                          <ion-button *ngIf="!photos[1]" (click)="openGallerystuffsRequests()" style="width: 40;" color="secondary">
                             إضافة الصورة
                           </ion-button>
-                          <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="margin-top: 10px;" color="secondary">
+                          <ion-button *ngIf="photos[1]" (click)="deleteimg(photos[1])" style="width: 40;" color="secondary">
                               حذف الصورة
                             </ion-button>
                         </ion-col>
                       </ion-row>
                       <ion-row>
                           <ion-col>
-                            <img *ngIf="photos[3]" [src]="photos[3]" style="height: 50px;width:100px">
-                            <img *ngIf="!photos[3]" src='assets/img/no.jpg' (click)="openGallerystuffsRequests()"
+                            <img *ngIf="photos[2]" [src]="photos[2]" style="height: 50px;width:100px">
+                            <img *ngIf="!photos[2]" src='assets/img/no.jpg' 
                               style="height: 100px;width:100px">
                           </ion-col>
                           <ion-col>
-                            <ion-button *ngIf="!photos[3]" (click)="openGallerystuffsRequests()" style="margin-top: 10px;" color="secondary">
+                            <ion-button *ngIf="!photos[2]" (click)="openGallerystuffsRequests()" style="width: 40;" color="secondary">
                               إضافة الصورة
                             </ion-button>
-                            <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="margin-top: 10px;" color="secondary">
+                            <ion-button *ngIf="photos[2]" (click)="deleteimg(photos[2])" style="width: 40;" color="secondary">
                                 حذف الصورة
                               </ion-button>
                           </ion-col>
                         </ion-row>
-               </ion-grid>
-              </ion-item>
+                        <ion-row>
+                            <ion-col>
+                              <img *ngIf="photos[3]" [src]="photos[3]" style="height: 50px;width:100px">
+                              <img *ngIf="!photos[3]" src='assets/img/no.jpg' (click)="openGallerystuffsRequests()"
+                                style="height: 100px;width:100px">
+                            </ion-col>
+                            <ion-col>
+                              <ion-button *ngIf="!photos[3]" (click)="openGallerystuffsRequests()" style="width: 40;" color="secondary">
+                                إضافة الصورة
+                              </ion-button>
+                              <ion-button *ngIf="photos[3]" (click)="deleteimg(photos[3])" style="width: 40;" color="secondary">
+                                  حذف الصورة
+                                </ion-button>
+                            </ion-col>
+                          </ion-row>
 
         <ion-item lines="none">
           <ion-label text-center>

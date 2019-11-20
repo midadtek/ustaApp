@@ -27,7 +27,6 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

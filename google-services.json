@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098173648426",
+    "firebase_url": "https://usta-2e7f9.firebaseio.com",
+    "project_id": "usta-2e7f9",
+    "storage_bucket": "usta-2e7f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098173648426:android:e524784c1c95f8ff",
+        "android_client_info": {
+          "package_name": "com.midadtek.usta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098173648426-ggdrihppu3n6lr3u586qt6m5b68tup4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrgy9cEryQUMS51i9IQUTlC197n2_1L7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098173648426-ggdrihppu3n6lr3u586qt6m5b68tup4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

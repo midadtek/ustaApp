@@ -22,6 +22,25 @@
 <div [ngSwitch]="request_segment">
   <ion-list *ngSwitchCase="'company'" padding>
     <form [formGroup]="companyReqForm" (ngSubmit)="submitcompanyReqForm(companyReqForm.value)">
+        <ion-item>
+            <ion-label text-center > الصورة الشخصية للشركة</ion-label>
+        </ion-item>
+          
+          <ion-row>
+              <ion-col>
+                <img *ngIf="profile[0]" [src]="profile[0]" style="height: 50px;width:100px">
+                <img *ngIf="!profile[0]" src='assets/img/no.jpg' 
+                  style="height: 100px;width:100px">
+              </ion-col>
+              <ion-col>
+                <ion-button *ngIf="!profile[0]" (click)="openProfileCompanyRequests()" style="width: 40;" color="secondary">
+                  إضافة الصورة
+                </ion-button>
+                <ion-button *ngIf="profile[0]" (click)="deleteprofileimg(profile[0])" style="width: 40;" color="secondary">
+                    حذف الصورة
+                  </ion-button>
+              </ion-col>
+            </ion-row>
       <ion-item class="animated fadeInUp">
         <ion-label text-right position="floating">اسم الشركة</ion-label>
         <ion-input type="text" formControlName="fullname" text-right></ion-input>
@@ -111,6 +130,71 @@
         <ion-label text-right position="floating">المنتجات و الخدمات</ion-label>
         <ion-textarea type="text" formControlName="description" text-right rows="6" cols="20"></ion-textarea>
       </ion-item>
+      <ion-item>
+          <ion-label text-center >معرض صور الشركة  </ion-label>
+        </ion-item>
+                  <ion-row>
+                      <ion-col>
+                        <img *ngIf="gallery[0]" [src]="gallery[0]" style="height: 50px;width:100px">
+                        <img *ngIf="!gallery[0]" src='assets/img/no.jpg' 
+                          style="height: 100px;width:100px">
+                      </ion-col>
+                      <ion-col>
+                        <ion-button *ngIf="!gallery[0]" (click)="openGalleryCompanyRequests()" style="width: 40;" color="secondary">
+                          إضافة الصورة
+                        </ion-button>
+                        <ion-button *ngIf="gallery[0]" (click)="deletegalleryimg(gallery[0])" style="width: 40;" color="secondary">
+                            حذف الصورة
+                          </ion-button>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                          <img *ngIf="gallery[1]" [src]="gallery[1]" style="height: 50px;width:100px">
+                          <img *ngIf="!gallery[1]" src='assets/img/no.jpg' 
+                            style="height: 100px;width:100px">
+                        </ion-col>
+                        <ion-col>
+                          <ion-button *ngIf="!gallery[1]" (click)="openGalleryCompanyRequests()" style="width: 40;" color="secondary">
+                            إضافة الصورة
+                          </ion-button>
+                          <ion-button *ngIf="gallery[1]" (click)="deletegalleryimg(gallery[1])" style="width: 40;" color="secondary">
+                              حذف الصورة
+                            </ion-button>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col>
+                            <img *ngIf="gallery[2]" [src]="gallery[2]" style="height: 50px;width:100px">
+                            <img *ngIf="!gallery[2]" src='assets/img/no.jpg' 
+                              style="height: 100px;width:100px">
+                          </ion-col>
+                          <ion-col>
+                            <ion-button *ngIf="!gallery[2]" (click)="openGalleryCompanyRequests()" style="width: 40;" color="secondary">
+                              إضافة الصورة
+                            </ion-button>
+                            <ion-button *ngIf="gallery[2]" (click)="deletegalleryimg(gallery[2])" style="width: 40;" color="secondary">
+                                حذف الصورة
+                              </ion-button>
+                          </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                              <img *ngIf="gallery[3]" [src]="gallery[3]" style="height: 50px;width:100px">
+                              <img *ngIf="!gallery[3]" src='assets/img/no.jpg' (click)="openGalleryCompanyRequests()"
+                                style="height: 100px;width:100px">
+                            </ion-col>
+                            <ion-col>
+                              <ion-button *ngIf="!gallery[3]" (click)="openGalleryCompanyRequests()" style="width: 40;" color="secondary">
+                                إضافة الصورة
+                              </ion-button>
+                              <ion-button *ngIf="gallery[3]" (click)="deletegalleryimg(gallery[3])" style="width: 40;" color="secondary">
+                                  حذف الصورة
+                                </ion-button>
+                            </ion-col>
+                          </ion-row>
+
+
 <ion-item>
   <ion-chip outline="true" color="danger">
       <ion-label text-center style="white-space: normal;">عند ارسال الاستمارة سيتم التواصل معكم ليتم استكمال البيانات</ion-label>
@@ -131,6 +215,25 @@
   </ion-list>
   <ion-list *ngSwitchCase="'resturant'" padding>
       <form [formGroup]="resturantReqForm" (ngSubmit)="submitresturantReqForm(resturantReqForm.value)">
+        <ion-item>
+            <ion-label text-center > الصورة الشخصية للمطعم</ion-label>
+        </ion-item>
+          
+          <ion-row>
+              <ion-col>
+                <img *ngIf="profile[0]" [src]="profile[0]" style="height: 50px;width:100px">
+                <img *ngIf="!profile[0]" src='assets/img/no.jpg' 
+                  style="height: 100px;width:100px">
+              </ion-col>
+              <ion-col>
+                <ion-button *ngIf="!profile[0]" (click)="openProfileResturantRequests()" style="width: 40;" color="secondary">
+                  إضافة الصورة
+                </ion-button>
+                <ion-button *ngIf="profile[0]" (click)="deleteprofileimg(profile[0])" style="width: 40;" color="secondary">
+                    حذف الصورة
+                  </ion-button>
+              </ion-col>
+            </ion-row>
         <ion-item class="animated fadeInUp">
           <ion-label text-right position="floating">اسم المطعم</ion-label>
           <ion-input type="text" formControlName="fullname" text-right></ion-input>
@@ -234,6 +337,69 @@
 
               </ion-select>
             </ion-item>
+<ion-item>
+    <ion-label text-center >معرض صور المطعم  </ion-label>
+  </ion-item>
+            <ion-row>
+                <ion-col>
+                  <img *ngIf="gallery[0]" [src]="gallery[0]" style="height: 50px;width:100px">
+                  <img *ngIf="!gallery[0]" src='assets/img/no.jpg' 
+                    style="height: 100px;width:100px">
+                </ion-col>
+                <ion-col>
+                  <ion-button *ngIf="!gallery[0]" (click)="openGalleryResturantRequests()" style="width: 40;" color="secondary">
+                    إضافة الصورة
+                  </ion-button>
+                  <ion-button *ngIf="gallery[0]" (click)="deletegalleryimg(gallery[0])" style="width: 40;" color="secondary">
+                      حذف الصورة
+                    </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <img *ngIf="gallery[1]" [src]="gallery[1]" style="height: 50px;width:100px">
+                    <img *ngIf="!gallery[1]" src='assets/img/no.jpg' 
+                      style="height: 100px;width:100px">
+                  </ion-col>
+                  <ion-col>
+                    <ion-button *ngIf="!gallery[1]" (click)="openGalleryResturantRequests()" style="width: 40;" color="secondary">
+                      إضافة الصورة
+                    </ion-button>
+                    <ion-button *ngIf="gallery[1]" (click)="deletegalleryimg(gallery[1])" style="width: 40;" color="secondary">
+                        حذف الصورة
+                      </ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                      <img *ngIf="gallery[2]" [src]="gallery[2]" style="height: 50px;width:100px">
+                      <img *ngIf="!gallery[2]" src='assets/img/no.jpg' 
+                        style="height: 100px;width:100px">
+                    </ion-col>
+                    <ion-col>
+                      <ion-button *ngIf="!gallery[2]" (click)="openGalleryResturantRequests()" style="width: 40;" color="secondary">
+                        إضافة الصورة
+                      </ion-button>
+                      <ion-button *ngIf="gallery[2]" (click)="deletegalleryimg(gallery[2])" style="width: 40;" color="secondary">
+                          حذف الصورة
+                        </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                        <img *ngIf="gallery[3]" [src]="gallery[3]" style="height: 50px;width:100px">
+                        <img *ngIf="!gallery[3]" src='assets/img/no.jpg' (click)="openGalleryResturantRequests()"
+                          style="height: 100px;width:100px">
+                      </ion-col>
+                      <ion-col>
+                        <ion-button *ngIf="!gallery[3]" (click)="openGalleryResturantRequests()" style="width: 40;" color="secondary">
+                          إضافة الصورة
+                        </ion-button>
+                        <ion-button *ngIf="gallery[3]" (click)="deletegalleryimg(gallery[3])" style="width: 40;" color="secondary">
+                            حذف الصورة
+                          </ion-button>
+                      </ion-col>
+                    </ion-row>
        
 <ion-item>
     <ion-chip outline="true" color="danger">

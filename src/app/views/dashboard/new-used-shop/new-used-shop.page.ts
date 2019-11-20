@@ -21,8 +21,6 @@ import { ViewChild } from '@angular/core';
 })
 export class NewUsedShopPage implements OnInit {
   @ViewChild('slides', {static: false}) slides: IonSlides;
-
-
   public uploadPercent:Observable<number>
   public downloadUrl:Observable<string>
   images=[]
@@ -362,8 +360,11 @@ export class NewUsedShopPage implements OnInit {
           })
         })
 
-    
-  }
+      }
+      ionViewWillEnter() {
+        this.slides.lockSwipes(true);
+
+      }
   onSelectChange(ev) {
     if(ev.detail.value != ''){
       this.db.getcities(ev.detail.value.id).subscribe(res => {
@@ -386,11 +387,19 @@ export class NewUsedShopPage implements OnInit {
        
        }
        next() {
+        this.slides.lockSwipes(false);
+
          this.slides.slideNext();
+         this.slides.lockSwipes(true);
+
        }
      
        prev() {
+        this.slides.lockSwipes(false);
+
          this.slides.slidePrev();
+         this.slides.lockSwipes(true);
+
        }
        async submithousesReqForm(value) {
         value.img_gallery=[]

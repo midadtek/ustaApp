@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Section, City, Country } from 'src/app/services/interfaces';
+import { Section, City, Country, subservices } from 'src/app/services/interfaces';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -41,7 +41,8 @@ export class NewCompanyPage implements OnInit {
   request_segment: string = 'resturant';
   gallery:any[]=[];
   profile:any[]=[];
-
+  companysubservice: subservices[]
+  resturantsubservice: subservices[]
 
   constructor(private formBuilder: FormBuilder, private afStorage:AngularFireStorage,
     private storage: Storage, public toastController: ToastController, private router: Router,
@@ -82,6 +83,22 @@ export class NewCompanyPage implements OnInit {
           }
         });
   })
+  this.db.getsubservices("4TRI4w7NCIcuMtxySXix").subscribe(data => {
+    this.companysubservice = data.docs.map(e => {
+      return {
+        //id:e.id,
+        ...e.data(), id: e.id
+      } as subservices
+    })
+  })
+  this.db.getsubservices("lQhp1nvbxO56DWe2BF4c").subscribe(data => {
+    this.resturantsubservice = data.docs.map(e => {
+      return {
+        //id:e.id,
+        ...e.data(), id: e.id
+      } as subservices
+    })
+  })
   this.companyReqForm = this.formBuilder.group({
     'fullname': [null, Validators.compose([
       Validators.required
@@ -105,6 +122,9 @@ export class NewCompanyPage implements OnInit {
       Validators.required
     ])],
      'country': [null, Validators.compose([
+      Validators.required
+    ])],
+    'subservices': [null, Validators.compose([
       Validators.required
     ])],
     'sections': [null, Validators.compose([
@@ -140,6 +160,9 @@ export class NewCompanyPage implements OnInit {
      'country': [null, Validators.compose([
       Validators.required
     ])],
+    'subservices': [null, Validators.compose([
+      Validators.required
+    ])],
   
   });
   }
@@ -157,6 +180,10 @@ export class NewCompanyPage implements OnInit {
     }
   }
   async submitcompanyReqForm(value) {
+    value.whatsappmobile=""
+    value.social=""
+    value.email=""
+    value.hash_type=""  
     value.img_gallery=[]
         this.gallery.forEach(element => {
          value.img_gallery.push(element)
@@ -223,6 +250,12 @@ export class NewCompanyPage implements OnInit {
     this.profile=[]
   }
   async submitresturantReqForm(value) {
+    value.whatsappmobile=""
+    value.social=""
+    value.email=""
+    value.description=""
+
+
     value.img_gallery=[]
     this.gallery.forEach(element => {
      value.img_gallery.push(element)

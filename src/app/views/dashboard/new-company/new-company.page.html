@@ -110,6 +110,19 @@
             *ngIf="companyReqForm.get('locations').touched && companyReqForm.get('locations').hasError('required')">
             <p text-right> هذا الحقل مطلوب </p>
           </ion-text>
+          <ion-item style=" direction:rtl">
+            <ion-label text-right>اختصاص الشركة</ion-label>
+            <ion-select formControlName="subservices" multiple="true"
+              [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+              <ion-select-option *ngFor="let s of companysubservice" [value]="s">
+                {{s.title}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-text color="warning"
+          *ngIf="companyReqForm.get('subservices').touched && companyReqForm.get('subservices').hasError('required')">
+          <p text-right>هذا الحقل مطلوب </p>
+        </ion-text>
       <ion-item class="animated fadeInUp">
         <ion-label text-right position="floating">عنوان الشركة</ion-label>
         <ion-input type="text" formControlName="address" text-right></ion-input>
@@ -288,6 +301,19 @@
               *ngIf="resturantReqForm.get('locations').touched && resturantReqForm.get('locations').hasError('required')">
               <p text-right> هذا الحقل مطلوب </p>
             </ion-text>
+            <ion-item style=" direction:rtl">
+              <ion-label text-right>اختصاص المطعم</ion-label>
+              <ion-select formControlName="subservices" multiple="true"
+                [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
+                <ion-select-option *ngFor="let s of resturantsubservice" [value]="s">
+                  {{s.title}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-text color="warning"
+            *ngIf="resturantReqForm.get('subservices').touched && resturantReqForm.get('subservices').hasError('required')">
+            <p text-right>هذا الحقل مطلوب </p>
+          </ion-text>
         <ion-item class="animated fadeInUp">
           <ion-label text-right position="floating">عنوان المطعم</ion-label>
           <ion-input type="text" formControlName="address" text-right></ion-input>

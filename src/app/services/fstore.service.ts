@@ -215,6 +215,8 @@ export class FstoreService {
       });
     }
     request.locationCode = locationid;  
+    let sectionIds=["lQhp1nvbxO56DWe2BF4c"]
+    request.sectionIds = sectionIds
     request.name = request.fullname;
     request.ustadate = new Date();
     request.readed = false;

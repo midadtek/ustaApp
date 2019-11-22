@@ -8,6 +8,8 @@ import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {File} from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
+import {IonSlides} from'@ionic/angular';
+import { ViewChild } from '@angular/core';
 
 
 
@@ -18,6 +20,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./new-company.page.scss'],
 })
 export class NewCompanyPage implements OnInit {
+  @ViewChild('slides', {static: false}) slides: IonSlides;
 
   customActionSheetOptions: any = {}
   customPopoverOptions: any = {
@@ -106,9 +109,18 @@ export class NewCompanyPage implements OnInit {
     'mobile': [null, Validators.compose([
       Validators.required, Validators.pattern('[0-9 \u0660-\u0669]{10,20}')
     ])],
+    'whatsappmobile': [null, Validators.compose([
+      Validators.required, Validators.pattern('[0-9 \u0660-\u0669]{10,20}')
+    ])],
     'address': [null, Validators.compose([
       Validators.nullValidator
-    ])],      
+    ])],
+    'email': [null, Validators.compose([
+      Validators.nullValidator
+    ])],
+    'social': [null, Validators.compose([
+      Validators.nullValidator
+    ])], 
     'typecompany': [null, Validators.compose([
       Validators.nullValidator
     ])],
@@ -139,14 +151,24 @@ export class NewCompanyPage implements OnInit {
     'mobile': [null, Validators.compose([
       Validators.required, Validators.pattern('[0-9 \u0660-\u0669]{10,20}')
     ])],
+    'whatsappmobile': [null, Validators.compose([
+      Validators.required, Validators.pattern('[0-9 \u0660-\u0669]{10,20}')
+    ])],
     'address': [null, Validators.compose([
+      Validators.required
+    ])],
+    'email': [null, Validators.compose([
       Validators.nullValidator
-    ])],      
-  
+    ])],
+    'social': [null, Validators.compose([
+      Validators.nullValidator
+    ])], 
+    'description':[null, Validators.compose([
+      Validators.required
+    ])],
     'resturantmenu': [null, Validators.compose([
       Validators.nullValidator
     ])],
-
     'resturantfeatures': [null, Validators.compose([
       Validators.nullValidator
     ])],
@@ -166,6 +188,26 @@ export class NewCompanyPage implements OnInit {
   
   });
   }
+  
+  next() {
+    this.slides.lockSwipes(false);
+
+     this.slides.slideNext();
+     this.slides.lockSwipes(true);
+
+   }
+ 
+   prev() {
+    this.slides.lockSwipes(false);
+
+     this.slides.slidePrev();
+     this.slides.lockSwipes(true);
+
+   }
+   ionViewWillEnter() {
+    this.slides.lockSwipes(true);
+
+  }
   onSelectChange(ev) {
     if(ev.detail.value != ''){
       this.db.getcities(ev.detail.value.id).subscribe(res => {
@@ -180,10 +222,7 @@ export class NewCompanyPage implements OnInit {
     }
   }
   async submitcompanyReqForm(value) {
-    value.whatsappmobile=""
-    value.social=""
-    value.email=""
-    value.hash_type=""  
+    value.hash_type=""
     value.img_gallery=[]
         this.gallery.forEach(element => {
          value.img_gallery.push(element)
@@ -250,12 +289,7 @@ export class NewCompanyPage implements OnInit {
     this.profile=[]
   }
   async submitresturantReqForm(value) {
-    value.whatsappmobile=""
-    value.social=""
-    value.email=""
-    value.description=""
-
-
+    
     value.img_gallery=[]
     this.gallery.forEach(element => {
      value.img_gallery.push(element)

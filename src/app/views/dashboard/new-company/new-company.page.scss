@@ -1,12 +1,12 @@
 form {
-    border: var(--ion-color-primary) solid 2px;
-    padding: 2px;
-  }
-  
-  ion-input{
-    --background :linear-gradient(to top, var(---ion-color-light-shade) 0%, #ffffff 100%) !important;
+  border: var(--ion-color-primary) solid 2px;
+  padding: 2px;
+}
+
+ion-input{
+  --background :linear-gradient(to top, var(---ion-color-light-shade) 0%, #ffffff 100%) !important;
 --color	:var(--ion-color-primary);
-  direction: rtl;
-    border:var(--ion-color-primary) solid 0px;
-    border-radius: 0px;
-  }
+direction: rtl;
+  border:var(--ion-color-primary) solid 0px;
+  border-radius: 0px;
+}

@@ -90,7 +90,7 @@
      <ion-row>
        <ion-col>
           <ion-item class="animated fadeInUp">
-              <ion-label text-right >نوع الشركة</ion-label>
+              <ion-label text-right position="floating">نوع الشركة </ion-label>
               <ion-select formControlName="typecompany" [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
                 <ion-select-option value="شخصية">شخصية</ion-select-option>
                 <ion-select-option value="محدودة"> محدودة</ion-select-option>
@@ -173,10 +173,31 @@
           </ion-slide>
           <ion-slide>
           <ion-grid>
-            <ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-item style=" direction:rtl">
+                          <ion-label text-right>اختصاص الشركة </ion-label>
+                          <ionic-selectable  item-content  formControlName="subservices" [isMultiple]="true"
+                            [items]="companysubservice" itemValueField="title" itemTextField="title" [canSearch]="false">
+                            <ng-template ionicSelectableCloseButtonTemplate>
+                              <ion-icon name="arrow-back" color='light'></ion-icon>
+                            </ng-template>
+                            <ng-template ionicSelectableTitleTemplate>
+                              <ion-title text-center>اختصاص الشركة</ion-title>
+                            </ng-template>
+                          </ionic-selectable>
+                        </ion-item>
+              
+                        <ion-text color="warning" 
+                          *ngIf="companyReqForm.get('subservices').touched && companyReqForm.get('subservices').hasError('required')">
+                          <p text-right> هذا الحقل مطلوب </p>
+                        </ion-text>
+                  </ion-col>
+                </ion-row>
+            <!-- <ion-row>
               <ion-col>
                   <ion-item style=" direction:rtl">
-                      <ion-label text-right>اختصاص الشركة</ion-label>
+                      <ion-label text-right></ion-label>
                       <ion-select formControlName="subservices" multiple="true"
                         [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
                         <ion-select-option *ngFor="let s of companysubservice" [value]="s">
@@ -189,7 +210,7 @@
                     <p text-right>هذا الحقل مطلوب </p>
                   </ion-text>
               </ion-col>
-            </ion-row>
+            </ion-row> -->
          
         <ion-row>
             <ion-col>
@@ -203,8 +224,8 @@
       <ion-row>
           <ion-col>
               <ion-item class="animated fadeInUp">
-                  <ion-label text-right >ايام العمل</ion-label>
-                  <ion-select formControlName="workday" multiple="true" cancelText="إالغاء" okText="تحديد">
+                  <ion-label text-right position="floating">ايام العمل</ion-label>
+                  <ion-select width="200" style="width: 200px" formControlName="workday" multiple="true" cancelText="إالغاء" okText="تحديد">
                     <ion-select-option value="الاحد">الاحد</ion-select-option>
                     <ion-select-option value="الاثنين">الاثنين</ion-select-option>
                     <ion-select-option value="الثلاثاء">الثلاثاء</ion-select-option>
@@ -459,18 +480,22 @@
             <ion-row>
                 <ion-col>
                     <ion-item style=" direction:rtl">
-                        <ion-label text-right >اختصاص المطعم</ion-label>
-                        <ion-select formControlName="subservices" multiple="true"
-                          [interfaceOptions]="customActionSheetOptions" interface="action-sheet">
-                          <ion-select-option *ngFor="let s of resturantsubservice" [value]="s">
-                            {{s.title}}
-                          </ion-select-option>
-                        </ion-select>
+                        <ion-label text-right>اختصاص المطعم </ion-label>
+                        <ionic-selectable  item-content  formControlName="subservices" [isMultiple]="true"
+                          [items]="resturantsubservice" itemValueField="title" itemTextField="title" [canSearch]="false">
+                          <ng-template ionicSelectableCloseButtonTemplate>
+                            <ion-icon name="arrow-back" color='light'></ion-icon>
+                          </ng-template>
+                          <ng-template ionicSelectableTitleTemplate>
+                            <ion-title text-center>اختصاص المطعم</ion-title>
+                          </ng-template>
+                        </ionic-selectable>
                       </ion-item>
-                      <ion-text color="warning"
-                      *ngIf="resturantReqForm.get('subservices').touched && resturantReqForm.get('subservices').hasError('required')">
-                      <p text-right>هذا الحقل مطلوب </p>
-                    </ion-text>
+            
+                      <ion-text color="warning" 
+                        *ngIf="resturantReqForm.get('subservices').touched && resturantReqForm.get('subservices').hasError('required')">
+                        <p text-right> هذا الحقل مطلوب </p>
+                      </ion-text>
                 </ion-col>
               </ion-row>
           
@@ -504,11 +529,12 @@
         </ion-slide>
         <ion-slide>
           <ion-grid>
+           
               <ion-row>
-                  <ion-col>
-                      <ion-item class="animated fadeInUp">
-                          <ion-label text-right >قائمة المطعم </ion-label>
-                          <ion-select formControlName="resturantmenu" multiple="true" cancelText="إالغاء" okText="تحديد">
+                  <ion-col >
+                      <ion-item class="animated fadeInUp" >
+                          <ion-label text-right position="floating">قائمة المطعم </ion-label>
+                          <ion-select width="200" style="width: 200px"  formControlName="resturantmenu" multiple="true" cancelText="إالغاء" okText="تحديد">
                             <ion-select-option value="وجبات طبخ">وجبات طبخ</ion-select-option>
                             <ion-select-option value="وجبات غربية">وجبات غربية</ion-select-option>
                             <ion-select-option value="سندويش">سندويش</ion-select-option>
@@ -525,12 +551,12 @@
                         </ion-item>
                   </ion-col>
                 </ion-row>
-      
+              
         <ion-row>
             <ion-col>
                 <ion-item class="animated fadeInUp">
-                    <ion-label text-right >مميزات المطعم </ion-label>
-                    <ion-select formControlName="resturantfeatures" multiple="true" cancelText="إالغاء" okText="تحديد">
+                    <ion-label text-right position="floating">مميزات المطعم </ion-label>
+                    <ion-select width="200" style="width: 200px" formControlName="resturantfeatures" multiple="true" cancelText="إالغاء" okText="تحديد">
                       <ion-select-option value="خدمة التوصيل">خدمة التوصيل</ion-select-option>
                       <ion-select-option value="خدمة الطلبات الخارجية">خدمة الطلبات الخارجية</ion-select-option>
                       <ion-select-option value="خدمة الطلبات المخصصة للحفلات والمناسبات">خدمة الطلبات المخصصة للحفلات والمناسبات</ion-select-option>
@@ -553,7 +579,7 @@
           <ion-row>
               <ion-col>
                   <ion-item class="animated fadeInUp">
-                      <ion-label text-right >طرق الدفع </ion-label>
+                      <ion-label text-right position="floating">طرق الدفع </ion-label>
                       <ion-select formControlName="paymentby" multiple="true" cancelText="إالغاء" okText="تحديد">
                         <ion-select-option value="الدفع نقدي">الدفع نقدي</ion-select-option>
                         <ion-select-option value="الدفع عن طريق البطاقة">الدفع عن طريق البطاقة</ion-select-option>

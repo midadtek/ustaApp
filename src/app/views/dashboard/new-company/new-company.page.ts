@@ -46,6 +46,7 @@ export class NewCompanyPage implements OnInit {
   profile:any[]=[];
   companysubservice: subservices[]
   resturantsubservice: subservices[]
+ 
 
   constructor(private formBuilder: FormBuilder, private afStorage:AngularFireStorage,
     private storage: Storage, public toastController: ToastController, private router: Router,
@@ -54,7 +55,7 @@ export class NewCompanyPage implements OnInit {
 
   ngOnInit() {
 
-    
+ 
     this.db.getcountries().subscribe(res => {
       this.countries = res.docs.map(doc => {
         return {
@@ -228,13 +229,11 @@ export class NewCompanyPage implements OnInit {
          value.img_gallery.push(element)
        });
 
-       if(this.profile=[]){
-         value.img_profile=""
-       }else{
+       
        this.profile.forEach(element => {
         value.img_profile=element
       });
-    }
+    
     const loading = await this.loadingController.create({
       spinner: 'lines-small'
     });
@@ -294,13 +293,12 @@ export class NewCompanyPage implements OnInit {
     this.gallery.forEach(element => {
      value.img_gallery.push(element)
    });
-   if(this.profile=[]){
-    value.img_profile=""
-  }else{
+  
+
   this.profile.forEach(element => {
    value.img_profile=element
- });
-}
+ 
+  })
     const loading = await this.loadingController.create({
       spinner: 'lines-small'
     });

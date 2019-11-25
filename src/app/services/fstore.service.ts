@@ -106,6 +106,17 @@ export class FstoreService {
         })
       );
     }
+    getustas(){
+      return this.afs.collection<Usta>('ustas').snapshotChanges().pipe(
+        map(action=>{
+          return action.map(a=>{
+            const data=a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return{id,...data}
+          })
+        })
+      )
+    }
   getUstaProfile(id) {
     return this.afs.collection<Usta>('ustas').doc<Usta>(id).valueChanges();
   }

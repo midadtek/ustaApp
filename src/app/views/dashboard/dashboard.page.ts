@@ -1,10 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { FstoreService } from 'src/app/services/fstore.service';
-import { Section, Banner } from 'src/app/services/interfaces';
+import { Section, Banner, Usta } from 'src/app/services/interfaces';
 import { Subscription } from 'rxjs';
-import { AlertController, ActionSheetController } from '@ionic/angular';
+import { AlertController, ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { resultsPage } from '../results/results.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+  searchTerm: string = '';
   scrolling = false;
   services: Section[] = [];
   business: Section[] = [];
@@ -30,16 +32,20 @@ export class DashboardPage implements OnInit {
     loop: true,
     speed: 1000,
     autoplay: true
+    
 
   };
   private businessIds = ['4TRI4w7NCIcuMtxySXix', 'QgfSghbyU5QdJFvDFMuo', 'lQhp1nvbxO56DWe2BF4c'];
   private usedShopsIds = ['XF0nvOlqe0kiGR3badlt', 'X8YhOaNVHSBsje3DjM3w', 'yCncXQlblutGpU8YlbjW'];
 
+allustas
+show
+name
+mobile
+hash_id
 
-
-
-  constructor(private fstore: FstoreService, private alertCtr: AlertController,
-              private actionSheetController: ActionSheetController, private router: Router,
+  constructor(private fstore: FstoreService, private alertCtr: AlertController, private modalCtr: ModalController,
+              private actionSheetController: ActionSheetController, private router: Router,public navCtrl: NavController,
               private callNumber: CallNumber) { }
 
   ngOnInit() {
@@ -64,6 +70,11 @@ export class DashboardPage implements OnInit {
       this.totalServices = this.services.reduce((prev, cur) => prev + cur.ustacount, 0);
       this.totalBusiness = this.business.reduce((prev, cur) => prev + cur.ustacount, 0);
     });
+
+    this.fstore.getustas().subscribe(r=>{
+      this.allustas=r;
+      // console.log(this.allustas)
+    })
 
   }
   scrollStart() {
@@ -100,7 +111,52 @@ export class DashboardPage implements OnInit {
     }).then(asCtrEl => asCtrEl.present());
   }
 
-  search() {
 
-  }
-}
+    async result(){
+
+
+
+      
+          
+          if (this.searchTerm.length >=4) {
+      
+            this.allustas = this.allustas.filter(usta => 
+              { try{return ((usta.name.indexOf(this.searchTerm) > -1) ||
+                 (usta.mobile.indexOf(this.searchTerm) > -1) ||
+                  (usta.hash_id.indexOf(this.searchTerm) > -1))}
+                  catch(err){
+                  }; 
+              }
+    
+              )
+          
+          
+        }
+        let res = this.allustas
+        
+                     
+        const modal=await this.modalCtr.create({
+        component:resultsPage,
+        componentProps:{
+        usta:res,
+      }
+    
+    });
+    modal.present();
+          
+          
+          }
+         
+            
+            
+            
+    
+    
+    }
+ 
+    
+    
+    
+  
+
+

@@ -13,7 +13,7 @@ import { resultsPage } from '../results/results.page';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  searchTerm: string = '';
+
   scrolling = false;
   services: Section[] = [];
   business: Section[] = [];
@@ -43,6 +43,7 @@ show
 name
 mobile
 hash_id
+search_select
 
   constructor(private fstore: FstoreService, private alertCtr: AlertController, private modalCtr: ModalController,
               private actionSheetController: ActionSheetController, private router: Router,public navCtrl: NavController,
@@ -71,12 +72,18 @@ hash_id
       this.totalBusiness = this.business.reduce((prev, cur) => prev + cur.ustacount, 0);
     });
 
-    this.fstore.getustas().subscribe(r=>{
-      this.allustas=r;
-      // console.log(this.allustas)
-    })
+   
 
   }
+  // searchbt(){
+  //   this.fstore.getustas().subscribe(r=>{
+  //     this.allustas=r;
+  //     // console.log(this.allustas)
+  //   })
+  //   this.showSearch=true;
+
+
+  // }
   scrollStart() {
     this.scrolling = true;
   }
@@ -112,45 +119,47 @@ hash_id
   }
 
 
-    async result(){
+    // async result(){
 
 
 
       
           
-          if (this.searchTerm.length >=4) {
+    //       if (this.searchTerm.length >=4) {
       
-            this.allustas = this.allustas.filter(usta => 
-              { try{return ((usta.name.indexOf(this.searchTerm) > -1) ||
-                 (usta.mobile.indexOf(this.searchTerm) > -1) ||
-                  (usta.hash_id.indexOf(this.searchTerm) > -1))}
-                  catch(err){
-                  }; 
-              }
+    //         this.allustas = this.allustas.filter(usta => 
+    //           { try{return ((usta.name.indexOf(this.searchTerm) > -1) ||
+    //              (usta.mobile.indexOf(this.searchTerm) > -1) ||
+    //               (usta.hash_id.indexOf(this.searchTerm) > -1))}
+    //               catch(err){
+    //               }; 
+    //           }
     
-              )
+    //           )
           
           
-        }
-        let res = this.allustas
+    //     }
+    //     let res = this.allustas
         
                      
-        const modal=await this.modalCtr.create({
-        component:resultsPage,
-        componentProps:{
-        usta:res,
-      }
+    //     const modal=await this.modalCtr.create({
+    //     component:resultsPage,
+    //     componentProps:{
+    //     usta:res,
+    //   }
     
-    });
-    modal.present();
+    // });
+    // modal.present();
           
           
-          }
+    //       }
          
             
             
             
-    
+    search(){
+      
+    }
     
     }
  

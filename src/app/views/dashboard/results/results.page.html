@@ -1,13 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title style="color: black">requestnumber</ion-title>
+    <ion-title text-center style="color: black">النتيجة</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ng-container >
+<ion-content [ngClass]="{'nodata' : (pagedUstas && pagedUstas.length == 0)}">
+    <ng-container *ngIf="!pagedUstas">
+        <div *ngFor="let n of [0,1,2]" padding>
+          <ion-skeleton-text></ion-skeleton-text>
+          <p>
+            <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+          </p>
+        </div>
+      </ng-container>
+  <ng-container *ngIf="pagedUstas && pagedUstas.length > 0" >
     <ion-list>
-      <ion-card *ngFor="let item of ustaF" [routerLink]="['/ustaprofile', item.id]" detail="false">
+      <ion-card *ngFor="let item of pagedUstas" (click)="clickToprofile()" detail="false">
         <ion-item lines="none">
               <ion-thumbnail>
             <ion-img src="{{item.img_profile}}" *ngIf="item.img_profile" style="width: 190px;" ></ion-img>
@@ -30,5 +38,7 @@
         </ion-item>
       </ion-card>
     </ion-list>
+
   </ng-container>
+
 </ion-content>

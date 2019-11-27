@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'ustas/:sectionid', loadChildren: './views/lists/ustas/ustas.module#UstasPageModule'},
 
   { path: 'ustaprofile/:id', loadChildren: './views/profiles/ustaprofile/ustaprofile.module#UstaprofilePageModule'},
-
+  // { path: 'results', loadChildren: './views/dashboard/results/results.module#ResultsPageModule'},
   { path: 'restaurant-company-profile/:id',
    loadChildren: './views/profiles/restaurant-company-profile/restaurant-company-profile.module#restaurantcompanyprofilePageModule'},
    { path: 'house-car-stuff-profile/:id',

@@ -106,8 +106,50 @@ export class FstoreService {
         })
       );
     }
-    getustas(){
-      return this.afs.collection<Usta>('ustas').snapshotChanges().pipe(
+    getustasbyname(name){
+
+      return this.afs.collection<Usta>('ustas',ref=>{
+        
+          return ref.where('name', '==', name).where('active', '==', true).orderBy("img_profile","desc");
+
+        
+      }).snapshotChanges().pipe(
+        map(action=>{
+          return action.map(a=>{
+            const data=a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return{id,...data}
+          })
+        })
+      )
+    }
+    getustasbyhashId(hash){
+
+      return this.afs.collection<Usta>('ustas',ref=>{
+      
+
+        
+          return ref.where('hash_id', '==', hash).where('active', '==', true).orderBy("img_profile","desc");
+
+        
+      }).snapshotChanges().pipe(
+        map(action=>{
+          return action.map(a=>{
+            const data=a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return{id,...data}
+          })
+        })
+      )
+    }
+    getustasbymobile(mobile){
+
+      return this.afs.collection<Usta>('ustas',ref=>{
+        
+          return ref.where('mobile', '==', mobile).where('active', '==', true).orderBy("img_profile","desc");
+
+        
+      }).snapshotChanges().pipe(
         map(action=>{
           return action.map(a=>{
             const data=a.payload.doc.data();

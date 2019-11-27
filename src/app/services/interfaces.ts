@@ -81,6 +81,7 @@ export interface Usta {
     facebook
     twitter
     instegram
+    sectionid
     
   
   }

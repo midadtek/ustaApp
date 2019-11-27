@@ -18,7 +18,8 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import {ProfilePageModule} from '../app/views/profiles/profile/profile.module';
 import { ProfileBannerPageModule} from '../app/views/profiles/profile-banner/profile-banner.module';
-import { ResultsPageModule} from '../app/views/results/results.module';
+import {ResultsPageModule} from '../app/views/dashboard/results/results.module';
+
 
 import {Camera} from '@ionic-native/camera/ngx';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -35,8 +36,8 @@ import { FCM } from '@ionic-native/fcm/ngx';
   imports: [
     BrowserModule,
     IonicStorageModule.forRoot(),
-    ProfilePageModule,AngularFireStorageModule,
-    ProfileBannerPageModule,ResultsPageModule,
+    ProfilePageModule,AngularFireStorageModule,ResultsPageModule,
+    ProfileBannerPageModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),

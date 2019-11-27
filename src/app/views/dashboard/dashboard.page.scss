@@ -12,3 +12,15 @@ ion-card {
 .footer{
     background: linear-gradient(to top, var(--ion-color-light-shade) 0%, #ffffff 100%) !important;
 }
+ion-input{
+    --background :linear-gradient(to top, var(---ion-color-light-shade) 0%, #ffffff 100%) !important;
+--color	:var(--ion-color-primary);
+  direction: rtl;
+  border:var(--ion-color-primary) solid 1px;
+  border-radius: 10px;  
+  }
+//   ion-select{
+   
+//       border:var(--ion-color-primary) solid 1px;
+//     border-radius: 10px;
+//   }

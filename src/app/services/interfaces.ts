@@ -82,7 +82,8 @@ export interface Usta {
     twitter
     instegram
     sectionid
-    
+    HomeTrends
+    Guaranty
   
   }
   export interface subservices{

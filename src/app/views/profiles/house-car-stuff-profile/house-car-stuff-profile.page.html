@@ -104,8 +104,14 @@
           </ion-item>
           <ion-item *ngIf="usta.periodicExpenses" lines="full">
             <ion-label text-right>
-              <h2>   يوجد عائدات</h2>
+              <h2>   قيمة عائدات</h2>
               <p> {{usta.periodicExpenses}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.HomeTrends" lines="full">
+            <ion-label text-right>
+              <h2>    اتجاهات المنزل</h2>
+              <p> {{usta.HomeTrends}}</p>
             </ion-label>
           </ion-item>
 
@@ -210,6 +216,12 @@
             <ion-label text-right>
               <h2> إمكانية التوصيل </h2>
               <p> {{usta.Delivery}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="usta.Guaranty" lines="full">
+            <ion-label text-right>
+              <h2>  يوجد كفالة </h2>
+              <p> {{usta.Guaranty}}</p>
             </ion-label>
           </ion-item>
 

@@ -33,7 +33,7 @@
               <ion-row>
                 <ion-col>
                   <ion-item class="animated fadeInUp">
-                    <ion-label text-right position="floating">الاسم</ion-label>
+                    <ion-label text-right position="floating">اسم المنزل</ion-label>
                     <ion-input type="text" formControlName="fullname" text-right></ion-input>
                   </ion-item>
                   <ion-text color="warning"
@@ -259,12 +259,8 @@
               <ion-row>
                 <ion-col>
                   <ion-item class="animated fadeInUp">
-                    <ion-label text-right position="floating"> عائدات</ion-label>
-                    <ion-select formControlName="periodicExpenses" [interfaceOptions]="customActionSheetOptions"
-                      interface="action-sheet">
-                      <ion-select-option value="نعم">نعم </ion-select-option>
-                      <ion-select-option value="لا"> لا</ion-select-option>
-                    </ion-select>
+                    <ion-label text-right position="floating"> قيمة العائدات</ion-label>
+                    <ion-input type="number" formControlName="periodicExpenses" text-right></ion-input>
                   </ion-item>
                   <ion-text color="warning"
                     *ngIf="housesRequests.get('periodicExpenses').touched && housesRequests.get('periodicExpenses').hasError('required')">
@@ -348,6 +344,29 @@
               <ion-row>
                 <ion-col>
                   <ion-item class="animated fadeInUp">
+                    <ion-label text-right position="floating">  اتجاهات المنزل</ion-label>
+                    <ion-select formControlName="HomeTrends" [interfaceOptions]="customActionSheetOptions"
+                      interface="action-sheet">
+                      <ion-select-option value="الجهه الشماليه">الجهه الشماليه  </ion-select-option>
+                      <ion-select-option value="الجهه الجنوبيه"> الجهه الجنوبيه</ion-select-option>
+                      <ion-select-option value="الجهه الشرقيه"> الجهه الشرقيه </ion-select-option>
+                      <ion-select-option value="الجهه الغربيه"> الجهه الغربيه</ion-select-option>
+                      <ion-select-option value="الجهه الجنوبيه الغربيه"> الجهه الجنوبيه الغربيه</ion-select-option>
+                      <ion-select-option value="الجهه الجنوبيه الشرقيه"> الجهه الجنوبيه الشرقيه </ion-select-option>
+                      <ion-select-option value="الجهه الشماليه الشرقيه"> الجهه الشماليه الشرقيه</ion-select-option>
+                      <ion-select-option value="الجهه الشماليه الغربيه"> الجهه الشماليه الغربيه </ion-select-option>
+
+                    </ion-select>
+                  </ion-item>
+                  <ion-text color="warning"
+                    *ngIf="housesRequests.get('HomeTrends').touched && housesRequests.get('HomeTrends').hasError('required')">
+                    <p text-right>هذا الحقل مطلوب </p>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item class="animated fadeInUp">
                     <ion-label text-right position="floating"> مفروشة</ion-label>
                     <ion-select formControlName="Furnished" [interfaceOptions]="customActionSheetOptions"
                       interface="action-sheet">
@@ -389,7 +408,6 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
-              <ion-label text-right position="floating"> الصور </ion-label>
               <ion-label text-right position="floating"> الصور </ion-label>
               <ion-row>
                 <ion-col>
@@ -483,7 +501,7 @@
             <ion-row>
                 <ion-col>
                     <ion-item class="animated fadeInUp">
-                        <ion-label text-right position="floating">الاسم</ion-label>
+                        <ion-label text-right position="floating">اسم السيارة</ion-label>
                         <ion-input type="text" formControlName="fullname" text-right></ion-input>
                       </ion-item>
                       <ion-text color="warning"
@@ -886,7 +904,7 @@
     <ion-list *ngSwitchCase="'stuffs'" padding>
       <form [formGroup]="stuffsRequests" (ngSubmit)="submitstuffReqForm(stuffsRequests.value)">
         <ion-item class="animated fadeInUp">
-          <ion-label text-right position="floating">الاسم</ion-label>
+          <ion-label text-right position="floating">اسم المنتج</ion-label>
           <ion-input type="text" formControlName="fullname" text-right></ion-input>
         </ion-item>
         <ion-text color="warning"
@@ -999,7 +1017,22 @@
                   <p text-right>هذا الحقل مطلوب </p>
                 </ion-text>
 
-               
+                <ion-row>
+                  <ion-col>
+                    <ion-item class="animated fadeInUp">
+                      <ion-label text-right position="floating">  كفالة </ion-label>
+                      <ion-select formControlName="Guaranty" [interfaceOptions]="customActionSheetOptions"
+                        interface="action-sheet">
+                        <ion-select-option value="نعم">نعم </ion-select-option>
+                        <ion-select-option value="لا"> لا</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-text color="warning"
+                      *ngIf="stuffsRequests.get('Guaranty').touched && stuffsRequests.get('Guaranty').hasError('required')">
+                      <p text-right>هذا الحقل مطلوب </p>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
                
                 
        

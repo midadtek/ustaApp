@@ -112,6 +112,9 @@ export class NewUsedShopPage implements OnInit {
       'space': [null, Validators.compose([
         Validators.required
       ])],
+      'HomeTrends': [null, Validators.compose([
+        Validators.required
+      ])],
       'ageOfconstruction': [null, Validators.compose([
         Validators.required
       ])],
@@ -239,6 +242,9 @@ export class NewUsedShopPage implements OnInit {
         Validators.required, Validators.pattern('[0-9 \u0660-\u0669]{10,20}')
       ])],
       'whatsappmobile': [null, Validators.compose([
+        Validators.nullValidator
+      ])],
+      'Guaranty': [null, Validators.compose([
         Validators.nullValidator
       ])],
     

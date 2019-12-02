@@ -30,6 +30,16 @@
         <ion-slides  #slides>
           <ion-slide>
             <ion-grid>
+                <ion-row>
+                    <ion-col>
+                      <ion-item class="animated fadeInUp">
+                        <ion-label text-right position="floating">تحديد الموقع </ion-label>
+                        <ion-label text-right position="floating">{{longitude}},{{latitude}}</ion-label>
+
+                       <ion-button (click)="getCurrentLocation()">تحديد</ion-button>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
               <ion-row>
                 <ion-col>
                   <ion-item class="animated fadeInUp">
@@ -284,7 +294,7 @@
                       housesRequests.get('floorNumber').hasError('required') ||
                       housesRequests.get('typeOfconstruction').hasError('required') ||
                       housesRequests.get('numberOfBalconies').hasError('required')
-                      ||housesRequests.get('periodicExpenses').hasError('required')">
+                      ||housesRequests.get('periodicExpenses').hasError('required') " >
                           التالي
                         </ion-button>
                   </ion-col>
@@ -498,6 +508,16 @@
         <ion-slides  #slides>
           <ion-slide>
             <ion-grid>
+                <ion-row>
+                    <ion-col>
+                      <ion-item class="animated fadeInUp">
+                        <ion-label text-right position="floating">تحديد الموقع </ion-label>
+                        <ion-label text-right position="floating">{{longitude}},{{latitude}}</ion-label>
+
+                       <ion-button (click)="getCurrentLocation()">تحديد</ion-button>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
             <ion-row>
                 <ion-col>
                     <ion-item class="animated fadeInUp">
@@ -903,6 +923,13 @@
     </ion-list>
     <ion-list *ngSwitchCase="'stuffs'" padding>
       <form [formGroup]="stuffsRequests" (ngSubmit)="submitstuffReqForm(stuffsRequests.value)">
+                <ion-item class="animated fadeInUp">
+                  <ion-label text-right position="floating">تحديد الموقع </ion-label>
+                  <ion-label text-right position="floating">{{longitude}},{{latitude}}</ion-label>
+
+                 <ion-button (click)="getCurrentLocation()">تحديد</ion-button>
+                </ion-item>
+      
         <ion-item class="animated fadeInUp">
           <ion-label text-right position="floating">اسم المنتج</ion-label>
           <ion-input type="text" formControlName="fullname" text-right></ion-input>

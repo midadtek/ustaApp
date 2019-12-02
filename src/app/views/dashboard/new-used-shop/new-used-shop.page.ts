@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {IonSlides} from'@ionic/angular';
 import { ViewChild } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 @Component({
@@ -35,7 +36,6 @@ export class NewUsedShopPage implements OnInit {
   housesRequests:FormGroup
   carsRequests:FormGroup
   stuffsRequests:FormGroup
-
   cities: City[]
   services: Section[]
   ustaservice: Section[]
@@ -59,10 +59,12 @@ export class NewUsedShopPage implements OnInit {
   plate:Plate[]
   gear:Gear[]
   @Input('useURI') useURI: Boolean = true;
-
+  locationCoords: any;
+  latitude=null
+  longitude=null
   downloadURL: Observable<string>
   request_segment: string = 'houses'
-  constructor(private formBuilder: FormBuilder,public file:File,
+  constructor(private formBuilder: FormBuilder,public file:File,private geolocation: Geolocation,
     private afStorage:AngularFireStorage, private storage: Storage, public toastController: ToastController, private router: Router,private camera:Camera,
     private db: FstoreService, private loadingController: LoadingController) { }
   ngOnInit() {
@@ -409,6 +411,8 @@ export class NewUsedShopPage implements OnInit {
        }
        async submithousesReqForm(value) {
         value.img_gallery=[]
+        value.longitude=this.longitude
+        value.latitude=this.latitude
         this.photos.forEach(element => {
          value.img_gallery.push(element)
        });
@@ -483,6 +487,8 @@ export class NewUsedShopPage implements OnInit {
       }
       async submitcarsReqForm(value) {
         value.img_gallery=[]
+        value.longitude=this.longitude
+        value.latitude=this.latitude
         this.photos.forEach(element => {
          value.img_gallery.push(element)
        });
@@ -557,6 +563,8 @@ export class NewUsedShopPage implements OnInit {
       
       async submitstuffReqForm(value) {
         value.img_gallery=[]
+        value.longitude=this.longitude
+        value.latitude=this.latitude
         this.photos.forEach(element => {
          value.img_gallery.push(element)
        });
@@ -731,6 +739,16 @@ export class NewUsedShopPage implements OnInit {
     
     
      
+    }
+
+    getCurrentLocation(){
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.latitude = resp.coords.latitude;
+        this.longitude = resp.coords.longitude;
+      
+      }).catch((error) => {
+        alert('Error getting location' + error);
+      });
     }
    
 }

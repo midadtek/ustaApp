@@ -10,6 +10,8 @@ import {File} from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {IonSlides} from'@ionic/angular';
 import { ViewChild } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 
 
@@ -46,9 +48,10 @@ export class NewCompanyPage implements OnInit {
   profile:any[]=[];
   companysubservice: subservices[]
   resturantsubservice: subservices[]
- 
+  latitude=null
+  longitude=null
 
-  constructor(private formBuilder: FormBuilder, private afStorage:AngularFireStorage,
+  constructor(private formBuilder: FormBuilder, private afStorage:AngularFireStorage,private geolocation: Geolocation,
     private storage: Storage, public toastController: ToastController, private router: Router,
     private camera:Camera,public file:File,
     private db:FstoreService, private loadingController: LoadingController) { }
@@ -224,6 +227,8 @@ export class NewCompanyPage implements OnInit {
   }
   async submitcompanyReqForm(value) {
     value.hash_type=""
+    value.longitude=this.longitude
+    value.latitude=this.latitude
     value.img_gallery=[]
         this.gallery.forEach(element => {
          value.img_gallery.push(element)
@@ -290,6 +295,8 @@ export class NewCompanyPage implements OnInit {
   async submitresturantReqForm(value) {
     
     value.img_gallery=[]
+    value.longitude=this.longitude
+    value.latitude=this.latitude
     this.gallery.forEach(element => {
      value.img_gallery.push(element)
    });
@@ -514,6 +521,15 @@ export class NewCompanyPage implements OnInit {
         this.profile.splice(arr,1)
            
    }
+   getCurrentLocation(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+    
+    }).catch((error) => {
+      alert('Error getting location' + error);
+    });
+  }
 }
 
   

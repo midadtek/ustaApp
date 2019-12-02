@@ -46,6 +46,16 @@
               </ion-col>
             </ion-row>
             <ion-row>
+                <ion-col>
+                  <ion-item class="animated fadeInUp">
+                    <ion-label text-right position="floating">تحديد الموقع </ion-label>
+                    <ion-label text-right position="floating">{{longitude}},{{latitude}}</ion-label>
+
+                   <ion-button (click)="getCurrentLocation()">تحديد</ion-button>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            <ion-row>
               <ion-col>
       <ion-item class="animated fadeInUp">
         <ion-label text-right position="floating">اسم الشركة</ion-label>
@@ -386,6 +396,16 @@
                             </ion-button>
               </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col>
+                  <ion-item class="animated fadeInUp">
+                    <ion-label text-right position="floating">تحديد الموقع </ion-label>
+                    <ion-label text-right position="floating">{{longitude}},{{latitude}}</ion-label>
+
+                   <ion-button (click)="getCurrentLocation()">تحديد</ion-button>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
       
                   <ion-row>
                       <ion-col>

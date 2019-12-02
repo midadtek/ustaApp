@@ -12,6 +12,7 @@ import { ProfilePage } from '../profile/profile.page';
 import { ElementRef, NgZone, ViewChild} from '@angular/core';
 import { Usta, Rate } from 'src/app/services/interfaces';
 import { RateComponent } from 'src/app/components/Rate/rate.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-housecarstuffprofile',
@@ -43,7 +44,7 @@ export class housescarstuffprofilePage implements OnInit {
     spaceBetween:20
   };
  
-  constructor(private db: FstoreService, private route: ActivatedRoute,
+  constructor(private db: FstoreService, private route: ActivatedRoute,private geolocation: Geolocation,
     private loadingController: LoadingController, public navCtrl: NavController, public platform: Platform,
     private callNumber: CallNumber, private storage: Storage, private rateModel: ModalController
     , private popoverCtr: PopoverController, private clipboard: Clipboard,
@@ -259,4 +260,7 @@ export class housescarstuffprofilePage implements OnInit {
     }).catch((e) => {
     });
   }
-}
+
+
+  
+  }
